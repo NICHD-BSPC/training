@@ -1,3 +1,8 @@
+# This uses
+# https://github.com/NICHD-BSPC/documentation-template/blob/main/.github/workflows/main.yml,
+# and the only change is that the docs are built in the top level rather than
+# in a `doc` dir.
+
 name: main
 on: [push]
 jobs:
@@ -23,7 +28,7 @@ jobs:
           --branch gh-pages "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY" \
           /tmp/doc
         rm -rf /tmp/doc/*
-        cp -r doc/build/html/* /tmp/doc
+        cp -r build/html/* /tmp/doc
         touch /tmp/doc/.nojekyll
 
     - name: push artifact
