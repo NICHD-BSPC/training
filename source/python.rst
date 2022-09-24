@@ -27,7 +27,7 @@ you'll need to install things separately using ``conda install
 You may have heard about Jupyter notebooks. While they have their place in data
 science-type work, I do not think this is a good way to learn Python. `Here are
 some reasons why
-<https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/edit#slide=id.g362da58057_0_1>`_;
+<https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/>`_;
 they boil down to needing to mentally keep track of what cells have been run
 when to avoid strange and hard-to-track-down bugs.
 
@@ -125,7 +125,7 @@ than sprinkling ``print()`` statements throughout your code!
 
 There is a good intro to the debugging workflow at `SciPy lecture notes:
 debugging
-<https://scipy-lectures.org/advanced/debugging/index.html#debugging-workflow>`_,
+<https://scipy-lectures.org/advanced/debugging/index.html>`_,
 along with what to do when you can't use IPython.
 
 Learning pandas
@@ -313,7 +313,7 @@ above categories.
 - `A Visual Intro to NumPy <https://jalammar.github.io/visual-numpy/>`_ is
   useful if you're just starting to learn NumPy
 
-- `The SciPy Lectures <https://www.scipy-lectures.org/>`_
+- `The SciPy Lectures <https://scipy-lectures.org/>`_
   First chapter of Scientific Python lectures includes NumPy, matplotlib, and
   scipy basics. Subsequent chapters get fairly advanced.
 

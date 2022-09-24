@@ -14,9 +14,6 @@ in the NICHD data center which is only accessible inside the NIH network. If
 you have access to the NIH network and you are interested in accessing this
 GitLab instance, contact ryan.dale@nih.gov for more info.
 
-If you already have access to our GitLab instance, you can find it at
-https://hdgitappip01.nichd.nih.gov (sign in with your NIH credentials).
-
 It's expected that you already know :ref:`git`.
 
 For the basics of GitLab, the `GitLab basics

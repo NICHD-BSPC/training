@@ -109,7 +109,7 @@ html_sidebars = {
 }
 
 linkcheck_request_headers = {
-    "https://ncbi.nlm.nih.gov": {
-        "User-Agent": "Mozilla",
+    "*": {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0",
     }
 }
