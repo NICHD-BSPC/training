@@ -1,0 +1,8 @@
+alabaster
+invoke
+python-dateutil
+sphinx-automodapi
+sphinx>=2.0
+watchdog
+werkzeug
+ablog
