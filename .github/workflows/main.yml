@@ -21,6 +21,7 @@ jobs:
         # Activate env and build docs
         eval "$(conda shell.bash hook)"
         conda activate ./env
+        make linkcheck
         make html
 
         git clone \
