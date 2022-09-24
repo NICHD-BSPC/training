@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vim</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Git" href="git.html" />
+    <link rel="prev" title="Genomics overview" href="genomics-formats.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Oswald&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="genomics-formats.html" title="Previous document">Genomics overview</a>
+        </li>
+        <li>
+          <a href="git.html" title="Next document">Git</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="vim">
+<span id="id1"></span><h1>Vim<a class="headerlink" href="#vim" title="Permalink to this heading">¶</a></h1>
+<p>Being able to modify files and edit text from the command line is <em>extremely</em>
+important. There is a lot of overhead in opening a separate graphical text
+editor (like Sublime, VSCode, Atom, TextEdit, Notepad++, etc) and navigating to
+the file you want to edit, instead of directly opening a file where you are on
+the command line.</p>
+<p>When you start working on remote servers (like NIH’s Biowulf), you may not have
+an easy option of using a graphical editor. This may require extra steps like
+transferring files to and from the server which dramatically slows down your
+work. Feeling at home in the terminal will pay off.</p>
+<p>The two main command-line text editors are <code class="docutils literal notranslate"><span class="pre">emacs</span></code> and <code class="docutils literal notranslate"><span class="pre">vim</span></code>. If you
+haven’t already learned one of these, I suggest vim because it’s available on
+just about any machine you log on to, so you’ll always feel at home in
+a terminal.</p>
+<p>It takes a lot of time and practice to get proficient with vim. But editing
+text is such a common task that improving your efficiency in any small way will
+pay off in the long term.</p>
+<p>As a rule of thumb, you’ll be miserable for the first two weeks you’re learning
+vim. Everything will seem like it’s taking you way longer than it should. But
+then you’ll get more practice, and will be able to edit far faster than
+any other graphical text editor.</p>
+<p>In fact, many graphical text editors have a “vim mode” for users who want to
+apply their vim skills to more efficient editing even within a GUI.</p>
+<p>I have yet to meet someone who regretted learning vim. It’s well worth your
+time.</p>
+<div class="section" id="vimtutor">
+<h2>vimtutor<a class="headerlink" href="#vimtutor" title="Permalink to this heading">¶</a></h2>
+<p>Once vim is installed, type <code class="docutils literal notranslate"><span class="pre">vimtutor</span></code> at the terminal and go through
+it.</p>
+</div>
+<div class="section" id="tips-and-tricks">
+<h2>Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>The search and replace functionality is very useful in vim. To do this you
+use the command <code class="docutils literal notranslate"><span class="pre">:s</span></code> (substitute). Check out <a class="reference external" href="https://vim.fandom.com/wiki/Search_and_replace">Search and Replace</a> for the many ways you can
+use this command.</p></li>
+</ul>
+</div>
+<div class="section" id="other-resources">
+<h2>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Here’s one example of a <a class="reference external" href="https://vim.rtorr.com/">vim cheatsheet</a>, but you
+might want to look around for something that fits your brain from a <a class="reference external" href="https://www.google.com/search?source=univ&amp;tbm=isch&amp;q=vim+cheat+sheet">Google
+image search</a> for
+them.</p></li>
+<li><p><a class="reference external" href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/">Learn Vim Progressively</a> is one
+person’s view on a good pacing for learning vim.</p></li>
+<li><p>A browser-based game that gets your fingers used to the Vim
+keybindings: <a class="reference external" href="https://vim-adventures.com/">Vim Adventures</a></p></li>
+<li><p>Once you have some vim under your belt, you can try some of these to
+get some practice (might want to check the cheat-sheets before each
+one): <a class="reference external" href="https://www.shortcutfoo.com/app/dojos/vim">Vim Dojo</a></p></li>
+<li><p>There is a robust plugin ecosystem for vim. See my <a class="reference external" href="https://daler.github.io/dotfiles/vim.html">dotfiles</a> for the vim plugins I use the
+most.</p></li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Vim</a><ul>
+<li><a class="reference internal" href="#vimtutor">vimtutor</a></li>
+<li><a class="reference internal" href="#tips-and-tricks">Tips and Tricks</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/vim.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="genomics-formats.html" title="Previous document">Genomics overview</a>
+        </li>
+        <li>
+          <a href="git.html" title="Next document">Git</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.1.1.
+
+  </footer>
+
+  
+  </body>
+</html>

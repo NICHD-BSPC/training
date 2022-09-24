@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Git</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GitLab" href="gitlab.html" />
+    <link rel="prev" title="Vim" href="vim.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Oswald&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="vim.html" title="Previous document">Vim</a>
+        </li>
+        <li>
+          <a href="gitlab.html" title="Next document">GitLab</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="git">
+<span id="id1"></span><h1>Git<a class="headerlink" href="#git" title="Permalink to this heading">¶</a></h1>
+<p>“<em>Your closest collaborator is you six months ago, but you don’t reply to emails</em>” `</p>
+<p>Writing code and documentation involves lots of iterative revisions. Just like
+keeping a lab notebook, you’ll need to keep track of these changes. And if
+something goes wrong, or you don’t like the direction things are going, it
+would be nice to rewind history to get your code back to a working state.</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span></code> does all of this. It’s sort of like “track changes” in Word, but for
+entire directories rather than a single file. And with the full power of
+a command-line interface.</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span></code> is “version control software” – a tool that allows you to track the
+history of files in a repository that lives within a working directory. This
+repository can stay private on disk or can optionally be shared with
+collaborators either publicly or privately, using web services like GitHub,
+GitLab, or Bitbucket.</p>
+<div class="section" id="should-you-learn-git">
+<h2>Should you learn git?<a class="headerlink" href="#should-you-learn-git" title="Permalink to this heading">¶</a></h2>
+<p>If you plan on doing substantial programming or analysis of any sort, you
+should learn git. Just like if you are going to be doing any substantial
+experiments, you should keep a lab notebook.</p>
+<p>Git can be hard to learn! The concepts are unfamiliar and the commands feel
+like arcane incantations. But the payoff – being able to step through time,
+rewinding the history of your work and keeping checkpoints – is well worth it.</p>
+<p>In BSPC, git is a critical part of our workflow. If you are aiming to work
+directly in BSPC, it will be important to know git.</p>
+<p>If you just started R or Python or Bash, you should probably focus on that
+first. If you decide to stick with it, git would be a good next thing to learn.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A note of warning, especially important to genomics where we work with large data sets:</p>
+<p><strong>DO NOT COMMIT DATA TO GIT!</strong></p>
+<p>Only small files (code, documentation) should be committed to a git
+repository. Even if you mistakenly add data and then immediately remove it,
+<em>it stays in the history</em>.</p>
+<p>To fix it, see <a class="reference external" href="https://help.github.com/en/github/authenticating-to-github/removing-sensitive-data-from-a-repository">these instructions</a>.
+It’s a pain. All the more reason to not commit data!</p>
+</div>
+</div>
+<div class="section" id="learning-git">
+<h2>Learning git<a class="headerlink" href="#learning-git" title="Permalink to this heading">¶</a></h2>
+<p>Here are some resources to learn the above commands. As with all self-directed
+training, it is worth looking at all of these resources at least briefly to
+decide what fits your brain the best.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004668">A quick introduction to version control with Git and GitHub</a>
+This guide, written by scientists, for scientists, walks you through a very
+practical example. It includes files to download to follow along and
+explains a lot of the concepts you’ll see while using git. It has a concise
+glossary of terms you’ll see</p></li>
+<li><p><a class="reference external" href="https://kieranhealy.org/files/papers/plain-person-text.pdf">Chapter 2 of Plain Person’s Guide</a> does not
+give direct commands, but does a nice job of framing the motivation for why
+learning and using git is a good thing.</p></li>
+<li><p><a class="reference external" href="https://guides.github.com/introduction/git-handbook/">Git Handbook</a>
+gives an overview and commands, and links out to YouTube videos on
+particular topics. It’s written by GitHub, so it’s understandably biased
+towards working with GitHub.</p></li>
+<li><p><a class="reference external" href="https://www.atlassian.com/git/tutorials">Bitbucket’s git tutorials</a> has
+multiple learning tracks. Bitbucket is a GitHub competitor, so some of their
+content is skewed towards using their product. But the rest of the content is
+very well written.</p>
+<ul>
+<li><p><a class="reference external" href="https://www.atlassian.com/git/tutorials/setting-up-a-repository">Beginner</a> (init, clone, config, add, commit, .gitignore))</p></li>
+<li><p><a class="reference external" href="https://www.atlassian.com/git/tutorials/syncing">Collaborating</a> (remote, fetch, push, pull, using branches, merge)</p></li>
+<li><p><a class="reference external" href="https://www.atlassian.com/git/tutorials/advanced-overview">Advanced tips</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://seankross.com/the-unix-workbench/git-and-github.html">Git and GitHub
+chapter</a>
+of the Unix Workbench. This is similar to the PLOS Comp Bio paper linked
+above, but also has some exercises which may be helpful to test your
+learning.</p></li>
+<li><p><a class="reference external" href="https://learngitbranching.js.org/">Learn Git Branching</a>, an
+interactive tutorial that turns learning about branching into a game. What
+makes it really useful is how visual it is.</p></li>
+<li><p>A <a class="reference external" href="https://training.github.com/downloads/github-git-cheat-sheet.pdf">cheatsheet</a>
+of commonly-used commands, useful if you need a refresher.</p></li>
+<li><p>An <a class="reference external" href="https://codewords.recurse.com/issues/two/git-from-the-inside-out">essay on the inner workings of git</a>. Starts
+off like the others, but quickly gets quite advanced. This is great if you
+want to know how it all actually works or need to dig around to do some fancy
+stuff.</p></li>
+<li><p>An examination of a <a class="reference external" href="https://fatbusinessman.com/2019/my-favourite-git-commit">good git commit</a>. This is not
+about the mechanics of git, but rather about best-practices of practical use.</p></li>
+<li><p>When working with pull requests from contributors to a repository you manage,
+<a class="reference external" href="https://tighten.com/blog/adding-commits-to-a-pull-request/">this blog post</a> walks you
+through making your own commits that get added to that PR.</p></li>
+</ul>
+</div>
+<div class="section" id="do-you-know-git">
+<h2>Do you know git?<a class="headerlink" href="#do-you-know-git" title="Permalink to this heading">¶</a></h2>
+<p>Here are some git commands split into different levels of git knowledge. This is just one
+way of thinking about it, but if you’re wondering where you stand along your
+training then this can give you a rough idea.</p>
+<div class="section" id="id2">
+<h3>Beginner<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">master</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">master</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">newbranch</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">--</span> <span class="pre">&lt;filename&gt;</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="intermediate">
+<h3>Intermediate<a class="headerlink" href="#intermediate" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">newbranch</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">HEAD~~</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-p</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span></code></p></li>
+<li><p>resolving merge conflicts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cola</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">blame</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="advanced">
+<h3>Advanced<a class="headerlink" href="#advanced" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherry-pick</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git-bisect</span></code></p></li>
+<li><p>resolving 3-way merges</p></li>
+<li><p>using the <a class="reference external" href="https://github.com/tpope/vim-fugitive">fugitive</a> vim plugin</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Git</a><ul>
+<li><a class="reference internal" href="#should-you-learn-git">Should you learn git?</a></li>
+<li><a class="reference internal" href="#learning-git">Learning git</a></li>
+<li><a class="reference internal" href="#do-you-know-git">Do you know git?</a><ul>
+<li><a class="reference internal" href="#id2">Beginner</a></li>
+<li><a class="reference internal" href="#intermediate">Intermediate</a></li>
+<li><a class="reference internal" href="#advanced">Advanced</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/git.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="vim.html" title="Previous document">Vim</a>
+        </li>
+        <li>
+          <a href="gitlab.html" title="Next document">GitLab</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.1.1.
+
+  </footer>
+
+  
+  </body>
+</html>

@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biowulf help topics</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UCSC Genome Browser" href="ucsc.html" />
+    <link rel="prev" title="Emacs" href="emacs.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Oswald&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="emacs.html" title="Previous document">Emacs</a>
+        </li>
+        <li>
+          <a href="ucsc.html" title="Next document">UCSC Genome Browser</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="biowulf-help-topics">
+<h1>Biowulf help topics<a class="headerlink" href="#biowulf-help-topics" title="Permalink to this heading">¶</a></h1>
+<p>In BSPC, our general workflow when connecting to Biowulf is this:</p>
+<ol class="arabic simple">
+<li><p>Open a terminal</p></li>
+<li><p>SSH to Helix</p></li>
+<li><p>Create a tmux session or attach to an existing one</p></li>
+</ol>
+<p>When doing graphics-heavy work, like plotting in R or Python, then instead we will:</p>
+<ol class="arabic simple">
+<li><p>Open NoMachine</p></li>
+<li><p>Connect to Biowulf</p></li>
+<li><p>Open a terminal from within NoMachine session on Biowulf.</p></li>
+</ol>
+<div class="section" id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this heading">¶</a></h2>
+<p>Here are some tips for making it as seamless as possible to connect.</p>
+</div>
+<div class="section" id="more-convenient-ssh">
+<h2>More convenient SSH<a class="headerlink" href="#more-convenient-ssh" title="Permalink to this heading">¶</a></h2>
+<p>Typically when you SSH to Biowulf you will get asked for your password. This
+can be made a bit more convenient as follows.</p>
+<p>First, create a new key pair and copy it to biowulf using <a class="reference external" href="https://www.ssh.com/ssh/copy-id">these
+instructions</a>.</p>
+<p><strong>You should use a passphrase</strong> otherwise anyone with access to your
+machine will be able to also access every other server you have copied
+your SSH key to.</p>
+<p>Then, see <a class="reference external" href="https://stackoverflow.com/a/18915067">this SO answer</a>
+for a function to add to your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> that will add the key to your
+session. This is sort of a security compromise that asks for your key once per
+bash session rather than every time it’s used.</p>
+<p>Now when you connect you are just substituting your pass phrase for your
+password, but this makes other things possible (see next section).</p>
+<div class="section" id="add-ssh-key-to-mac-keychain">
+<h3>Add SSH key to Mac keychain<a class="headerlink" href="#add-ssh-key-to-mac-keychain" title="Permalink to this heading">¶</a></h3>
+<p>If you’re on a Mac, adding the following lines to your <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file
+will allow SSH to use the Mac keychain. This means that once you log in to your
+Mac like normal, you don’t need to enter your SSH pass phrase at all. That
+means <cite>ssh user&#64;biowulf.nih.gov</cite> will immediately and automatically connect.</p>
+<p>Note that this example uses RSA keys; modify as needed if using ed25519 or
+ecdsa algorithms.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="o">*</span>
+    <span class="n">AddKeysToAgent</span> <span class="n">yes</span>
+    <span class="n">UseKeychain</span> <span class="n">yes</span>
+    <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span>
+</pre></div>
+</div>
+<p>Then run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-add -K ~/.ssh/id_rsa
+</pre></div>
+</div>
+<p>to add it to the keychain.</p>
+<p>More info <a class="reference external" href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent">here</a>.</p>
+<p>You can always add an alias to your <cite>.bashrc</cite>, like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">b</span><span class="o">=</span><span class="s2">&quot;ssh </span><span class="nv">$USER</span><span class="s2">@biowulf.nih.gov&quot;</span>
+</pre></div>
+</div>
+<p>So that to connect Biowulf, you open a terminal, type <code class="docutils literal notranslate"><span class="pre">b</span></code>, then Enter, and you’re in.</p>
+</div>
+<div class="section" id="nomachine-and-rstudio">
+<h3>NoMachine and RStudio<a class="headerlink" href="#nomachine-and-rstudio" title="Permalink to this heading">¶</a></h3>
+<p>When doing visualization-heavy work, especially in RMarkdown in RStudio, we use NoMachine.</p>
+<p>In BSPC, we prefer to manage our own conda environments so we can install
+exactly the versions we need (and use development versions of packages if
+needed) without affecting the global installation and allowing us to use
+different sets of packages for different projects.</p>
+<p>If you have conda configured on Biowulf and your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> adds the
+conda-installed version of Python to your path, NoMachine will fail. This is
+because it needs the system-wide installed Python version.</p>
+<p>To avoid this, you can wrap the block of code that <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">init</span> <span class="pre">bash</span></code> adds to
+your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> in an if-clause:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$NX_CLIENT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+
+    <span class="c1"># conda activate stuff</span>
+
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>Since the <code class="docutils literal notranslate"><span class="pre">NX_CLIENT</span></code> environment variable is only set when using NoMachine,
+this will only activate conda if that environment variable is not set.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When creating a conda environment, you should NOT add RStudio to that
+environment. RStudio is simply a convenient interface; it is not required
+for reproducibility. RStudio can use the R version in the conda env as
+described below.</p>
+</div>
+<p>To run RStudio in NoMachine:</p>
+<ol class="arabic simple">
+<li><p>Connect to Biowulf with NoMachine</p></li>
+<li><p>Open a terminal within NoMachine</p></li>
+<li><p>Get an interactive node with scratch space (e.g., <code class="docutils literal notranslate"><span class="pre">sinteractive</span> <span class="pre">--mem=8g</span> <span class="pre">--gres=lscratch:8</span></code>)</p></li>
+<li><p>Load the RStudio module (note the lowercase “s”): <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">Rstudio</span></code>.
+You may see a message like “Remember to load an R module before starting
+Rstudio”, but don’t do that if you’re using a conda env.</p></li>
+<li><p>Activate your conda env e.g., <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">./env</span></code>)</p></li>
+<li><p>Use the wrapper provided in the module to load RStudio, using the
+(undocumented) flag <code class="docutils literal notranslate"><span class="pre">--conda</span></code>. This sets things up properly to use the
+conda-installed version of R in RStudio.</p></li>
+</ol>
+</div>
+<div class="section" id="tmux">
+<h3>tmux<a class="headerlink" href="#tmux" title="Permalink to this heading">¶</a></h3>
+<p>We typically SSH into Helix and attach to a persistent tmux session (or create
+a new tmux session, roughly once a month). From there we ssh over to Biowulf.
+Helix has lots more resources available and tends to have less lag or slowdown
+issues than the Biowulf head node.</p>
+<p>Helix reboots the first Monday of each month, so make sure you’re done with
+your tmux session by then!</p>
+<p>See <a class="reference internal" href="making-your-linux-life-easier.html#tmux"><span class="std std-ref">Tmux</span></a> for more info.</p>
+</div>
+</div>
+<div class="section" id="limitations-of-mounted-drives">
+<h2>Limitations of mounted drives<a class="headerlink" href="#limitations-of-mounted-drives" title="Permalink to this heading">¶</a></h2>
+<p>While it’s convenient to map biowulf drives locally, there are
+limitations. It would be best to treat the mapped drive as
+<strong>read-only</strong>.</p>
+<p>Executable permissions:</p>
+<ul class="simple">
+<li><p><strong>Executables cannot be called on the mounted drive</strong>, even if they
+have the executable bit set. This means that running conda
+environments stored in the analysis directory will not work. A
+workaround is either to remove the “noperm,file_mode=0660” options
+from above, or use the <code class="docutils literal notranslate"><span class="pre">--conda-prefix</span></code> argument to Snakemake when
+running locally (e.g.,
+<code class="docutils literal notranslate"><span class="pre">--conda-prefix</span> <span class="pre">$HOME/snakemake-conda-envs</span></code>).</p></li>
+</ul>
+<p><strong>Symlinks are not handled correctly.</strong> Even with the <code class="docutils literal notranslate"><span class="pre">mkfsymlinks</span></code>
+option,</p>
+<ul class="simple">
+<li><p>Symlinks created on Biowulf do not appear locally</p></li>
+<li><p>Symlinks created locally do not appear on Biowulf</p></li>
+<li><p>If you open something that looks like a regular file locally but that
+is actually symlink on biowulf and then save it, <strong>the symlink is
+destroyed and replaced with a regular file</strong>.</p></li>
+</ul>
+</div>
+<div class="section" id="squeue">
+<h2>squeue<a class="headerlink" href="#squeue" title="Permalink to this heading">¶</a></h2>
+<p>The default output of <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-u</span></code> doesn’t have a lot of info. Also,
+it’s a pain (for me) to type. Digging through the man page for squeue, I
+found you can control which columns are shown. Here’s what I’ve aliased
+to <code class="docutils literal notranslate"><span class="pre">q</span></code> in my biowulf <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">q</span><span class="o">=</span><span class="s1">&#39;squeue -u $USER -o &quot;%9A %18j %5C %5m %.9L %.9M %9N %8T %o&quot;&#39;</span>
+</pre></div>
+</div>
+<p>Now the easier-to-type <code class="docutils literal notranslate"><span class="pre">q</span></code> gives output with info on the node resources, how
+much time is left, and a longer “name” field and “command” field to better
+track which job is which when you have a ton of jobs going.</p>
+</div>
+<div class="section" id="fastq-dump">
+<h2>fastq-dump<a class="headerlink" href="#fastq-dump" title="Permalink to this heading">¶</a></h2>
+<p>By default, fastq-dump uses local caching in your home directory
+(<code class="docutils literal notranslate"><span class="pre">~/ncbi</span></code> I believe) which, if you’re not careful can fill up all your
+quota. If you use <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">sratoolkit</span></code> on biowulf, it sets a
+particular environment variable to override this behavior. You can see
+what it’s doing with <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">show</span> <span class="pre">sratookit</span></code>.</p>
+<p>To mimic this behavior when using conda environment containing
+<code class="docutils literal notranslate"><span class="pre">sratools</span></code>, you can acheive the same thing by putting this in your
+<code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">VDB_CONFIG</span><span class="o">=</span>/usr/local/apps/ncbi/config/biowulf.kfg
+</pre></div>
+</div>
+<p>When writing swarmfiles or otherwise using fastq-dump to get lots of
+files, it’s important to write things to be robust against accidental
+failures where you may get a partially-downloaded fastq. It’s difficult
+to know when that happens, so one way around it is to download to a temp
+location and then move the resulting temp file only if the previous
+command exited cleanly. The move operation is instantaneous so it
+doesn’t add any time.</p>
+<p>Also, the fastq-dump implementation of gzip is slow, so for single-end
+reads you might want to consider writing out to stdout and piping to
+gzip for single-end.</p>
+<p>For example, to download a single-end FASTQ, a swarmfile entry might be:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SRR</span><span class="o">=</span>SRR00001<span class="p">;</span> <span class="se">\</span>
+<span class="nb">export</span> <span class="nv">TEMP_PATH</span><span class="o">=</span>/temp/directory<span class="p">;</span> <span class="se">\</span>
+<span class="nb">export</span> <span class="nv">FINAL_PATH</span><span class="o">=</span>/directory/for/final/data<span class="p">;</span> <span class="se">\</span>
+<span class="nb">cd</span> <span class="nv">$TEMP_PATH</span><span class="p">;</span> <span class="se">\</span>
+  module load sratoolkit<span class="p">;</span> <span class="se">\</span>
+  fastq-dump <span class="nv">$SRR</span> --gzip <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> mv <span class="nv">$TEMP_PATH</span>/<span class="nv">$SRR_1</span>.fastq.gz <span class="nv">$FINAL_PATH</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">TEMP_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">FINAL_PATH</span></code> should be absolute paths.</p>
+<p>For paired-end, use <code class="docutils literal notranslate"><span class="pre">--split-files</span></code> and move both ends over the final
+directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SRR</span><span class="o">=</span>SRR00001<span class="p">;</span> <span class="se">\</span>
+<span class="nb">export</span> <span class="nv">TEMP_PATH</span><span class="o">=</span>/temp/directory<span class="p">;</span> <span class="se">\</span>
+<span class="nb">export</span> <span class="nv">FINAL_PATH</span><span class="o">=</span>/directory/for/final/data<span class="p">;</span> <span class="se">\</span>
+<span class="nb">cd</span> <span class="nv">$TEMP_PATH</span><span class="p">;</span> <span class="se">\</span>
+  module load sratoolkit<span class="p">;</span> <span class="se">\</span>
+  fastq-dump <span class="nv">$SRR</span> --split-files --gzip <span class="se">\</span>
+  <span class="o">&amp;&amp;</span> mv <span class="nv">$TEMP_PATH</span>/<span class="nv">$SRR_</span><span class="o">{</span><span class="m">1</span>,2<span class="o">}</span>.fastq.gz <span class="nv">$FINAL_PATH</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="avoid-swarm-clutter">
+<h2>Avoid <code class="docutils literal notranslate"><span class="pre">swarm</span></code> clutter<a class="headerlink" href="#avoid-swarm-clutter" title="Permalink to this heading">¶</a></h2>
+<p>When running <code class="docutils literal notranslate"><span class="pre">swarm</span></code>, use <code class="docutils literal notranslate"><span class="pre">--noout</span> <span class="pre">--noerror</span></code> to avoid getting all the <code class="docutils literal notranslate"><span class="pre">swarm_*</span></code> output files.</p>
+</div>
+<div class="section" id="consider-dev-shm-for-high-i-o">
+<h2>Consider <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> for high I/O<a class="headerlink" href="#consider-dev-shm-for-high-i-o" title="Permalink to this heading">¶</a></h2>
+<p>Copying data to <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> to put it in the memory temp file system. This
+should be super fast I/O access. The size is limited to the <code class="docutils literal notranslate"><span class="pre">--mem</span></code> for the
+job and to 50% of node memory.</p>
+<p>There’s some more info on this on the Biowulf help page for <code class="docutils literal notranslate"><span class="pre">kraken</span></code>,
+<a class="reference external" href="https://hpc.nih.gov/apps/kraken.html">https://hpc.nih.gov/apps/kraken.html</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> is not cleaned up after a job like <code class="docutils literal notranslate"><span class="pre">lscratch</span></code> is. Be sure to
+clean up when you’re done!</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Biowulf help topics</a><ul>
+<li><a class="reference internal" href="#tips">Tips</a></li>
+<li><a class="reference internal" href="#more-convenient-ssh">More convenient SSH</a><ul>
+<li><a class="reference internal" href="#add-ssh-key-to-mac-keychain">Add SSH key to Mac keychain</a></li>
+<li><a class="reference internal" href="#nomachine-and-rstudio">NoMachine and RStudio</a></li>
+<li><a class="reference internal" href="#tmux">tmux</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#limitations-of-mounted-drives">Limitations of mounted drives</a></li>
+<li><a class="reference internal" href="#squeue">squeue</a></li>
+<li><a class="reference internal" href="#fastq-dump">fastq-dump</a></li>
+<li><a class="reference internal" href="#avoid-swarm-clutter">Avoid <code class="docutils literal notranslate"><span class="pre">swarm</span></code> clutter</a></li>
+<li><a class="reference internal" href="#consider-dev-shm-for-high-i-o">Consider <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> for high I/O</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/biowulf.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="emacs.html" title="Previous document">Emacs</a>
+        </li>
+        <li>
+          <a href="ucsc.html" title="Next document">UCSC Genome Browser</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.1.1.
+
+  </footer>
+
+  
+  </body>
+</html>

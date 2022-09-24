@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Command line</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Choosing R or Python" href="choosing-r-python.html" />
+    <link rel="prev" title="First steps" href="first-steps.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Oswald&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="first-steps.html" title="Previous document">First steps</a>
+        </li>
+        <li>
+          <a href="choosing-r-python.html" title="Next document">Choosing R or Python</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="command-line">
+<span id="id1"></span><h1>Command line<a class="headerlink" href="#command-line" title="Permalink to this heading">¶</a></h1>
+<p>This page provides a syllabus for getting up-to-speed on being
+productive on the command line.</p>
+<p>If you’re planning on running bioinformatics tools or Biowulf, you will need to
+get good at using the command line. Even if you’re only planning on using R or
+Python, basic command-line usage (at least moving around and listing files)
+will be useful.</p>
+<div class="section" id="optional-textbooks">
+<h2>Optional textbooks<a class="headerlink" href="#optional-textbooks" title="Permalink to this heading">¶</a></h2>
+<p>The resources below are all web-based. Sometimes it’s nice to have a hard-copy
+book, so here are some good options:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/gp/product/0878933913">Practical Computing for Biologists</a> is a fantastic textbook,
+available on Amazon</p></li>
+<li><p><a class="reference external" href="https://open.oregonstate.education/computationalbiology/">A Primer for Computational Biology</a>
+is free and has sections on command-line, Python, and R. You can buy a hard
+copy on <a class="reference external" href="https://www.amazon.com/Primer-Computational-Biology-Shawn-ONeil/dp/0870719262">Amazon</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>Command line<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<p>Most command-line tutorials teach the same sorts of things but in
+different ways. You may find some tutorials fit your brain better than
+others, so I’ve provided several here. The different tutorials
+prioritize different topics, and each has its own unique content. I’ve
+tried to indicate this in the descriptions below. One approach you could take
+would be to pick one and go through it start-to-finish, and then read through
+the remaining tutorials relatively quickly to see if they offer any other
+insight or additional information not covered by the others. The benefit of
+this approach is that you will also get a review of the topics you’ve already
+learned. Another approach could be to take a single topic at a time, and work
+through that topic in each of the resources to get practice and see it
+presented in different ways.</p>
+<p>Here is a list of skills you should have for basic command-line usage:</p>
+<ul class="simple">
+<li><p>open a terminal on your computer</p></li>
+<li><p>connect to a remote machine with SSH</p></li>
+<li><p>navigate with <code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, <code class="docutils literal notranslate"><span class="pre">pwd</span></code>.</p></li>
+<li><p>inspect files with <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">less</span></code>, <code class="docutils literal notranslate"><span class="pre">tail</span></code>, <code class="docutils literal notranslate"><span class="pre">wc</span></code></p></li>
+<li><p>search for text in a file with <code class="docutils literal notranslate"><span class="pre">grep</span></code></p></li>
+<li><p>manipulate delimited text with <code class="docutils literal notranslate"><span class="pre">awk</span></code></p></li>
+<li><p>sort files with <code class="docutils literal notranslate"><span class="pre">sort</span></code></p></li>
+<li><p>edit a file with <code class="docutils literal notranslate"><span class="pre">nano</span></code> or <code class="docutils literal notranslate"><span class="pre">vim</span></code> or <code class="docutils literal notranslate"><span class="pre">emacs</span></code></p></li>
+<li><p>extract columns with <code class="docutils literal notranslate"><span class="pre">cut</span></code></p></li>
+<li><p>pipe commands together</p></li>
+<li><p>change permissions with <code class="docutils literal notranslate"><span class="pre">chmod</span></code></p></li>
+<li><p>move, copy, rename files</p></li>
+<li><p>make directories</p></li>
+<li><p>know the difference between stdin/stdout/stderr</p></li>
+<li><p>redirecting stdout and/or stderr</p></li>
+<li><p>download files with <code class="docutils literal notranslate"><span class="pre">wget</span></code> and/or <code class="docutils literal notranslate"><span class="pre">curl</span></code></p></li>
+<li><p>creating scripts</p></li>
+<li><p>making symlinks – both to files and directories and how they behave
+differently</p></li>
+<li><p>“install” a program by putting it on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code></p></li>
+</ul>
+<p>The resources below will teach you these.</p>
+</div>
+<div class="section" id="resources-for-learning-the-command-line">
+<h2>Resources for learning the command line<a class="headerlink" href="#resources-for-learning-the-command-line" title="Permalink to this heading">¶</a></h2>
+<p>Each of these is partly redundant with the others. Based on feedback
+from others going through these resources, the Unix Workbench is more
+streamlined and allows you to spend more time on the exercises.</p>
+<div class="section" id="the-unix-workbench">
+<h3>The Unix Workbench<a class="headerlink" href="#the-unix-workbench" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://seankross.com/the-unix-workbench">https://seankross.com/the-unix-workbench</a></p>
+<p>This is the companion text to the Coursera course
+<a class="reference external" href="https://www.coursera.org/learn/unix">https://www.coursera.org/learn/unix</a>. The text is pretty straightforward,
+and unlike some other tutorials it includes sections on Bash programming
+and Git/GitHub.</p>
+</div>
+<div class="section" id="id3">
+<h3>A Primer for Computational Biology<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://open.oregonstate.education/computationalbiology/">https://open.oregonstate.education/computationalbiology/</a></p>
+<p>For command-line, all of Part I is fantastic. In addition to the basics, this
+book has a section specifically on installing bioinformatics software and
+running command-line BLAST. It also has quite a few exercises to work on. Part
+II of the book is on Python, Part III is on R. If you are planning on learning
+Python or R, reading this book cover-to-cover will get you quite far!</p>
+</div>
+<div class="section" id="learn-the-command-line">
+<h3>Learn the Command Line<a class="headerlink" href="#learn-the-command-line" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://www.codecademy.com/learn/learn-the-command-line">https://www.codecademy.com/learn/learn-the-command-line</a></p>
+<p>Like many of the Codecademy tutorials, this is kind of gamified. This can be
+a powerful motivator for some people. They want you to sign in, and they offer
+paid upgrades.</p>
+</div>
+<div class="section" id="learn-enough-command-line-to-be-dangerous">
+<h3>Learn Enough Command Line to be Dangerous<a class="headerlink" href="#learn-enough-command-line-to-be-dangerous" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://www.learnenough.com/command-line-tutorial">https://www.learnenough.com/command-line-tutorial</a></p>
+<p>This one has some asides to get you up to speed on “programming culture” things
+that you will see throughout your career in many contexts, like using <code class="docutils literal notranslate"><span class="pre">foo</span></code>
+or <code class="docutils literal notranslate"><span class="pre">bar</span></code> as variable names, or explaining some in-jokes. It’s heavy-handed on
+the outdated memes, but if you can get past that it’s pretty good.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For anything beyond chapters 1 and 2, this has recently become a paid
+option – as of Nov 30 2019 it’s $9 for the full content.</p>
+</div>
+</div>
+</div>
+<div class="section" id="intermediate-command-line">
+<h2>Intermediate command line<a class="headerlink" href="#intermediate-command-line" title="Permalink to this heading">¶</a></h2>
+<p>Here are skills that might be considered more intermediate:</p>
+<ul class="simple">
+<li><p>for loops</p></li>
+<li><p>if/else statements</p></li>
+<li><p>associative arrays (Bash 5)</p></li>
+<li><p>POSIX compliance</p></li>
+<li><p>various tests like <code class="docutils literal notranslate"><span class="pre">-z</span></code>, <code class="docutils literal notranslate"><span class="pre">-e</span></code>, etc</p></li>
+<li><p>subshells</p></li>
+<li><p>process substitution</p></li>
+<li><p>interpolating command output (with <code class="docutils literal notranslate"><span class="pre">$()</span></code> or backticks)</p></li>
+<li><p>piping to <code class="docutils literal notranslate"><span class="pre">xargs</span></code></p></li>
+<li><p>functions</p></li>
+<li><p>heredocs</p></li>
+<li><p>exit codes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-x</span></code></p></li>
+<li><p>command substitution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-eou</span> <span class="pre">pipefail</span></code> (what it means and why you would want to use it)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[</span></code> vs <code class="docutils literal notranslate"><span class="pre">[[</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> vs <code class="docutils literal notranslate"><span class="pre">||</span></code></p></li>
+</ul>
+<p>Other intermediate resources:</p>
+<ul class="simple">
+<li><p>Try the <a class="reference external" href="https://cmdchallenge.com/">command line challenge</a>. This gives you
+a series of challenges that you complete directly in the browser and that are
+checked immediately in real time.</p></li>
+<li><p>There are many opinions on formatting shell scripts, but the <a class="reference external" href="https://google.github.io/styleguide/shellguide.html">bash style
+guide</a> used at Google
+seems to have well-thought-out suggestions.</p></li>
+<li><p><a class="reference external" href="https://bertvv.github.io/cheat-sheets/Bash.html">bash cheat sheet</a> has
+a concise overview of good ways to use bash. This could be thought of as sort
+of an extension beyond the above style guide.</p></li>
+<li><p><a class="reference external" href="https://www.linode.com/docs/development/bash/an-intermediate-guide-to-bash-scripting/">Intermediate guide to bash scripting</a>,
+which talks about making menus, printf, and various test options for files and
+directories.</p></li>
+<li><p>Julia Evans’ <a class="reference external" href="https://jvns.ca/blog/2017/03/26/bash-quirks/">bash quirks</a>
+has some overlap with the previous links and some new ones as well.</p></li>
+<li><p>This 3-part blog series starts with why you would want to learn <code class="docutils literal notranslate"><span class="pre">awk</span></code>
+anyway, and then shows you the ropes. The later tutorials get a bit advanced
+to the point where I would probably be using R or Python instead, but it can
+be useful to know how to do these kinds of things directly from the command
+line.</p>
+<ul>
+<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/why-learn-awk/">Why Learn AWK?</a></p></li>
+<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/awk-tutorial-part-1/">Awk tutorial part 1</a></p></li>
+<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/awk-tutorial-part-2/">Awk tutorial part 2</a></p></li>
+<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/awk-tutorial-part-3/">Awk tutorial part 3</a></p></li>
+<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/my-best-awk-tricks/">Awk tricks</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://kfirlavi.herokuapp.com/blog/2012/11/14/defensive-bash-programming/">Defensive bash programming</a>
+also reiterates some of the suggestions from above and adds some additional ones.</p></li>
+</ul>
+</div>
+<div class="section" id="advanced-command-line">
+<h2>Advanced command line<a class="headerlink" href="#advanced-command-line" title="Permalink to this heading">¶</a></h2>
+<p>The Linux documentation project’s <a class="reference external" href="https://tldp.org/LDP/abs/html/index.html">advanced bash scripting guide</a> will keep you busy for a while….</p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Command line</a><ul>
+<li><a class="reference internal" href="#optional-textbooks">Optional textbooks</a></li>
+<li><a class="reference internal" href="#id2">Command line</a></li>
+<li><a class="reference internal" href="#resources-for-learning-the-command-line">Resources for learning the command line</a><ul>
+<li><a class="reference internal" href="#the-unix-workbench">The Unix Workbench</a></li>
+<li><a class="reference internal" href="#id3">A Primer for Computational Biology</a></li>
+<li><a class="reference internal" href="#learn-the-command-line">Learn the Command Line</a></li>
+<li><a class="reference internal" href="#learn-enough-command-line-to-be-dangerous">Learn Enough Command Line to be Dangerous</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#intermediate-command-line">Intermediate command line</a></li>
+<li><a class="reference internal" href="#advanced-command-line">Advanced command line</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/command-line.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="first-steps.html" title="Previous document">First steps</a>
+        </li>
+        <li>
+          <a href="choosing-r-python.html" title="Next document">Choosing R or Python</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.1.1.
+
+  </footer>
+
+  
+  </body>
+</html>

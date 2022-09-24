@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Making your Linux life easier</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Biology" href="biology.html" />
+    <link rel="prev" title="GitLab" href="gitlab.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Oswald&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="gitlab.html" title="Previous document">GitLab</a>
+        </li>
+        <li>
+          <a href="biology.html" title="Next document">Biology</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="making-your-linux-life-easier">
+<h1>Making your Linux life easier<a class="headerlink" href="#making-your-linux-life-easier" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="intermediate-command-line-use">
+<h2>Intermediate command-line use<a class="headerlink" href="#intermediate-command-line-use" title="Permalink to this heading">¶</a></h2>
+<p>Here are some tips that you might not have picked up from introductory
+command-line tutorials.</p>
+<div class="section" id="aliases">
+<h3>Aliases<a class="headerlink" href="#aliases" title="Permalink to this heading">¶</a></h3>
+<p>You can put any bash commands you’d like into an alias (see
+<a class="reference external" href="http://tldp.org/LDP/abs/html/aliases.html">http://tldp.org/LDP/abs/html/aliases.html</a> for more).</p>
+<p>For example, to log in to biowulf by typing <code class="docutils literal notranslate"><span class="pre">b</span></code>, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">b</span><span class="o">=</span><span class="s2">&quot;ssh -X </span><span class="nv">$USER</span><span class="s2">@biowulf.nih.gov&quot;</span>
+</pre></div>
+</div>
+<p>To change to a frequently-visited directory,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">N</span><span class="o">=</span><span class="s2">&quot;cd /data/NICDH-core0/&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="middle-click-paste">
+<h3>Middle-click paste<a class="headerlink" href="#middle-click-paste" title="Permalink to this heading">¶</a></h3>
+<p>This is frequently overlooked in intro Linux tutorials, but in most
+software on Linux when you highlight text it goes into a separate copy
+buffer that can be pasted with middle-mouse-button. This means you
+effectively have two buffers, the typical Ctrl-C/Ctrl-X/Ctrl-V as well
+as the last-selected text buffer.</p>
+</div>
+<div class="section" id="ctrl-c-in-terminals">
+<h3>Ctrl-C in terminals<a class="headerlink" href="#ctrl-c-in-terminals" title="Permalink to this heading">¶</a></h3>
+<p>To interrupt a command, use Ctrl-C. To paste text from the Ctrl-C/X/V
+buffer, use Ctrl-Shift-C or Ctrl-Shift-V (using most terminal
+emulators).</p>
+</div>
+<div class="section" id="dotfiles">
+<h3>dotfiles<a class="headerlink" href="#dotfiles" title="Permalink to this heading">¶</a></h3>
+<p>I’ve collected a lot of configurations over the years. You can grow your
+own over time, or see <a class="reference external" href="https://github.com/daler/dotfiles">https://github.com/daler/dotfiles</a> to start with
+“the works”.</p>
+</div>
+<div class="section" id="ctrl-r">
+<h3>Ctrl-R<a class="headerlink" href="#ctrl-r" title="Permalink to this heading">¶</a></h3>
+<p>This lets you search through your history … but see <code class="docutils literal notranslate"><span class="pre">fzf</span></code> below in the
+tools section for a fancier way.</p>
+</div>
+</div>
+<div class="section" id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="meld">
+<span id="id1"></span><h3>meld<a class="headerlink" href="#meld" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="http://meldmerge.org/">Meld</a> is an amazing tool for visually looking
+at the differences between two files and merging them. I used meld for a
+while but have now moved to using <code class="docutils literal notranslate"><span class="pre">vim</span></code> in diff mode, and the
+<a class="reference external" href="https://github.com/tpope/vim-fugitive">vim-fugitive</a> vim plugin
+helps especially with Git-related diffs and merges.</p>
+</div>
+<div class="section" id="visidata">
+<h3>visidata<a class="headerlink" href="#visidata" title="Permalink to this heading">¶</a></h3>
+<p>We work a lot with TSV files and we work a lot on the command line.
+Things like <code class="docutils literal notranslate"><span class="pre">less</span></code> and <code class="docutils literal notranslate"><span class="pre">vim</span></code> don’t format the data as nice as a
+spreadsheet program like LibreOffice Calc or Gnumeric do.</p>
+<p><a class="reference external" href="https://www.visidata.org/">visidata</a> formats TSV files into a browsable,
+sortable table with all sorts of convenient hotkeys. Makes it trivial to find
+the most strongly differentially expressed genes from a TSV of DESeq2 results.</p>
+<p>See a lightning demo <a class="reference external" href="https://www.youtube.com/watch?v=N1CBDTgGtOU">here</a>.</p>
+</div>
+<div class="section" id="tmux">
+<span id="id3"></span><h3>Tmux<a class="headerlink" href="#tmux" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Brief guide to tmux:
+<a class="reference external" href="https://medium.com/actualize-network/a-minimalist-guide-to-tmux-13675fb160fa">https://medium.com/actualize-network/a-minimalist-guide-to-tmux-13675fb160fa</a></p></li>
+<li><p>Lots more details: <a class="reference external" href="https://leanpub.com/the-tao-of-tmux/read">https://leanpub.com/the-tao-of-tmux/read</a></p></li>
+<li><p>Recent HN post: <a class="reference external" href="https://news.ycombinator.com/item?id=17998649">https://news.ycombinator.com/item?id=17998649</a></p></li>
+</ul>
+<p>Copy/paste between tmux, vim/neovim, and the system clipboard can get a
+bit crazy. See
+<a class="reference external" href="http://www.rushiagr.com/blog/2016/06/16/everything-you-need-to-know-about-tmux-copy-pasting-ubuntu">http://www.rushiagr.com/blog/2016/06/16/everything-you-need-to-know-about-tmux-copy-pasting-ubuntu</a>
+for the details.</p>
+</div>
+<div class="section" id="fzf">
+<h3>fzf<a class="headerlink" href="#fzf" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://github.com/junegunn/fzf">fzf</a> is a fuzzy-finder. The installation
+script will make Ctrl-R, for searching through history, use <code class="docutils literal notranslate"><span class="pre">fzf</span></code>.</p>
+<p>Any content can be piped through fzf. For example, to search through <code class="docutils literal notranslate"><span class="pre">conda</span></code>
+environments here’s a function to put in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>. Then you can use
+the <code class="docutils literal notranslate"><span class="pre">sa</span></code> command to search through your environments, and when you hit enter
+that environment will be activated.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select a conda env to activate</span>
+sa<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">local</span> <span class="nv">name</span><span class="o">=</span><span class="k">$(</span>conda env list <span class="p">|</span> grep -v <span class="s2">&quot;#&quot;</span> <span class="p">|</span> fzf<span class="k">)</span>
+    <span class="nb">local</span> <span class="nv">env</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$name</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span><span class="p">;</span>
+    <span class="nb">eval</span> <span class="s2">&quot;source activate </span><span class="nv">$env</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="autojump">
+<h3>autojump<a class="headerlink" href="#autojump" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://github.com/wting/autojump">autojump</a> remembers where you’ve changed
+directories, and lets you jump right there with <code class="docutils literal notranslate"><span class="pre">j</span></code>. Or hit <code class="docutils literal notranslate"><span class="pre">j</span></code> and
+tab-complete to see alternatives.</p>
+<p>This is a huge time saver when you’re frequently visting highly-nested directories.</p>
+</div>
+<div class="section" id="ripgrep">
+<h3>ripgrep<a class="headerlink" href="#ripgrep" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://github.com/BurntSushi/ripgrep">ripgrep</a> is like grep combined but
+much faster. Perfect for looking through source code since it plays nice with
+git repos – for example, it will ignore searching in files added to
+<code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> or will avoid searching in huge files.</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Making your Linux life easier</a><ul>
+<li><a class="reference internal" href="#intermediate-command-line-use">Intermediate command-line use</a><ul>
+<li><a class="reference internal" href="#aliases">Aliases</a></li>
+<li><a class="reference internal" href="#middle-click-paste">Middle-click paste</a></li>
+<li><a class="reference internal" href="#ctrl-c-in-terminals">Ctrl-C in terminals</a></li>
+<li><a class="reference internal" href="#dotfiles">dotfiles</a></li>
+<li><a class="reference internal" href="#ctrl-r">Ctrl-R</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tools">Tools</a><ul>
+<li><a class="reference internal" href="#meld">meld</a></li>
+<li><a class="reference internal" href="#visidata">visidata</a></li>
+<li><a class="reference internal" href="#tmux">Tmux</a></li>
+<li><a class="reference internal" href="#fzf">fzf</a></li>
+<li><a class="reference internal" href="#autojump">autojump</a></li>
+<li><a class="reference internal" href="#ripgrep">ripgrep</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/making-your-linux-life-easier.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="gitlab.html" title="Previous document">GitLab</a>
+        </li>
+        <li>
+          <a href="biology.html" title="Next document">Biology</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.1.1.
+
+  </footer>
+
+  
+  </body>
+</html>

@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choosing R or Python</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python" href="python.html" />
+    <link rel="prev" title="Command line" href="command-line.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Oswald&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="command-line.html" title="Previous document">Command line</a>
+        </li>
+        <li>
+          <a href="python.html" title="Next document">Python</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="choosing-r-or-python">
+<span id="choosing-r-python"></span><h1>Choosing R or Python<a class="headerlink" href="#choosing-r-or-python" title="Permalink to this heading">¶</a></h1>
+<p>R and Python are both commonly-used languages in statistics, data science,
+visualization, and bioinformatics. Once you learn one, you will be able to pick
+up the other one relatively quickly.</p>
+<p>However, learning programming languages is much like learning human languages:
+it takes time and practice. So you’ll probably want to focus on just one to
+start to avoid confusion.</p>
+<p>But which one to choose? This question is the topic of many a <a class="reference external" href="https://en.wikipedia.org/wiki/Flaming_(Internet)">flame war</a> on programming websites,
+and you should do your own research into which one to choose. In BSPC, we use
+both R and Python extensively, so here are some opinions on how they are
+different and why you might want to choose one or the other depending on your
+training goals, career goals, and expectations.</p>
+<div class="section" id="choose-the-language-used-in-your-environment">
+<h2>Choose the language used in your environment<a class="headerlink" href="#choose-the-language-used-in-your-environment" title="Permalink to this heading">¶</a></h2>
+<p>If your lab focuses more on Python or R, then you should learn that first.
+You’ll have more local resources and will be able to be more immediately
+productive by learning the language used by your peers. And if your lab uses
+Matlab, by all means learn Matlab first!</p>
+<blockquote>
+<div><p>If a language is already used in your lab, start with that one.</p>
+</div></blockquote>
+</div>
+<div class="section" id="python-is-a-general-programming-language-r-is-a-statistical-programming-package">
+<h2>Python is a general programming language, R is a statistical programming package<a class="headerlink" href="#python-is-a-general-programming-language-r-is-a-statistical-programming-package" title="Permalink to this heading">¶</a></h2>
+<p>R is primarily for data analysis, visualization, and statistical programming.
+Python is used for those as well, and in addition it is a general-purpose language.
+Python is installed by default on Mac and Linux and used for various systems
+programming tasks. You can build a website from scratch with Python (R does have
+the wonderful Shiny package for building interactive websites, but such sites
+these are constrained to a certain kind of website).</p>
+<p>The biggest differentiator is that Python is used in many
+other domains, while R tends to be focused more on biology, statistics, and
+visualization. Many tools provide a Python API. With Python you can control 3D
+animation in <a class="reference external" href="https://blender.org">Blender</a>, operate on <a class="reference external" href="https://www.dropbox.com/developers/documentation/python">Dropbox</a> files
+interact with <a class="reference external" href="https://github.com/PyGithub/PyGithub">GitHub</a>, <a class="reference external" href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera">control
+a Raspberry Pi camera</a>,
+<a class="reference external" href="https://wiki.python.org/moin/PythonInMusic">write and compose music</a>,
+<a class="reference external" href="https://www.pygame.org/docs/">create games</a>, <a class="reference external" href="https://flask.palletsprojects.com/">create web apps</a>, and much more.</p>
+<p>The statistical methods available in R are unparalleled. Python does have some
+statistics, for example in the <a class="reference external" href="https://www.statsmodels.org/">statsmodels</a>
+and <a class="reference external" href="https://docs.scipy.org/doc/scipy/tutorial/stats.html">scipy.stats</a> packages,
+but these are just playing catch-up to R.</p>
+<p>For things like differential expression in bulk RNA-seq that use sophisticated
+statistical methods, the major packages for this (DESeq2, edgeR) are written in
+R.</p>
+<blockquote>
+<div><p>If you are interested in general programming – not just bioinformatics and statistics – choose Python for its flexibility.</p>
+<p>If you will be using sophisticated statistics, choose R.</p>
+</div></blockquote>
+</div>
+<div class="section" id="visualization-is-good-in-both">
+<h2>Visualization is good in both<a class="headerlink" href="#visualization-is-good-in-both" title="Permalink to this heading">¶</a></h2>
+<p>In R, there’s pretty much just one plotting package in town: <a class="reference external" href="https://ggplot2.tidyverse.org/">ggplot2</a>. ggplot2 is a fantastic plotting library for
+R. It is sort of its own mini-language though, so it takes some time to get used
+to it, but that time is well worth it.</p>
+<p>Python has excellent plotting libraries as well: <a class="reference external" href="https://plotnine.readthedocs.io/en/stable/">plotnine</a> is inspired by ggplot2, though
+<a class="reference external" href="https://seaborn.pydata.org/">seaborn</a> tends to be a more canonical Python
+package. Both use the powerful <a class="reference external" href="https://matplotlib.org/">matplotlib</a> package.
+There’s also <a class="reference external" href="https://docs.bokeh.org/en/latest/index.html">bokeh</a> and
+<a class="reference external" href="http://holoviews.org/">holoviews</a> which are geared more towards interactive
+web visualization.</p>
+<p><a class="reference external" href="https://plot.ly/graphing-libraries/">plotly</a> has libraries for both R and
+Python.</p>
+<p>The only differentiator I see between R and Python is for custom graphics. If
+you need to make non-standard figures of some kind, it tends to be easier to do
+that in matplotlib which gives cleaner access to the individual components of
+a plot (down to modifying each individual shape or line, if you need it).</p>
+<blockquote>
+<div><p>Visualization is good in both Python and R, and so does not help in choosing.</p>
+</div></blockquote>
+</div>
+<div class="section" id="manipulating-data-from-tsv-csv-excel-is-good-in-both">
+<h2>Manipulating data from TSV/CSV/Excel is good in both<a class="headerlink" href="#manipulating-data-from-tsv-csv-excel-is-good-in-both" title="Permalink to this heading">¶</a></h2>
+<p>R has the <a class="reference external" href="https://www.tidyverse.org/">tidyverse</a>, a set of packages designed
+for data science-type work that all work together (and have their own
+idiosyncratic way of doing things). In particular, the <a class="reference external" href="https://dplyr.tidyverse.org/">dplyr</a> package makes it easy to interact with tables
+of data.</p>
+<p>Python has <a class="reference external" href="https://pandas.pydata.org/">pandas</a> for interacting with tables of
+data.</p>
+<p>The authors of dplyr and pandas have collaborated on the <a class="reference external" href="https://github.com/wesm/feather">feather</a>) format, which allows for
+cross-communication between R and Python.</p>
+<blockquote>
+<div><p>Data manipulation is good in both Python and R, and so does not help in choosing.</p>
+</div></blockquote>
+</div>
+<div class="section" id="bioconductor-is-only-for-r">
+<h2>Bioconductor is only for R<a class="headerlink" href="#bioconductor-is-only-for-r" title="Permalink to this heading">¶</a></h2>
+<p>One major reason for choosing R is the fanstastic <a class="reference external" href="https://bioconductor.org/">Bioconductor</a> repository. This is a huge collection of
+high-quality bioinformatics-related packages for R. There’s nothing in Python
+that comes close.</p>
+<blockquote>
+<div><p>If you are planning to rely heavily on Bioconductor packages, you should choose R.</p>
+</div></blockquote>
+</div>
+<div class="section" id="snakemake-is-a-superset-of-python">
+<h2>Snakemake is a superset of Python<a class="headerlink" href="#snakemake-is-a-superset-of-python" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://snakemake.readthedocs.io">snakemake</a> is a workflow management system
+that helps tie together complex analyses. Snakemake is a superset of Python, so
+all valid Python is also valid Snakemake. Knowing Python is therefore important
+for writing Snakefiles.</p>
+<blockquote>
+<div><p>If you plan to use Snakemake heavily, choose Python</p>
+</div></blockquote>
+</div>
+<div class="section" id="still-can-t-choose">
+<h2>Still can’t choose?<a class="headerlink" href="#still-can-t-choose" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.anotherbookondatascience.com/">Another Book On Data Science</a>
+teaches them both side-by-side, and <a class="reference external" href="https://gist.github.com/conormm/fd8b1980c28dd21cfaf6975c86c74d07">this page of comparisons</a> attempts
+to show operations in dplyr and pandas side-by-side.</p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Choosing R or Python</a><ul>
+<li><a class="reference internal" href="#choose-the-language-used-in-your-environment">Choose the language used in your environment</a></li>
+<li><a class="reference internal" href="#python-is-a-general-programming-language-r-is-a-statistical-programming-package">Python is a general programming language, R is a statistical programming package</a></li>
+<li><a class="reference internal" href="#visualization-is-good-in-both">Visualization is good in both</a></li>
+<li><a class="reference internal" href="#manipulating-data-from-tsv-csv-excel-is-good-in-both">Manipulating data from TSV/CSV/Excel is good in both</a></li>
+<li><a class="reference internal" href="#bioconductor-is-only-for-r">Bioconductor is only for R</a></li>
+<li><a class="reference internal" href="#snakemake-is-a-superset-of-python">Snakemake is a superset of Python</a></li>
+<li><a class="reference internal" href="#still-can-t-choose">Still can’t choose?</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/choosing-r-python.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="command-line.html" title="Previous document">Command line</a>
+        </li>
+        <li>
+          <a href="python.html" title="Next document">Python</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.1.1.
+
+  </footer>
+
+  
+  </body>
+</html>

@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulk RNA-seq analysis</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ChIP-seq analysis" href="chipseq.html" />
+    <link rel="prev" title="Variant calling" href="variant-calling.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Oswald&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="variant-calling.html" title="Previous document">Variant calling</a>
+        </li>
+        <li>
+          <a href="chipseq.html" title="Next document">ChIP-seq analysis</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bulk-rna-seq-analysis">
+<h1>Bulk RNA-seq analysis<a class="headerlink" href="#bulk-rna-seq-analysis" title="Permalink to this heading">¶</a></h1>
+<p>The basic steps in bulk RNA-seq analysis are:</p>
+<ul class="simple">
+<li><p>quality control (FastQC, MultiQC, many other tools)</p></li>
+<li><p>trim reads if needed (cutadapt, fastp)</p></li>
+<li><p>align reads to genome (HISAT2, STAR)</p></li>
+<li><p>count reads in genes (featureCounts)</p></li>
+<li><p>run differential expression analysis (DESeq2, edgeR)</p></li>
+</ul>
+<p><strong>The best place to learn</strong> this is probably the Harvard Bioinformatics Core
+training material. It’s still under development, but most of it is accessible
+here on their <a class="reference external" href="https://github.com/hbctraining/main">main training page</a>.
+Specifically, you’ll probably want to check out:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon-flipped/schedule/links-to-lessons.html">Introduction to (bulk) RNA-seq using High-Performance Computing</a></p></li>
+<li><p><a class="reference external" href="https://hbctraining.github.io/DGE_workshop_salmon_online/schedule/links-to-lessons.html">Introduction to Differential Gene Expression Analysis</a></p></li>
+</ul>
+<p>Note that these have prerequisites of <a class="reference external" href="https://hbctraining.github.io/Intro-to-shell-flipped/schedule/links-to-lessons.html">Introduction to shell</a>
+and <a class="reference external" href="https://hbctraining.github.io/Intro-to-R-flipped/schedules/links-to-lessons.html">Introduction to R</a> respectively.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Harvard Bioinformatics Core tutorials sometimes change locations or get
+updated or split. The above links are checked periodically for correctness,
+but if you can’t find the linked tutorials, look around on their
+<a class="reference external" href="https://github.com/hbctraining/main">main training page</a>.</p>
+</div>
+<p>The remainder of this page goes into some more detail on various aspects of
+RNA-seq analysis.</p>
+<div class="section" id="experimental-design">
+<h2>Experimental design<a class="headerlink" href="#experimental-design" title="Permalink to this heading">¶</a></h2>
+<p>The <a class="reference external" href="https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon-flipped/lessons/02_experimental_planning_considerations.html">experimental planning considerations</a>
+section from HBC training is a very good discussion on how much to sequence
+(more samples or more depth?), how to avoid a confounded experiment, and
+preventing batch effects in general.</p>
+<p>Especially when doing <cite>in vitro</cite> research with cell lines, it’s important to
+think about what a replicate really is. <a class="reference external" href="https://paasp.net/accurate-design-of-in-vitro-experiments-why-does-it-matter/">This blog post</a>
+is a good discussion of the difference between technical replicates and
+biological replicates <cite>in vitro</cite>.</p>
+</div>
+<div class="section" id="strandedness-in-rna-seq">
+<h2>Strandedness in RNA-seq<a class="headerlink" href="#strandedness-in-rna-seq" title="Permalink to this heading">¶</a></h2>
+<p>Depending on what kit was used for the library prep, a library may be stranded,
+reverse stranded, or unstranded. <a class="reference external" href="https://github.com/igordot/genomics/blob/master/notes/rna-seq-strand.md">These figures</a>
+help visualize the different strand-specific protocols. If you’re unsure,
+RSeQC’s <a class="reference external" href="http://rseqc.sourceforge.net/#infer-experiment-py">infer_experiment.py</a> can help you figure it
+out given a BAM and a BED file of genes.</p>
+</div>
+<div class="section" id="running-your-own-differential-expression-analysis">
+<h2>Running your own differential expression analysis<a class="headerlink" href="#running-your-own-differential-expression-analysis" title="Permalink to this heading">¶</a></h2>
+<p>When you’re ready, try your hand at analyzing a real-world RNA-seq data
+set. The best thing to do would be to find data from a paper of interest and
+try to reproduce it.</p>
+<p>Here’s a published experiment:
+<a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE93737">https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE93737</a>. This is
+Drosophila melanogaster RNA-seq data from a recent paper.</p>
+<p>The counts table is available, if you want to focus on that part in R,
+or you can access the raw data from SRA and run from scratch. Note that
+this experiment has more than just two treatments. To start, try just
+identifying the genes differentially expressed between larvae and pupae
+(the dicer-gfp_x_larva_neuron replicates vs the dicer-gfp_x_pupal_neuron
+replicates).</p>
+<p>You may have heard the terms RPKM, FPKM, RPM, and TPM. Which to use? Short
+answer: TPM. Longer answer, with figures, is here:
+<a class="reference external" href="https://ro-che.info/articles/2016-11-28-rna-seq-normalization">https://ro-che.info/articles/2016-11-28-rna-seq-normalization</a>. The accompanying
+<a class="reference external" href="https://ro-che.info/docs/2016-11-27-rna-seq.pdf">slides</a> are useful for
+discussion.</p>
+</div>
+<div class="section" id="other-resources">
+<h2>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a></h2>
+<p>To start digging into details:</p>
+<ul class="simple">
+<li><p>We base part of our RNA-seq template off of the <a class="reference external" href="https://www.bioconductor.org/packages/devel/workflows/vignettes/rnaseqGene/inst/doc/rnaseqGene.html">Bioconductor RNA-seq
+workflow</a>, which shows all the steps of RNA-seq from within R.</p></li>
+<li><p>The <a class="reference external" href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">DESeq2 vignette</a>
+is the authoritative source on how to use DESeq2.</p></li>
+<li><p>The <a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8">DESeq2 paper</a>
+is very well written, and describes how DESeq2 is actually working</p></li>
+<li><p>A nice treatment of <a class="reference external" href="http://genomicsclass.github.io/book/pages/interactions_and_contrasts.html">interaction terms</a>,
+along with plots to help understand what’s being tested.</p></li>
+<li><p>For complex experimental designs, this <a class="reference external" href="https://github.com/tavareshugo/tutorial_DESeq2_contrasts/blob/main/DESeq2_contrasts.md">tutorial</a>
+shows an elegant, general method for creating the proper contrasts.</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>This RNA-seq page needs some better organization.</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Bulk RNA-seq analysis</a><ul>
+<li><a class="reference internal" href="#experimental-design">Experimental design</a></li>
+<li><a class="reference internal" href="#strandedness-in-rna-seq">Strandedness in RNA-seq</a></li>
+<li><a class="reference internal" href="#running-your-own-differential-expression-analysis">Running your own differential expression analysis</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/rnaseq.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="variant-calling.html" title="Previous document">Variant calling</a>
+        </li>
+        <li>
+          <a href="chipseq.html" title="Next document">ChIP-seq analysis</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.1.1.
+
+  </footer>
+
+  
+  </body>
+</html>

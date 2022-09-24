@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variant calling</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bulk RNA-seq analysis" href="rnaseq.html" />
+    <link rel="prev" title="Biology" href="biology.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lora|Oswald&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="biology.html" title="Previous document">Biology</a>
+        </li>
+        <li>
+          <a href="rnaseq.html" title="Next document">Bulk RNA-seq analysis</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="variant-calling">
+<span id="id1"></span><h1>Variant calling<a class="headerlink" href="#variant-calling" title="Permalink to this heading">¶</a></h1>
+<p>Variant calling is the process of looking for differences in the genome. This
+could be looking for differences between individuals (germline calling) or
+between a tumor and matched normal tissue (somatic calling).</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-020-00791-w">Koboldt 2020</a>
+is a good overview of variant calling, including different technologies,
+differences between germline and somatic calling, and a sketch of the
+workflow. <a class="reference external" href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-020-00791-w/figures/2">Figure
+2</a>
+is especially good to study as it has examples of incorrectly called variants
+and shows how to critically evaluate calls.</p></li>
+<li><p>Data Carpentry’s “Wrangling Genomics” workshop has a <a class="reference external" href="https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html">section on variant
+calling</a>
+that walks through some of the basics. Depending on which machine you’re
+running it on, you may want to start at the <a class="reference external" href="https://datacarpentry.org/genomics-workshop/">beginning of the workshop</a> which walks you through
+installing the required software. If this is your first time working on the
+command line, then the entire workshop would be good to go through.</p></li>
+<li><p>The Broad’s <a class="reference external" href="https://gatk.broadinstitute.org/hc/en-us">Genome Analysis Toolkit (GATK)</a> is the standard germline variant
+calling workflow (often called “GATK best-practices workflow”) that can also
+do somatic calling and germline CNV. That site includes <a class="reference external" href="https://gatk.broadinstitute.org/hc/en-us/sections/360007226631-Tutorials">extensive tutorials</a>
+and <a class="reference external" href="https://gatk.broadinstitute.org/hc/en-us/sections/360007373191-Blog">blog posts</a> that
+give a lot of detail and context.</p></li>
+</ul>
+<div class="section" id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">¶</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">SNV</dt>
+<dd class="field-odd"><p>Single-nucleotide variant, typically use GATK to call these.</p>
+</dd>
+<dt class="field-even">indel</dt>
+<dd class="field-even"><p>Insertion or deletion. Typically assumed to be small-ish (&lt;10 bp), called by GATK.</p>
+</dd>
+<dt class="field-odd">SV</dt>
+<dd class="field-odd"><p>Structural variant. Typically assumed to be large (&gt;1kb). Can include
+complicated inversions, translocations, and copy-number variants (which are
+often considered a separate class). SVs are best detected with long-read
+sequencing and need specialized algorithms to detect them. This is a hard
+problem, and different algorithms are able to detect different kinds of
+SVs.</p>
+</dd>
+<dt class="field-even">CNV</dt>
+<dd class="field-even"><p>Copy number variants. This is a stretch of DNA that is duplicated. Often
+assayed by aCGH (array comparative genome hybridization).</p>
+</dd>
+<dt class="field-odd">germline variant calling</dt>
+<dd class="field-odd"><p>The process of identifying places in a genome that differ from the
+reference genome. If otherwise unspecified, it usually means SNV and indel
+calling (rather than SV or CNV).</p>
+</dd>
+<dt class="field-even">somatic variant calling</dt>
+<dd class="field-even"><p>Calling variants that arose in a tumor compared to normal tissue is somatic
+varant calling. It is important to note that <a class="reference external" href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890491-Somatic-calling-is-NOT-simply-a-difference-between-two-callsets">somatic calling is NOT simply
+a difference between two callsets</a>,
+it’s quite a bit more complicated than that.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="interpreting-and-prioritizing-variants">
+<h2>Interpreting and prioritizing variants<a class="headerlink" href="#interpreting-and-prioritizing-variants" title="Permalink to this heading">¶</a></h2>
+<p>Calling variants is just the first step. You’ll probably find thousands. Which
+ones are meaningful?</p>
+<p>Variant annotation is the process of adding extra information to each variant.
+For example, the location of each variant relative to genes, known clinical
+relevance, and how common a variant is in the general population.</p>
+<p><a class="reference external" href="https://www.future-science.com/doi/10.2144/000114492">Dashti 2018</a> provides
+lots of practical advice about tools, databases, and thresholds to use and is
+worth a careful read.</p>
+<p>Example tools for this include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://pcingola.github.io/SnpEff/">SnpEff</a></p></li>
+<li><p><a class="reference external" href="https://annovar.openbioinformatics.org/en/latest/">ANNOVAR</a></p></li>
+<li><p><a class="reference external" href="https://useast.ensembl.org/info/docs/tools/vep/index.html">VEP</a></p></li>
+<li><p><a class="reference external" href="https://github.com/brentp/vcfanno">vcfanno</a> supports arbitrary user-specified annotations</p></li>
+</ul>
+<p>There are many databases, each with their own uses. There is no single database
+that aggregates them all, though dbNSFP comes the closest. Here is an
+incomplete list:</p>
+<ul>
+<li><p><a class="reference external" href="https://sites.google.com/site/jpopgen/dbNSFP">dbNSFP</a> compiles prediction
+scores for non-synonymous single-nucleotide variants for many databases (some
+of which are also listed below). For one-off queries, there is a <a class="reference external" href="http://database.liulab.science/dbNSFP">web
+application</a>. This is probably the
+best one-stop-shop for variant annotation. But when digging deeper on a small
+number of variants, you may find it useful to submit those variants to the
+tools</p>
+<dl class="simple">
+<dt>&gt; Its current version is based on the Gencode release 29 / Ensembl version 94</dt><dd><p>and includes a total of 84,013,490 nsSNVs and ssSNVs (splicing-site SNVs).
+It compiles prediction scores from 37 prediction algorithms (SIFT, SIFT4G,
+Polyphen2-HDIV, Polyphen2-HVAR, LRT, MutationTaster2, MutationAssessor,
+FATHMM, MetaSVM, MetaLR, CADD, CADD_hg19, VEST4, PROVEAN, FATHMM-MKL
+coding, FATHMM-XF coding, fitCons x 4, LINSIGHT, DANN, GenoCanyon, Eigen,
+Eigen-PC, M-CAP, REVEL, MutPred, MVP, MPC, PrimateAI, GEOGEN2,
+BayesDel_addAF, BayesDel_noAF, ClinPred, LIST-S2, ALoFT), 9 conservation
+scores (PhyloP x 3, phastCons x 3, GERP++, SiPhy and bStatistic) and other
+related information including allele frequencies observed in the 1000
+Genomes Project phase 3 data, UK10K cohorts data, ExAC consortium data,
+gnomAD data and the NHLBI Exome Sequencing Project ESP6500 data, various
+gene IDs from different databases, functional descriptions of genes, gene
+expression and gene interaction information, etc.</p>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/snp/docs/entrez_help/">dbSNP</a> is hosted by
+NCBI and is a collection of known SNPs corresponding with an <cite>rsID</cite>, a unique
+identifier. If your variant calling found variant in dbSNP, annotation tools
+will generally annotate it with the rsID.</p></li>
+<li><p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/dbvar/">dbVar</a> is similar to dbSNP but for structural variation</p></li>
+<li><p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/clinvar/">ClinVar</a> stores clinical information about variants</p></li>
+<li><p><a class="reference external" href="https://www.clinicalgenome.org/">ClinGen</a> is a curated resource of
+clinically-relevant variants in genes (read more about the differences
+between ClinVar and ClinGen <a class="reference external" href="https://www.ncbi.nlm.nih.gov/clinvar/docs/clingen/">here</a>)</p></li>
+<li><p><a class="reference external" href="https://www.omim.org/">OMIM</a> lists known genetic disorders and associated genes.</p></li>
+<li><p><a class="reference external" href="https://sift.bii.a-star.edu.sg/">SIFT</a> (“Sorting Intolerant from
+Tolerant”). More sophisticated than just “amino acid
+change”, SIFT predicts whether an amino acid change would affect protein
+function based on sequence homology and physical properties of amino acids.</p></li>
+<li><p>PolyPhen (PolyPhen2-HDIV and PolyPhen2-HVAR are included in dbNSFP). dbNSFP
+includes SIFT, but only for known cases. Unknown missense mutations can be
+run through the command-line tool to calculate predictions.</p></li>
+<li><p><a class="reference external" href="https://cancer.sanger.ac.uk/cosmic">COSMIC</a> is the Catalogue of Somatic
+Mutations in Cancer which is an expert-curated database of somatic mutations.
+The website also has mutation profiles of 1000+ cell lines and other useful
+info on somatic mutations in human cancer. You will need to create an account
+to download data.</p></li>
+<li><p><a class="reference external" href="http://mendel.stanford.edu/SidowLab/downloads/gerp/">GERP</a> (Genomic
+Evolutionary Rate Profiling) assesses if a mutation was likely to be neutral
+or not (precomputed scores included in dbNSFP)</p></li>
+<li><p><a class="reference external" href="https://cadd.gs.washington.edu/">CAAD</a> (Combined Annotation Dependent
+Depletion) scores the deleteriousness of single-nucleotide variants and small
+indels. The scoring uses a combination of sources. Precomputed scores are
+included in dbNSFP.</p></li>
+</ul>
+</div>
+<div class="section" id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading">¶</a></h2>
+<p>The <a class="reference external" href="https://gnomad.broadinstitute.org/">gnomAD browser</a> is a great way to
+visualize your variants.</p>
+<p>The <a class="reference external" href="http://genome.ucsc.edu">UCSC Genome Browser</a> has tracks for many of the databases noted above.</p>
+<p><a class="reference external" href="https://www.nature.com/articles/s41587-019-0054-x">Krusche 2019</a> in Figure
+2 show the ways in which small indels can be called in different ways.</p>
+</div>
+<div class="section" id="additional-notes">
+<h2>Additional notes<a class="headerlink" href="#additional-notes" title="Permalink to this heading">¶</a></h2>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>This section could use some better organization</p>
+</div>
+<p>Filtering on minor allele frequency: A non-synonymous SNP that is rare in the
+general population might be expected to be more important for the study.
+Annotation tools typically add MAF (minor allele frequency) which is taken from
+large studies with healthy individuals. But that “healthy individuals”
+assumption is probably not 100% correct, due to incomplete penetrance or
+variable clinical phenotype. So while we might initially think of something
+like 1% as a threshold for “rare in the general population”, we should set that
+possibly to some different value. One place to start would be to set the
+threshold to the carrier frequency for a related disease.</p>
+<p>Some notes from from MacArthur 2018:</p>
+<p>How many samples needed:</p>
+<dl class="simple">
+<dt>&gt; Gene discovery for conditions with low locus heterogeneity and sufficiently</dt><dd><p>high-penetrance mutations is occasionally possible by sequencing a single
+family; however, most gene-discovery applications will require
+substantially larger sample sizes: multiple unrelated families for rare
+monogenic conditions, and thousands to tens of thousands of patients and
+controls for complex disorders.</p>
+</dd>
+</dl>
+<p>If you want to say that you did <em>not</em> find an expected variant:</p>
+<dl class="simple">
+<dt>&gt; Investigators should begin by examining sequence variation in genes known to</dt><dd><p>be associated with that phenotype, and assessing sequence coverage of the
+coding sequences and splice junctions for these genes before exploring the
+possibility of new candidate genes in the affected individuals.</p>
+</dd>
+</dl>
+<p>A tale of caution regarding gene size:</p>
+<dl class="simple">
+<dt>&gt; A study found 4 independent missense mutations in TTN in a cohort of 945</dt><dd><p>families with a child affected by autism. TTN has the largest coding sequence
+of any gene, so you’d actually expect 1.96 mutations. Need to consider gene
+size, mutation rate, number of trios, distribution of exome coverage.</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5935497/">Eilbeck 2017</a> gives
+a good overview of variant prioritization in the context of Mendelian
+disease.</p></li>
+<li><p><a class="reference external" href="https://www.nature.com/articles/nature13127">MacArthur 2014</a> gives clear
+guidelines assessing variant pathogenicity.</p></li>
+<li><p>The <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/25741868/">ACGM standards</a> describes
+standard specific terminology like “pathogenic” or “likely benign” to
+describe variants in genes causing Mendelian disorders.</p></li>
+</ul>
+</div>
+<div class="section" id="other-resources">
+<h2>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>The “Extant-knowledge-based candidate prioritization” section of <a class="reference external" href="https://www.future-science.com/doi/10.2144/000114492">Dashti 2018</a> gives an example of
+what the final output of many database searches for a candidate gene.</p></li>
+<li><p><a class="reference external" href="https://monarchinitiative.org/">Monarch Initiative</a> integrates many
+databases and is very useful for exploring existing knowledge.</p></li>
+<li><p>RegulomeDB: <a class="reference external" href="https://www.regulomedb.org">https://www.regulomedb.org</a></p></li>
+<li><p>GTEx: <a class="reference external" href="https://www.gtexportal.org">https://www.gtexportal.org</a></p></li>
+<li><p>GWAVA: <a class="reference external" href="https://www.sanger.ac.uk/sanger/StatGen_Gwava">https://www.sanger.ac.uk/sanger/StatGen_Gwava</a></p></li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Variant calling</a><ul>
+<li><a class="reference internal" href="#terminology">Terminology</a></li>
+<li><a class="reference internal" href="#interpreting-and-prioritizing-variants">Interpreting and prioritizing variants</a></li>
+<li><a class="reference internal" href="#visualization">Visualization</a></li>
+<li><a class="reference internal" href="#additional-notes">Additional notes</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/variant-calling.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="biology.html" title="Previous document">Biology</a>
+        </li>
+        <li>
+          <a href="rnaseq.html" title="Next document">Bulk RNA-seq analysis</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.1.1.
+
+  </footer>
+
+  
+  </body>
+</html>
