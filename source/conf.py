@@ -107,3 +107,9 @@ html_short_title = "Home"
 html_sidebars = {
     '**': ['localtoc.html', 'sourcelink.html', 'searchbox.html'],
 }
+
+linkcheck_request_headers = {
+    "https://ncbi.nlm.nih.gov": {
+        "User-Agent": "Mozilla",
+    }
+}
