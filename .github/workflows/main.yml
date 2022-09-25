@@ -26,6 +26,7 @@ jobs:
         if [ -s broken ]; then
           echo "BROKEN LINKS IDENTIFIED"
           cat broken
+          exit 1
         fi
 
     - name: build docs
