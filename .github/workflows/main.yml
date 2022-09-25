@@ -21,8 +21,13 @@ jobs:
         # Activate env and build docs
         eval "$(conda shell.bash hook)"
         conda activate ./env
+
+        # check for broken links
         make linkcheck | tee linkcheck.log
-        grep -w "broken" linkcheck.log > broken
+
+        # Prevent completely exiting the test if pattern not found
+        grep -w "broken" linkcheck.log > broken ||  true
+
         if [ -s broken ]; then
           echo "BROKEN LINKS IDENTIFIED"
           cat broken
