@@ -133,5 +133,5 @@ linkcheck_ignore = [
 
     # Scraping returns 500, but website seems fine. Possibly a timeout issue
     # since the site seems slow.
-    r'http://blogs.nature.com/methagora',
+    #r'http://blogs.nature.com/methagora',
 ]
