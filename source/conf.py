@@ -107,3 +107,31 @@ html_short_title = "Home"
 html_sidebars = {
     '**': ['localtoc.html', 'sourcelink.html', 'searchbox.html'],
 }
+
+# Running `make linkcheck` will ensure links are working. However, some sites
+# are resistant to scraping, so need some tweaks here:
+linkcheck_request_headers = {
+    # Add a user agent to everything
+    "*": {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0",
+    }
+}
+
+# Avoids downloading the entire page to check anchors.
+linkcheck_anchors = False
+
+# Completely ignore these regexes
+linkcheck_ignore = [
+    # Appears to be using CloudFlare, not worth the effor to spoof here
+    r'https://gatk.broadinstitute.org',
+
+    # Also scrape-resistant
+    r'https://twitter.com',
+
+    # SSL/TLS errors
+    r'https://www.sempf.net',
+
+    # Scraping returns 500, but website seems fine. Possibly a timeout issue
+    # since the site seems slow.
+    r'http://blogs.nature.com/methagora',
+]

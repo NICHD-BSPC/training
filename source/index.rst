@@ -8,6 +8,9 @@ topics.
 
   Note: the opinions on these pages do not reflect those of NICHD or NIH.
 
+There's a lot of excellent training material out there, so rather than repeat
+it, this website acts as a central location of curated resources. We've found
+the good stuff so you can get right to learning.
 
 Start here
 ----------
@@ -15,12 +18,9 @@ Start here
 Bioinformatics and scientific programming is a big field, and it can be
 difficult to know where to start.
 
-If possible, schedule a meeting (ryan.dale@nih.gov) to discuss your training
-goals and expectations so we can help develop a customized training plan.
-
-There's a lot of excellent training material out there, so rather than repeat
-it, this website acts as a central location of curated resources to help focus
-your learning.
+If you are at NIH, you can schedule a meeting (ryan.dale@nih.gov) to discuss
+your training goals and expectations so we can help develop a customized
+training plan.
 
 Ready? Head to :ref:`first-steps`.
 
@@ -32,11 +32,16 @@ If you haven't been here in a while and want to know what's new, see the :ref:`c
 Currently-written topics
 ------------------------
 
-:ref:`first-steps` gives you an introduction to the content here and some context.
-
+:ref:`first-steps` gives you an introduction to the content here and some
+context. If you're just starting out, head there first.
 
 Initial training
 ~~~~~~~~~~~~~~~~
+
+These sections help you learn the basics of programming, and include some
+examples of beginner/intermediate/advanced skills to help you figure out where
+you are in your learning and how to advance.
+
 .. toctree::
    :maxdepth: 1
 
@@ -45,11 +50,12 @@ Initial training
    choosing-r-python
    python
    r
-   genomics-formats
 
 
-Supplemental training
-~~~~~~~~~~~~~~~~~~~~~
+Next steps
+~~~~~~~~~~
+
+Once you have the basics of programming, these sections will broaden your skills.
 
 .. toctree::
    :maxdepth: 1
@@ -63,9 +69,12 @@ Supplemental training
 Genomics
 ~~~~~~~~
 
+These sections point to resources to learn about some specific genomics topics:
+
 .. toctree::
    :maxdepth: 1
 
+   genomics-formats
    variant-calling
    rnaseq
    chipseq

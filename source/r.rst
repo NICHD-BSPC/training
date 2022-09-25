@@ -187,36 +187,17 @@ for bioinformatics and biology packages, and CRAN is for everything else.
 Bioconductor packages need to satisfy lots of documentation and testing
 criteria, so they are typically high-quality packages.
 
-- The `main Bioconductor page <https://www.bioconductor.org/>`_ has
-  installation instructions and links for exploring packages
-
-- `Bioconductor for everyone
-  <http://biocworkshops2019.bioconductor.org.s3-website-us-east-1.amazonaws.com/page/BiocIntro__RBiocForAll/>`_
-  starts from the basics of R and goes through using some common Bioconductor
-  packages. If you've gone through one of the basic tutorials above, much of
-  the first part will be a nice review.
-
-- The `2019 Bioconductor Conference materials
-  <http://biocworkshops2019.bioconductor.org.s3-website-us-east-1.amazonaws.com/>`_ cover lots of topics.
+The `main Bioconductor page <https://www.bioconductor.org/>`_ has installation
+instructions and links for exploring packages. Bioconductor is a vast resource
+though, so rather than try to learn it all in practice you'll typically find
+a package that does what you want and then read the vignette (a tutorial that
+comes with the package) to learn how to use it.
 
 scRNA-seq
 ~~~~~~~~~
 
 Recently, many people have been asking about R specifically so that they can
-learn how to work with scRNA-seq on their own. There are several major packages
-for scRNA-seq: `Seurat <https://satijalab.org/seurat/>`_, a `suite of
-Bioconductor packages <https://bioconductor.org/books/release/OSCA/>`_, and
-`scanpy <https://scanpy.readthedocs.io/en/stable/>`_. Seurat and Bioconductor are
-in R, scanpy is Python. They are broadly the same, but are in somewhat of an
-arms race so some new features or analyses may not be immediately available in
-all of them.
-
-If you don't otherwise have strong opinions, I'd suggest Seurat. It's
-commonly-used, updated frequently, well-written, and has good documentation. To
-learn Seurat, go through the introductory vignettes in the dropdown menu at the
-top of the `Seurat home page <https://satijalab.org/seurat/>`_. Run them on
-your own to get a feel for how long the steps take and to make sure everything
-is installed and working correctly.
+learn how to work with scRNA-seq on their own.
 
 .. note::
 
@@ -229,6 +210,28 @@ is installed and working correctly.
     Seurat effectively. See the "Beginner" section above for learning these
     skills.
 
+
+There are several major packages
+for scRNA-seq: `Seurat <https://satijalab.org/seurat/>`_, a `suite of
+Bioconductor packages <https://bioconductor.org/books/release/OSCA/>`_, and
+`scanpy <https://scanpy.readthedocs.io/en/stable/>`_. Seurat and Bioconductor are
+in R, scanpy is Python. They are broadly the same, but are in somewhat of an
+arms race so some new features or analyses may not be immediately available in
+all of them.
+
+The book `Orchestrating Single-Cell Analysis with Bioconductor
+<https://bioconductor.org/books/release/OSCA/>`_ is a fantastic, comprehensive
+resource that even goes through worked examples of published data. This uses
+the suite of tools in Bioconductor. Highly recommended.
+
+`Seurat <https://satijalab.org/seurat/>`_ is another popular package for
+scRNA-seq, and has a series of vignettes on the home page. There have been
+recent improvments to the normalization (scTransform v1 and v2), and these use
+somewhat different steps. The different vignettes therefore differ in the
+steps, and it can be a bit confusing. The `PBMC3k tutorial
+<https://satijalab.org/seurat/articles/pbmc3k_tutorial.html>`_ is the classic
+starting point, so working through this one will at least give you the context
+to work through other vignettes.
 
 Additional resources
 --------------------
