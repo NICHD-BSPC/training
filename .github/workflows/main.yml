@@ -16,12 +16,17 @@ jobs:
         eval "$(conda shell.bash hook)"
         conda create -p ./env --file docs-requirements.txt --channel conda-forge
 
+    - name: check links
+        # Activate env and build docs
+        eval "$(conda shell.bash hook)"
+        conda activate ./env
+        make linkcheck
+
     - name: build docs
       run: |
         # Activate env and build docs
         eval "$(conda shell.bash hook)"
         conda activate ./env
-        make linkcheck
         make html
 
         git clone \
