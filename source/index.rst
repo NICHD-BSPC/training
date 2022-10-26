@@ -62,6 +62,7 @@ Once you have the basics of programming, these sections will broaden your skills
 
    vim
    git
+   conda
    gitlab
    making-your-linux-life-easier
    biology
