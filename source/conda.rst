@@ -31,7 +31,7 @@ First, `install conda
 See the note above if you are working on NIH's Biowulf cluster.
 
 Then set up the channels like this, which follows the
-`bioconda docs <https://bioconda.github.io/user/install.html>`_:
+`bioconda docs <https://bioconda.github.io/>`_:
 
 .. code-block:: bash
 
