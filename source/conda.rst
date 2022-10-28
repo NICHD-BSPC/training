@@ -40,7 +40,8 @@ Then set up the channels like this, which follows the
    conda config --add channels conda-forge
    conda config --set channel_priority strict
 
-Much of the bioinformatics community is moving to ``mamba``, which is a faster
+**Optional:** Much of the bioinformatics community is moving to `mamba
+<https://mamba.readthedocs.io/en/latest/index.html>`_, which is a faster
 drop-in replacement for ``conda`` which is `quite a bit faster
 <https://pythonspeed.com/articles/faster-conda-install/>`_. So typically the
 next step is to install ``mamba`` into your base environment. You only have to
