@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Bulk RNA-seq analysis</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/better.css" />
@@ -52,7 +53,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="bulk-rna-seq-analysis">
+  <section id="bulk-rna-seq-analysis">
 <h1>Bulk RNA-seq analysis<a class="headerlink" href="#bulk-rna-seq-analysis" title="Permalink to this heading">¶</a></h1>
 <p>The basic steps in bulk RNA-seq analysis are:</p>
 <ul class="simple">
@@ -81,7 +82,7 @@ but if you can’t find the linked tutorials, look around on their
 </div>
 <p>The remainder of this page goes into some more detail on various aspects of
 RNA-seq analysis.</p>
-<div class="section" id="experimental-design">
+<section id="experimental-design">
 <h2>Experimental design<a class="headerlink" href="#experimental-design" title="Permalink to this heading">¶</a></h2>
 <p>The <a class="reference external" href="https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon-flipped/lessons/02_experimental_planning_considerations.html">experimental planning considerations</a>
 section from HBC training is a very good discussion on how much to sequence
@@ -91,16 +92,16 @@ preventing batch effects in general.</p>
 think about what a replicate really is. <a class="reference external" href="https://paasp.net/accurate-design-of-in-vitro-experiments-why-does-it-matter/">This blog post</a>
 is a good discussion of the difference between technical replicates and
 biological replicates <cite>in vitro</cite>.</p>
-</div>
-<div class="section" id="strandedness-in-rna-seq">
+</section>
+<section id="strandedness-in-rna-seq">
 <h2>Strandedness in RNA-seq<a class="headerlink" href="#strandedness-in-rna-seq" title="Permalink to this heading">¶</a></h2>
 <p>Depending on what kit was used for the library prep, a library may be stranded,
 reverse stranded, or unstranded. <a class="reference external" href="https://github.com/igordot/genomics/blob/master/notes/rna-seq-strand.md">These figures</a>
 help visualize the different strand-specific protocols. If you’re unsure,
 RSeQC’s <a class="reference external" href="http://rseqc.sourceforge.net/#infer-experiment-py">infer_experiment.py</a> can help you figure it
 out given a BAM and a BED file of genes.</p>
-</div>
-<div class="section" id="running-your-own-differential-expression-analysis">
+</section>
+<section id="running-your-own-differential-expression-analysis">
 <h2>Running your own differential expression analysis<a class="headerlink" href="#running-your-own-differential-expression-analysis" title="Permalink to this heading">¶</a></h2>
 <p>When you’re ready, try your hand at analyzing a real-world RNA-seq data
 set. The best thing to do would be to find data from a paper of interest and
@@ -119,8 +120,8 @@ answer: TPM. Longer answer, with figures, is here:
 <a class="reference external" href="https://ro-che.info/articles/2016-11-28-rna-seq-normalization">https://ro-che.info/articles/2016-11-28-rna-seq-normalization</a>. The accompanying
 <a class="reference external" href="https://ro-che.info/docs/2016-11-27-rna-seq.pdf">slides</a> are useful for
 discussion.</p>
-</div>
-<div class="section" id="other-resources">
+</section>
+<section id="other-resources">
 <h2>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a></h2>
 <p>To start digging into details:</p>
 <ul class="simple">
@@ -139,8 +140,8 @@ shows an elegant, general method for creating the proper contrasts.</p></li>
 <p class="admonition-title">Todo</p>
 <p>This RNA-seq page needs some better organization.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -201,7 +202,7 @@ shows an elegant, general method for creating the proper contrasts.</p></li>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      5.2.1.
+      5.3.0.
 
   </footer>
 

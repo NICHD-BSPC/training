@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>R</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/better.css" />
@@ -52,7 +53,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="r">
+  <section id="r">
 <span id="id1"></span><h1>R<a class="headerlink" href="#r" title="Permalink to this heading">¶</a></h1>
 <p>This page contains links for learning R at a variety of levels.</p>
 <div class="admonition seealso">
@@ -60,7 +61,7 @@
 <p>See <a class="reference internal" href="choosing-r-python.html#choosing-r-python"><span class="std std-ref">Choosing R or Python</span></a> if you’re trying to decide whether to learn
 R or Python</p>
 </div>
-<div class="section" id="beginner">
+<section id="beginner">
 <h2>Beginner<a class="headerlink" href="#beginner" title="Permalink to this heading">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -113,8 +114,8 @@ A data visualization-centric approach to learning R. Also has some
 great discussions on what makes a plot good or bad (channeling a fair
 amount of Tufte in the process)</p></li>
 </ul>
-</div>
-<div class="section" id="intermediate">
+</section>
+<section id="intermediate">
 <h2>Intermediate<a class="headerlink" href="#intermediate" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://web.stanford.edu/class/bios221/book/introduction.html">Modern Statistics for Modern Biology</a> assumes you
@@ -128,14 +129,14 @@ of Statistical Modeling by Daniel Kaplan gives a great introduction to model
 formulas in R, especially important for handling things like batch effects in
 RNA-seq data.</p></li>
 </ul>
-</div>
-<div class="section" id="skills">
+</section>
+<section id="skills">
 <h2>Skills<a class="headerlink" href="#skills" title="Permalink to this heading">¶</a></h2>
 <p>Here I’ve attempted to list the various skills you might be expected to know at
 various levels. I’ve tried to keep it to base R, but ggplot2 and dplyr are so
 ubiquitous they are becoming de facto base R, so I’ve included them here as
 well.</p>
-<div class="section" id="level-1">
+<section id="level-1">
 <h3>Level 1<a class="headerlink" href="#level-1" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Working in RStudio</p></li>
@@ -160,8 +161,8 @@ well.</p>
 <li><p>for-loops</p></li>
 <li><p>Basic ggplot2 (scatter, line, histograms)</p></li>
 </ul>
-</div>
-<div class="section" id="level-2">
+</section>
+<section id="level-2">
 <h3>Level 2<a class="headerlink" href="#level-2" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Working outside of RStudio (text file and command-line R interpreter)</p></li>
@@ -182,8 +183,8 @@ well.</p>
 <li><p>caching code chunks in RMarkdown</p></li>
 <li><p>debugging (e.g., <code class="docutils literal notranslate"><span class="pre">options(error</span> <span class="pre">=</span> <span class="pre">recover)</span></code>)</p></li>
 </ul>
-</div>
-<div class="section" id="level-3">
+</section>
+<section id="level-3">
 <h3>Level 3<a class="headerlink" href="#level-3" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>environments</p></li>
@@ -193,9 +194,9 @@ well.</p>
 <li><p>testing</p></li>
 <li><p>publishing to CRAN or Bioconductor</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="shiny">
+</section>
+</section>
+<section id="shiny">
 <h2>Shiny<a class="headerlink" href="#shiny" title="Permalink to this heading">¶</a></h2>
 <p>Shiny is an R package that lets you develop web applications with graphical
 user interfaces very quickly. This is fantastic if you have everything
@@ -209,8 +210,8 @@ own apps so other people can access it from their computers. Contact
 <li><p><a class="reference external" href="https://shiny.rstudio.com/tutorial/">Main Shiny tutorial</a> from the developers</p></li>
 <li><p><a class="reference external" href="http://zevross.com/blog/2016/04/19/r-powered-web-applications-with-shiny-a-tutorial-and-cheat-sheet-with-40-example-apps/">Extensive Shiny tutorial</a></p></li>
 </ul>
-</div>
-<div class="section" id="bioconductor">
+</section>
+<section id="bioconductor">
 <h2>Bioconductor<a class="headerlink" href="#bioconductor" title="Permalink to this heading">¶</a></h2>
 <p>R has two main repositories of packages: CRAN and Bioconductor. Bioconductor is
 for bioinformatics and biology packages, and CRAN is for everything else.
@@ -221,7 +222,7 @@ instructions and links for exploring packages. Bioconductor is a vast resource
 though, so rather than try to learn it all in practice you’ll typically find
 a package that does what you want and then read the vignette (a tutorial that
 comes with the package) to learn how to use it.</p>
-<div class="section" id="scrna-seq">
+<section id="scrna-seq">
 <h3>scRNA-seq<a class="headerlink" href="#scrna-seq" title="Permalink to this heading">¶</a></h3>
 <p>Recently, many people have been asking about R specifically so that they can
 learn how to work with scRNA-seq on their own.</p>
@@ -252,16 +253,16 @@ somewhat different steps. The different vignettes therefore differ in the
 steps, and it can be a bit confusing. The <a class="reference external" href="https://satijalab.org/seurat/articles/pbmc3k_tutorial.html">PBMC3k tutorial</a> is the classic
 starting point, so working through this one will at least give you the context
 to work through other vignettes.</p>
-</div>
-</div>
-<div class="section" id="additional-resources">
+</section>
+</section>
+<section id="additional-resources">
 <h2>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Curious about factors? See <a class="reference external" href="https://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh">this blog post</a>
 describing the details.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -332,7 +333,7 @@ describing the details.</p></li>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      5.2.1.
+      5.3.0.
 
   </footer>
 

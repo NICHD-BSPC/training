@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Genomics overview</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/better.css" />
@@ -52,9 +53,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="genomics-overview">
+  <section id="genomics-overview">
 <span id="genomics-formats"></span><h1>Genomics overview<a class="headerlink" href="#genomics-overview" title="Permalink to this heading">¶</a></h1>
-<div class="section" id="overviews">
+<section id="overviews">
 <h2>Overviews<a class="headerlink" href="#overviews" title="Permalink to this heading">¶</a></h2>
 <p>Recent reviews are probably the best place to get an overview of
 high-throughput sequencing.The goal is not to understand everything
@@ -84,8 +85,8 @@ commonly performed.</p>
 interactive flowcharts of high-throughput sequencing techniques, along with
 tool suggestions. This can be useful for getting a big-picture view of the
 steps of various workflows.</p>
-</div>
-<div class="section" id="genome-browsers">
+</section>
+<section id="genome-browsers">
 <h2>Genome Browsers<a class="headerlink" href="#genome-browsers" title="Permalink to this heading">¶</a></h2>
 <p>As with any data analysis, the first thing you should do with your data
 is to visualize it. Genomic data is no different, so it makes sense that
@@ -95,16 +96,16 @@ genome browser will help you understand them better.</p>
 <p>You will probably always be learning new things about these browsers;
 for now just install/load them and poke around to get a feel for them.
 Below we’ll upload specific files to experiment with.</p>
-</div>
-<div class="section" id="igv">
+</section>
+<section id="igv">
 <h2>IGV<a class="headerlink" href="#igv" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="http://software.broadinstitute.org/software/igv/">http://software.broadinstitute.org/software/igv/</a></p>
 <p>IGV (Integrated Genome Viewer) is a standalone Java program. It’s best used for
 local data, and excels at detailed looks at BAM and VCF files. Since it can
 read files straight off disk, this is the preferred option for data that can’t
 be made public.</p>
-</div>
-<div class="section" id="ucsc-genome-browser">
+</section>
+<section id="ucsc-genome-browser">
 <h2>UCSC Genome Browser<a class="headerlink" href="#ucsc-genome-browser" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="http://genome.ucsc.edu/">http://genome.ucsc.edu/</a></p>
 <p>The UCSC Genome Browser is a web-based browser. It looks like the design
@@ -112,8 +113,8 @@ hasn’t changed since the 90s, but it is extremely powerful and is
 constantly updated. It has a tremendous amount of data already loaded,
 and is best used for sharing data with others or comparing with existing
 data.</p>
-</div>
-<div class="section" id="other-genome-browsers">
+</section>
+<section id="other-genome-browsers">
 <h2>Other genome browsers<a class="headerlink" href="#other-genome-browsers" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.bioinformatics.babraham.ac.uk/projects/seqmonk/">SeqMonk</a> has
@@ -121,8 +122,8 @@ some interesting visualization options</p></li>
 <li><p><a class="reference external" href="http://epigenomegateway.wustl.edu/browser/">WashU Epigenome Viewer</a> allows
 visualization of long-range interaction data like Hi-C</p></li>
 </ul>
-</div>
-<div class="section" id="file-formats">
+</section>
+<section id="file-formats">
 <h2>File formats<a class="headerlink" href="#file-formats" title="Permalink to this heading">¶</a></h2>
 <p>The field has settled down into a reasonably small set of file formats
 that are commonly used by various tools. Getting to know these file
@@ -140,7 +141,7 @@ a genome browser.</p>
 <p>For variant calling, you’ll start with FASTQ files, align them to the genome to
 get a BAM, and run variant-calling tools to get a VCF file you can view in
 a genome browser.</p>
-<div class="section" id="an-aside">
+<section id="an-aside">
 <h3>An aside<a class="headerlink" href="#an-aside" title="Permalink to this heading">¶</a></h3>
 <p>Some of the file formats described below are position-based. Please read the
 following posts talking about 0-based and 1-based coordinate systems to figure
@@ -149,8 +150,8 @@ out what this means:</p>
 <li><p><a class="reference external" href="https://standage.github.io/on-genomic-interval-notation.html">https://standage.github.io/on-genomic-interval-notation.html</a></p></li>
 <li><p><a class="reference external" href="https://www.biostars.org/p/84686/">https://www.biostars.org/p/84686/</a></p></li>
 </ul>
-</div>
-<div class="section" id="fastq">
+</section>
+<section id="fastq">
 <h3>FASTQ<a class="headerlink" href="#fastq" title="Permalink to this heading">¶</a></h3>
 <p>Raw reads come off the sequencer in FASTQ format. Each read is
 represented by 4 lines only one of which is the sequence itself. Note
@@ -168,8 +169,8 @@ files in a genome browser.</p>
 page if you need help)</p></li>
 <li><p>What quality score encoding does it use?</p></li>
 </ul>
-</div>
-<div class="section" id="bam">
+</section>
+<section id="bam">
 <h3>BAM<a class="headerlink" href="#bam" title="Permalink to this heading">¶</a></h3>
 <p>When FASTQ files are aligned to a reference genome, the output is
 typically a BAM format file (or sometimes the uncompressed version, SAM
@@ -207,8 +208,8 @@ files on the command line is:</p>
 <li><p>how many reads are in this BAM file?</p></li>
 </ul>
 <p>We will do some more exercises on this BAM file in the samtools section.</p>
-</div>
-<div class="section" id="bed">
+</section>
+<section id="bed">
 <h3>BED<a class="headerlink" href="#bed" title="Permalink to this heading">¶</a></h3>
 <p>BED files represent blocks of coordinates in the genome. While FASTQ and
 BAM are primarily used for sequences, BED files can represent anything
@@ -229,8 +230,8 @@ for a protein called CP190 in Drosophila:
 <li><p>how many peaks are there?</p></li>
 <li><p>how many peaks are there on each chromosome?</p></li>
 </ul>
-</div>
-<div class="section" id="gtf-and-gff">
+</section>
+<section id="gtf-and-gff">
 <h3>GTF and GFF<a class="headerlink" href="#gtf-and-gff" title="Permalink to this heading">¶</a></h3>
 <p>While BED files can represent genes, there is no good way for a BED file
 to represent hierarchical relationships between features. However GTF
@@ -258,8 +259,8 @@ you can look at it in the command line (note it is gzipped):
 </ul>
 <p>Parsing the attributes field of GTF/GFF gets pretty annoying; we’ll hold
 off on that for now.</p>
-</div>
-<div class="section" id="vcf">
+</section>
+<section id="vcf">
 <h3>VCF<a class="headerlink" href="#vcf" title="Permalink to this heading">¶</a></h3>
 <p>VCF files are used for storing variant information and the additional
 metadata that goes along with it. Typically, any kind of variant-calling
@@ -277,11 +278,11 @@ In that example:</p>
 <li><p>which variant has the highest total depth of coverage?</p></li>
 <li><p>which variant has the highest genotype quality?</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="standard-tools">
+</section>
+</section>
+<section id="standard-tools">
 <h2>Standard tools<a class="headerlink" href="#standard-tools" title="Permalink to this heading">¶</a></h2>
-<div class="section" id="samtools">
+<section id="samtools">
 <h3>samtools<a class="headerlink" href="#samtools" title="Permalink to this heading">¶</a></h3>
 <p>BAM files are compressed in a very specific way. To read them correctly,
 we need to use the samtools program. See the More on installing programs
@@ -303,16 +304,16 @@ files on the command line is:</p>
 21:33019966-33020000</p></li>
 <li><p>are there sequences in the header that have no reads?</p></li>
 </ul>
-</div>
-<div class="section" id="fastqc">
+</section>
+<section id="fastqc">
 <h3>FastQC<a class="headerlink" href="#fastqc" title="Permalink to this heading">¶</a></h3>
 <p>Generally the first, quick step for quality control (QC) of sequenced
 files is to run FastQC on each FASTQ file. It’s pretty straightforward
 to run, either through a GUI or from the command line. Try checking the
 example FASTQ files from the fastq section above.</p>
 <p><a class="reference external" href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a></p>
-</div>
-<div class="section" id="bedtools">
+</section>
+<section id="bedtools">
 <h3>BEDTools<a class="headerlink" href="#bedtools" title="Permalink to this heading">¶</a></h3>
 <p>Any time you’re working on genomic intervals, whether they’re stored in
 BAM, BED, GTF, GFF, or VCF, you should be reaching for BEDTools. There
@@ -323,9 +324,9 @@ familiarize yourself with them all.</p>
 your time to go through this and understand how the tools work.
 Especially useful are the “puzzles” at the end which will test your
 knowledge.</p>
-</div>
-</div>
-<div class="section" id="hints">
+</section>
+</section>
+<section id="hints">
 <h2>Hints<a class="headerlink" href="#hints" title="Permalink to this heading">¶</a></h2>
 <p>How many reads in the fastq? <code class="docutils literal notranslate"><span class="pre">zcat</span> <span class="pre">sample1.tiny_R1.fastq.gz</span> <span class="pre">|</span> <span class="pre">wc</span> <span class="pre">-l</span></code>
 gets the line count (using zcat to uncompress on the fly), but then we
@@ -352,8 +353,8 @@ explain how all of these steps come together.</p>
 workflows?</p></li>
 </ul>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -431,7 +432,7 @@ workflows?</p></li>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      5.2.1.
+      5.3.0.
 
   </footer>
 

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Python</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/better.css" />
@@ -52,7 +53,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="python">
+  <section id="python">
 <span id="id1"></span><h1>Python<a class="headerlink" href="#python" title="Permalink to this heading">¶</a></h1>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -63,7 +64,7 @@ R or Python</p>
 well-regarded resources for learning Python, but they take different
 strategies. You’ll be spending a lot of time with them, so it might be a good
 idea to briefly look at them all first to see what would be a good fit for you.</p>
-<div class="section" id="setting-up">
+<section id="setting-up">
 <h2>Setting up<a class="headerlink" href="#setting-up" title="Permalink to this heading">¶</a></h2>
 <p>Install Python using either <a class="reference external" href="https://www.anaconda.com/distribution/">Anaconda</a> (if you want “the works”, including
 many of the libraries described below) or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> (which is much more minimal;
@@ -82,8 +83,8 @@ solutions work best for you.</p>
 Python (or IPython, see the <a class="reference internal" href="#ipython"><span class="std std-ref">Use IPython</span></a> section). My setup happens to be
 running <a class="reference internal" href="vim.html#vim"><span class="std std-ref">Vim</span></a> in one terminal next to another terminal open running
 IPython.</p>
-</div>
-<div class="section" id="learning-python">
+</section>
+<section id="learning-python">
 <h2>Learning Python<a class="headerlink" href="#learning-python" title="Permalink to this heading">¶</a></h2>
 <p>When learning Python, it’s very important to start with the basics. Sometimes
 people will start learning Python because they’re interested in data science,
@@ -123,8 +124,8 @@ regarded highly but is $30.</p></li>
 Biology</a> is
 a single resource that teaches all of these.</p></li>
 </ul>
-</div>
-<div class="section" id="use-ipython">
+</section>
+<section id="use-ipython">
 <span id="ipython"></span><h2>Use IPython<a class="headerlink" href="#use-ipython" title="Permalink to this heading">¶</a></h2>
 <p>Python comes with an interpreter (what you enter when you type <code class="docutils literal notranslate"><span class="pre">python</span></code>
 at the command line). But that interpreter is limited in a lot of ways.</p>
@@ -136,8 +137,8 @@ prompt. You can also directly interact with the Bash shell from inside IPython
 (see <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/python-ipython-diff.html">this page</a>
 for more).</p>
 <p>Learn more about IPython in the <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/tutorial.html">IPython tutorial</a>.</p>
-</div>
-<div class="section" id="debugging-in-python">
+</section>
+<section id="debugging-in-python">
 <h2>Debugging in Python<a class="headerlink" href="#debugging-in-python" title="Permalink to this heading">¶</a></h2>
 <p>Something that is often skipped over in tutorials is the utility of interactive
 debugging. In IPython, when you get an error you can call <cite>%debug</cite> from the
@@ -148,8 +149,8 @@ than sprinkling <code class="docutils literal notranslate"><span class="pre">pri
 <p>There is a good intro to the debugging workflow at <a class="reference external" href="https://scipy-lectures.org/advanced/debugging/index.html">SciPy lecture notes:
 debugging</a>,
 along with what to do when you can’t use IPython.</p>
-</div>
-<div class="section" id="learning-pandas">
+</section>
+<section id="learning-pandas">
 <h2>Learning pandas<a class="headerlink" href="#learning-pandas" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">pandas</span></code> package is the standard for working with tables of data (like
 from a spreadsheet).</p>
@@ -188,8 +189,8 @@ order of beginner to advanced):</p>
 <li><p>join dataframes together (aligning by index)</p></li>
 <li><p>group-by and summarize (e.g., find group means)</p></li>
 </ul>
-</div>
-<div class="section" id="visualization-in-python">
+</section>
+<section id="visualization-in-python">
 <h2>Visualization in Python<a class="headerlink" href="#visualization-in-python" title="Permalink to this heading">¶</a></h2>
 <p>There are a lot of visualization options in Python. I think it’s best to learn
 matplotlib and then use seaborn, but this <a class="reference external" href="https://dsaber.com/2016/10/02/a-dramatic-tour-through-pythons-data-visualization-landscape-including-ggplot-and-altair/">dramatic comparison of Python
@@ -206,7 +207,7 @@ following (in very rough order of beginner to advanced):</p>
 <li><p>choose appropriate colormaps for heatmaps</p></li>
 <li><p>make subplots</p></li>
 </ul>
-<div class="section" id="matplotlib">
+<section id="matplotlib">
 <h3>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this heading">¶</a></h3>
 <p>Matplotlib is extremely powerful, as it gives you access to every aspect of
 a plot. It is well worth the time to learn the basics of matplotlib, and then
@@ -220,14 +221,14 @@ and advanced tutorials.</p></li>
 <li><p>The <a class="reference external" href="https://matplotlib.org/stable/gallery/index.html">matplotlib gallery</a>
 shows the kinds of things you can do with matplotlib.</p></li>
 </ul>
-</div>
-<div class="section" id="seaborn">
+</section>
+<section id="seaborn">
 <h3>Seaborn<a class="headerlink" href="#seaborn" title="Permalink to this heading">¶</a></h3>
 <p>The <a class="reference external" href="https://seaborn.pydata.org/tutorial.html">seaborn tutorial page</a> lays
 out everything you need to know about seaborn.</p>
-</div>
-</div>
-<div class="section" id="useful-built-in-python-modules">
+</section>
+</section>
+<section id="useful-built-in-python-modules">
 <h2>Useful built-in Python modules<a class="headerlink" href="#useful-built-in-python-modules" title="Permalink to this heading">¶</a></h2>
 <p>There are many built-in Python modules, here is a list of those that I keep
 coming back to. There’s no need to jump in and start learning these one-by-one.
@@ -275,8 +276,8 @@ or dedent text, or line-wrap to a fixed line length</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/zipfile.html">zipfile</a>: interact with
 zip files</p></li>
 </ul>
-</div>
-<div class="section" id="useful-python-libraries">
+</section>
+<section id="useful-python-libraries">
 <h2>Useful Python libraries<a class="headerlink" href="#useful-python-libraries" title="Permalink to this heading">¶</a></h2>
 <p>Below are some useful and commonly-used Python libraries to give you a flavor
 of what else is possible with Python. Like the modules above, this section is
@@ -306,8 +307,8 @@ anything from the internet (downloading pages etc)</p></li>
 track hubs. Written and maintained by BSPC!</p></li>
 <li><p><a class="reference external" href="https://pyyaml.org/">yaml</a> for working with YAML config files</p></li>
 </ul>
-</div>
-<div class="section" id="other-links">
+</section>
+<section id="other-links">
 <h2>Other links<a class="headerlink" href="#other-links" title="Permalink to this heading">¶</a></h2>
 <p>The following links are related to Python but don’t necessarily fit into the
 above categories.</p>
@@ -326,8 +327,8 @@ tool to reach for.</p></li>
 <li><p><a class="reference external" href="https://pbpython.com/">Practical business python</a> has lots of useful posts
 on intermediate topics</p></li>
 </ul>
-</div>
-<div class="section" id="python-skills">
+</section>
+<section id="python-skills">
 <h2>Python skills<a class="headerlink" href="#python-skills" title="Permalink to this heading">¶</a></h2>
 <p>Some people have asked about what skills they would be expected to have when
 learning Python. That’s a very difficult question, as it depends on exactly
@@ -342,7 +343,7 @@ linked above, so you’ll need to find your own resources for learning them, or
 get in touch <a class="reference external" href="mailto:ryan&#46;dale&#37;&#52;&#48;nih&#46;gov">ryan<span>&#46;</span>dale<span>&#64;</span>nih<span>&#46;</span>gov</a> if you would like some pointers.</p>
 <p>There are lots of commonly-used Python modules (see sections above), each of
 which have their own lists of skills. This section is just about base Python.</p>
-<div class="section" id="level-1">
+<section id="level-1">
 <h3>Level 1<a class="headerlink" href="#level-1" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>creating lists, dicts, tuples</p></li>
@@ -360,8 +361,8 @@ which have their own lists of skills. This section is just about base Python.</p
 <li><p>open a file</p></li>
 <li><p>write to a file</p></li>
 </ul>
-</div>
-<div class="section" id="level-2">
+</section>
+<section id="level-2">
 <h3>Level 2<a class="headerlink" href="#level-2" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>debugging in IPython (with pdb)</p></li>
@@ -376,8 +377,8 @@ which have their own lists of skills. This section is just about base Python.</p
 <li><p>f-strings</p></li>
 <li><p>docstrings</p></li>
 </ul>
-</div>
-<div class="section" id="level-3">
+</section>
+<section id="level-3">
 <h3>Level 3<a class="headerlink" href="#level-3" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>dealing with unicode</p></li>
@@ -403,8 +404,8 @@ which have their own lists of skills. This section is just about base Python.</p
 <li><p>doctests</p></li>
 <li><p>using a context manager</p></li>
 </ul>
-</div>
-<div class="section" id="level-4">
+</section>
+<section id="level-4">
 <h3>Level 4<a class="headerlink" href="#level-4" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>shallow vs deep copy</p></li>
@@ -416,17 +417,17 @@ which have their own lists of skills. This section is just about base Python.</p
 <li><p>writing a context manager and discussing why it’s useful</p></li>
 <li><p>create and use sqlite3 databases</p></li>
 </ul>
-</div>
-<div class="section" id="level-5">
+</section>
+<section id="level-5">
 <h3>Level 5<a class="headerlink" href="#level-5" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>cython extensions</p></li>
 <li><p>asyncio</p></li>
 <li><p>multiprocessing</p></li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -504,7 +505,7 @@ which have their own lists of skills. This section is just about base Python.</p
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      5.2.1.
+      5.3.0.
 
   </footer>
 

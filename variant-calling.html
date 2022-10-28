@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Variant calling</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/better.css" />
@@ -52,7 +53,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="variant-calling">
+  <section id="variant-calling">
 <span id="id1"></span><h1>Variant calling<a class="headerlink" href="#variant-calling" title="Permalink to this heading">¶</a></h1>
 <p>Variant calling is the process of looking for differences in the genome. This
 could be looking for differences between individuals (germline calling) or
@@ -77,16 +78,16 @@ do somatic calling and germline CNV. That site includes <a class="reference exte
 and <a class="reference external" href="https://gatk.broadinstitute.org/hc/en-us/sections/360007373191-Blog">blog posts</a> that
 give a lot of detail and context.</p></li>
 </ul>
-<div class="section" id="terminology">
+<section id="terminology">
 <h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">¶</a></h2>
 <dl class="field-list simple">
-<dt class="field-odd">SNV</dt>
+<dt class="field-odd">SNV<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Single-nucleotide variant, typically use GATK to call these.</p>
 </dd>
-<dt class="field-even">indel</dt>
+<dt class="field-even">indel<span class="colon">:</span></dt>
 <dd class="field-even"><p>Insertion or deletion. Typically assumed to be small-ish (&lt;10 bp), called by GATK.</p>
 </dd>
-<dt class="field-odd">SV</dt>
+<dt class="field-odd">SV<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Structural variant. Typically assumed to be large (&gt;1kb). Can include
 complicated inversions, translocations, and copy-number variants (which are
 often considered a separate class). SVs are best detected with long-read
@@ -94,24 +95,24 @@ sequencing and need specialized algorithms to detect them. This is a hard
 problem, and different algorithms are able to detect different kinds of
 SVs.</p>
 </dd>
-<dt class="field-even">CNV</dt>
+<dt class="field-even">CNV<span class="colon">:</span></dt>
 <dd class="field-even"><p>Copy number variants. This is a stretch of DNA that is duplicated. Often
 assayed by aCGH (array comparative genome hybridization).</p>
 </dd>
-<dt class="field-odd">germline variant calling</dt>
+<dt class="field-odd">germline variant calling<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The process of identifying places in a genome that differ from the
 reference genome. If otherwise unspecified, it usually means SNV and indel
 calling (rather than SV or CNV).</p>
 </dd>
-<dt class="field-even">somatic variant calling</dt>
+<dt class="field-even">somatic variant calling<span class="colon">:</span></dt>
 <dd class="field-even"><p>Calling variants that arose in a tumor compared to normal tissue is somatic
 varant calling. It is important to note that <a class="reference external" href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890491-Somatic-calling-is-NOT-simply-a-difference-between-two-callsets">somatic calling is NOT simply
 a difference between two callsets</a>,
 it’s quite a bit more complicated than that.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="interpreting-and-prioritizing-variants">
+</section>
+<section id="interpreting-and-prioritizing-variants">
 <h2>Interpreting and prioritizing variants<a class="headerlink" href="#interpreting-and-prioritizing-variants" title="Permalink to this heading">¶</a></h2>
 <p>Calling variants is just the first step. You’ll probably find thousands. Which
 ones are meaningful?</p>
@@ -186,16 +187,16 @@ Depletion) scores the deleteriousness of single-nucleotide variants and small
 indels. The scoring uses a combination of sources. Precomputed scores are
 included in dbNSFP.</p></li>
 </ul>
-</div>
-<div class="section" id="visualization">
+</section>
+<section id="visualization">
 <h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading">¶</a></h2>
 <p>The <a class="reference external" href="https://gnomad.broadinstitute.org/">gnomAD browser</a> is a great way to
 visualize your variants.</p>
 <p>The <a class="reference external" href="http://genome.ucsc.edu">UCSC Genome Browser</a> has tracks for many of the databases noted above.</p>
 <p><a class="reference external" href="https://www.nature.com/articles/s41587-019-0054-x">Krusche 2019</a> in Figure
 2 show the ways in which small indels can be called in different ways.</p>
-</div>
-<div class="section" id="additional-notes">
+</section>
+<section id="additional-notes">
 <h2>Additional notes<a class="headerlink" href="#additional-notes" title="Permalink to this heading">¶</a></h2>
 <div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
@@ -244,8 +245,8 @@ guidelines assessing variant pathogenicity.</p></li>
 standard specific terminology like “pathogenic” or “likely benign” to
 describe variants in genes causing Mendelian disorders.</p></li>
 </ul>
-</div>
-<div class="section" id="other-resources">
+</section>
+<section id="other-resources">
 <h2>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>The “Extant-knowledge-based candidate prioritization” section of <a class="reference external" href="https://www.future-science.com/doi/10.2144/000114492">Dashti 2018</a> gives an example of
@@ -256,8 +257,8 @@ databases and is very useful for exploring existing knowledge.</p></li>
 <li><p>GTEx: <a class="reference external" href="https://www.gtexportal.org">https://www.gtexportal.org</a></p></li>
 <li><p>GWAVA: <a class="reference external" href="https://www.sanger.ac.uk/sanger/StatGen_Gwava">https://www.sanger.ac.uk/sanger/StatGen_Gwava</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -319,7 +320,7 @@ databases and is very useful for exploring existing knowledge.</p></li>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      5.2.1.
+      5.3.0.
 
   </footer>
 

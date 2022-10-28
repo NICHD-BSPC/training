@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Biowulf help topics</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/better.css" />
@@ -52,7 +53,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="biowulf-help-topics">
+  <section id="biowulf-help-topics">
 <h1>Biowulf help topics<a class="headerlink" href="#biowulf-help-topics" title="Permalink to this heading">¶</a></h1>
 <p>In BSPC, our general workflow when connecting to Biowulf is this:</p>
 <ol class="arabic simple">
@@ -66,11 +67,11 @@
 <li><p>Connect to Biowulf</p></li>
 <li><p>Open a terminal from within NoMachine session on Biowulf.</p></li>
 </ol>
-<div class="section" id="tips">
+<section id="tips">
 <h2>Tips<a class="headerlink" href="#tips" title="Permalink to this heading">¶</a></h2>
 <p>Here are some tips for making it as seamless as possible to connect.</p>
-</div>
-<div class="section" id="more-convenient-ssh">
+</section>
+<section id="more-convenient-ssh">
 <h2>More convenient SSH<a class="headerlink" href="#more-convenient-ssh" title="Permalink to this heading">¶</a></h2>
 <p>Typically when you SSH to Biowulf you will get asked for your password. This
 can be made a bit more convenient as follows.</p>
@@ -85,7 +86,7 @@ session. This is sort of a security compromise that asks for your key once per
 bash session rather than every time it’s used.</p>
 <p>Now when you connect you are just substituting your pass phrase for your
 password, but this makes other things possible (see next section).</p>
-<div class="section" id="add-ssh-key-to-mac-keychain">
+<section id="add-ssh-key-to-mac-keychain">
 <h3>Add SSH key to Mac keychain<a class="headerlink" href="#add-ssh-key-to-mac-keychain" title="Permalink to this heading">¶</a></h3>
 <p>If you’re on a Mac, adding the following lines to your <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file
 will allow SSH to use the Mac keychain. This means that once you log in to your
@@ -110,8 +111,8 @@ ecdsa algorithms.</p>
 </pre></div>
 </div>
 <p>So that to connect Biowulf, you open a terminal, type <code class="docutils literal notranslate"><span class="pre">b</span></code>, then Enter, and you’re in.</p>
-</div>
-<div class="section" id="nomachine-and-rstudio">
+</section>
+<section id="nomachine-and-rstudio">
 <h3>NoMachine and RStudio<a class="headerlink" href="#nomachine-and-rstudio" title="Permalink to this heading">¶</a></h3>
 <p>When doing visualization-heavy work, especially in RMarkdown in RStudio, we use NoMachine.</p>
 <p>In BSPC, we prefer to manage our own conda environments so we can install
@@ -152,8 +153,8 @@ Rstudio”, but don’t do that if you’re using a conda env.</p></li>
 (undocumented) flag <code class="docutils literal notranslate"><span class="pre">--conda</span></code>. This sets things up properly to use the
 conda-installed version of R in RStudio.</p></li>
 </ol>
-</div>
-<div class="section" id="tmux">
+</section>
+<section id="tmux">
 <h3>tmux<a class="headerlink" href="#tmux" title="Permalink to this heading">¶</a></h3>
 <p>We typically SSH into Helix and attach to a persistent tmux session (or create
 a new tmux session, roughly once a month). From there we ssh over to Biowulf.
@@ -162,9 +163,9 @@ issues than the Biowulf head node.</p>
 <p>Helix reboots the first Monday of each month, so make sure you’re done with
 your tmux session by then!</p>
 <p>See <a class="reference internal" href="making-your-linux-life-easier.html#tmux"><span class="std std-ref">Tmux</span></a> for more info.</p>
-</div>
-</div>
-<div class="section" id="limitations-of-mounted-drives">
+</section>
+</section>
+<section id="limitations-of-mounted-drives">
 <h2>Limitations of mounted drives<a class="headerlink" href="#limitations-of-mounted-drives" title="Permalink to this heading">¶</a></h2>
 <p>While it’s convenient to map biowulf drives locally, there are
 limitations. It would be best to treat the mapped drive as
@@ -188,8 +189,8 @@ option,</p>
 is actually symlink on biowulf and then save it, <strong>the symlink is
 destroyed and replaced with a regular file</strong>.</p></li>
 </ul>
-</div>
-<div class="section" id="squeue">
+</section>
+<section id="squeue">
 <h2>squeue<a class="headerlink" href="#squeue" title="Permalink to this heading">¶</a></h2>
 <p>The default output of <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-u</span></code> doesn’t have a lot of info. Also,
 it’s a pain (for me) to type. Digging through the man page for squeue, I
@@ -201,8 +202,8 @@ to <code class="docutils literal notranslate"><span class="pre">q</span></code> 
 <p>Now the easier-to-type <code class="docutils literal notranslate"><span class="pre">q</span></code> gives output with info on the node resources, how
 much time is left, and a longer “name” field and “command” field to better
 track which job is which when you have a ton of jobs going.</p>
-</div>
-<div class="section" id="fastq-dump">
+</section>
+<section id="fastq-dump">
 <h2>fastq-dump<a class="headerlink" href="#fastq-dump" title="Permalink to this heading">¶</a></h2>
 <p>By default, fastq-dump uses local caching in your home directory
 (<code class="docutils literal notranslate"><span class="pre">~/ncbi</span></code> I believe) which, if you’re not careful can fill up all your
@@ -247,12 +248,12 @@ directory.</p>
   <span class="o">&amp;&amp;</span> mv <span class="nv">$TEMP_PATH</span>/<span class="nv">$SRR_</span><span class="o">{</span><span class="m">1</span>,2<span class="o">}</span>.fastq.gz <span class="nv">$FINAL_PATH</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="avoid-swarm-clutter">
+</section>
+<section id="avoid-swarm-clutter">
 <h2>Avoid <code class="docutils literal notranslate"><span class="pre">swarm</span></code> clutter<a class="headerlink" href="#avoid-swarm-clutter" title="Permalink to this heading">¶</a></h2>
 <p>When running <code class="docutils literal notranslate"><span class="pre">swarm</span></code>, use <code class="docutils literal notranslate"><span class="pre">--noout</span> <span class="pre">--noerror</span></code> to avoid getting all the <code class="docutils literal notranslate"><span class="pre">swarm_*</span></code> output files.</p>
-</div>
-<div class="section" id="consider-dev-shm-for-high-i-o">
+</section>
+<section id="consider-dev-shm-for-high-i-o">
 <h2>Consider <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> for high I/O<a class="headerlink" href="#consider-dev-shm-for-high-i-o" title="Permalink to this heading">¶</a></h2>
 <p>Copying data to <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> to put it in the memory temp file system. This
 should be super fast I/O access. The size is limited to the <code class="docutils literal notranslate"><span class="pre">--mem</span></code> for the
@@ -264,8 +265,8 @@ job and to 50% of node memory.</p>
 <p><code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> is not cleaned up after a job like <code class="docutils literal notranslate"><span class="pre">lscratch</span></code> is. Be sure to
 clean up when you’re done!</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -334,7 +335,7 @@ clean up when you’re done!</p>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      5.2.1.
+      5.3.0.
 
   </footer>
 
