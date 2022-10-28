@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Conda</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GitLab" href="gitlab.html" />
+    <link rel="prev" title="Git" href="git.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lato:bold,italic,bolditalic|Lora|Oswald|Inconsolata&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="git.html" title="Previous document">Git</a>
+        </li>
+        <li>
+          <a href="gitlab.html" title="Next document">GitLab</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="conda">
+<span id="id1"></span><h1>Conda<a class="headerlink" href="#conda" title="Permalink to this heading">¶</a></h1>
+<p>Conda helps install and manage software packages in a separate environment that
+is isolated from the rest of the system. You install conda once, and from there
+you use use conda to install lots of other software, without needing root
+access. Typically, you will be creating an environment for each project. That
+environment has everything in it that you need for that project (for example,
+maybe Python and R and various packages for those languages). Importantly, that
+version of R and that version of Python are <em>completely independent</em> of any
+other environments you might have.</p>
+<p>Another major advantage is that you can generate a list of packages and send
+that list to someone else, allowing them to install the same exact packages on
+their machine. Since different versions of tools often give different results,
+this aspect is very important for reproducibility.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For NIH users, see the NIH HPC <a class="reference external" href="https://hpc.nih.gov/apps/python.html">Python documentation</a> for specific points about
+installing and using conda on Biowulf. One of the main points is that on
+Biowulf, each person should have their own miniconda installation in their
+<code class="docutils literal notranslate"><span class="pre">/data/$USER</span></code> directory. Don’t use your home directory because the quota
+of 16 GB can actually be too small after installing a lot of packages.</p>
+</div>
+<p>First, <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">install conda</a>.
+See the note above if you are working on NIH’s Biowulf cluster.</p>
+<p>Then set up the channels like this, which follows the
+<a class="reference external" href="https://bioconda.github.io/">bioconda docs</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+</pre></div>
+</div>
+<p><strong>Optional:</strong> Much of the bioinformatics community is moving to <a class="reference external" href="https://mamba.readthedocs.io/en/latest/index.html">mamba</a>, which is a faster
+drop-in replacement for <code class="docutils literal notranslate"><span class="pre">conda</span></code> which is <a class="reference external" href="https://pythonspeed.com/articles/faster-conda-install/">quite a bit faster</a>. So typically the
+next step is to install <code class="docutils literal notranslate"><span class="pre">mamba</span></code> into your base environment. You only have to
+do this once:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -n base mamba
+</pre></div>
+</div>
+<p>From now on, instead of <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code> you can use <code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">install</span></code> to make
+it go faster. Instead of <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span></code> use <code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">create</span></code>. And so on. There
+are also some nice troubleshooting tools that come with <code class="docutils literal notranslate"><span class="pre">mamba</span></code> that can come
+in handy.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have a new Mac that uses the M1 chip, <strong>this is not yet supported by
+Bioconda</strong>. All packages need to be re-built for ARM64 architecture, which
+is a rather large task. There are plans to do this but the packages are not
+available yet.</p>
+</div>
+<section id="what-is-an-environment">
+<h2>What is an environment?<a class="headerlink" href="#what-is-an-environment" title="Permalink to this heading">¶</a></h2>
+<p>The purpose of conda is to create environments. We create environments and then
+<em>activate</em> them to use them.</p>
+<p>What is an environment?</p>
+<p>Briefly: an environment is a directory containing executables and supporting
+files for those executables, and environment activated when its directory of
+executables is been prepended to the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
+<p>What does that mean?</p>
+<p>First, let’s understand the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> variable. For example, if you’re on a Mac
+or Linux machine, you have access to the command <code class="docutils literal notranslate"><span class="pre">ls</span></code> that lists the contents
+of directories. <code class="docutils literal notranslate"><span class="pre">ls</span></code> is an executable program. When you type <code class="docutils literal notranslate"><span class="pre">ls</span></code> on the
+command line, the command line interpreter needs to figure out what you mean.
+It will look through its list of possible locations to try and find an
+executable called <code class="docutils literal notranslate"><span class="pre">ls</span></code>. The first one it finds, it runs.</p>
+<p>How does it know where to look?</p>
+<p>By convention, the shell uses the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> variable. This is a variable that,
+again by convention, is separated by colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) characters. Here is
+a typical <code class="docutils literal notranslate"><span class="pre">PATH</span></code> from a fresh Linux machine, which we can see by running <code class="docutils literal notranslate"><span class="pre">echo</span>
+<span class="pre">$PATH</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span>
+</pre></div>
+</div>
+<p>So with this <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, typing <code class="docutils literal notranslate"><span class="pre">ls</span></code> (and then Enter) means that the shell will
+first look in <code class="docutils literal notranslate"><span class="pre">/usr/local/sbin</span></code> for the executable program <code class="docutils literal notranslate"><span class="pre">ls</span></code>. If the file
+<code class="docutils literal notranslate"><span class="pre">/usr/local/sbin/ls</span></code> does not exist, then it will next check for
+<code class="docutils literal notranslate"><span class="pre">/usr/local/bin/ls</span></code>. If that doesn’t work, it keeps going. On this machine,
+eventually <code class="docutils literal notranslate"><span class="pre">/bin/ls</span></code> is found (it happens to be the last place it looked) and
+it is <strong>that</strong> <code class="docutils literal notranslate"><span class="pre">ls</span></code> that runs.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ls</span></code> can’t be found at any of those locations, we’ll get a <code class="docutils literal notranslate"><span class="pre">ls:</span> <span class="pre">command</span>
+<span class="pre">not</span> <span class="pre">found</span></code> error.</p>
+<p>We can edit your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable to add new locations. This is how we
+“install” programs on Linux. For example, imagine we made a new amazing version
+of <code class="docutils literal notranslate"><span class="pre">ls</span></code> that we wanted to be called any time we typed <code class="docutils literal notranslate"><span class="pre">ls</span></code> on the command
+line. We don’t have root access to this machine, so we can’t put my new <code class="docutils literal notranslate"><span class="pre">ls</span></code> in
+any of the paths in our <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable (they are all system-wide and owned by
+root). Instead, we modify the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable. Say we were keeping the new <code class="docutils literal notranslate"><span class="pre">ls</span></code>
+in our home directory, <code class="docutils literal notranslate"><span class="pre">~/tools/ls</span></code>. Then we would modify <code class="docutils literal notranslate"><span class="pre">PATH</span></code> like
+this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="s2">&quot;~/tools:$PATH&quot;</span>
+</pre></div>
+</div>
+<p>Here is an annotated version of that:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>export PATH=&quot;~/tools:$PATH&quot;
+^      ^     ^       ^
+|      |     |       |
+|      |     |       |__ expand out the existing contents of PATH
+|      |     |           and insert the results here
+|      |     |
+|      |     |__ Add the directory with the program I made
+|      |     |   to the beginning of the new PATH
+|      |
+|      |__ Overwrite the existing PATH
+|
+|__ Make the new PATH available to child processes,
+    not just this one
+</pre></div>
+</div>
+<p>After running that command, we check the new value of <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PATH</span>
+~/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+<span class="c1"># ^^^^^</span>
+<span class="c1"># the directory has been prepended</span>
+</pre></div>
+</div>
+<p>If we wanted that to be permanent so we had that every time we started a new shell,
+then we would put that <code class="docutils literal notranslate"><span class="pre">export</span></code> line in the <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file, which is executed
+every time bash starts up.</p>
+<p>So now hopefully the following statment makes more sense: “an activated
+environment is a directory containing executables that has been prepended to the
+<code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
+</section>
+<section id="activating-and-deactivating-environments">
+<h2>Activating and deactivating environments<a class="headerlink" href="#activating-and-deactivating-environments" title="Permalink to this heading">¶</a></h2>
+<p><strong>Activating an environment</strong> with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code> will add the
+environment’s directory containing executables to the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>. This is the
+<code class="docutils literal notranslate"><span class="pre">bin</span></code> directory of the evironment. For example, if we create a simple
+environment with just Python:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba create -p ./env python
+</pre></div>
+</div>
+<p>and look inside it with <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">env/</span></code>, we see this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>├── bin
+├── conda-meta
+├── include
+├── lib
+├── man
+├── share
+└── ssl
+</pre></div>
+</div>
+<p>If we look inside the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory, we’ll see lots of files. One of them
+is <code class="docutils literal notranslate"><span class="pre">python</span></code>. If we activate the environment with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">./env</span></code>,
+and check the path, <strong>the bin directory of the environment has been prepended
+to the path</strong>. So if we use <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">python</span></code>, it should point to the Python
+installation in that directory because the shell found <code class="docutils literal notranslate"><span class="pre">python</span></code> at the first
+place it looked: the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory of the environment. As long as this
+environment is activated, any time we call <code class="docutils literal notranslate"><span class="pre">python</span></code> it will use <em>that</em>
+Python.</p>
+<p>If we wanted to, we could avoid using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code> and just manually add
+things to the path. Or we could explicitly call that Python with
+<code class="docutils literal notranslate"><span class="pre">./env/bin/python</span></code>. But <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code> ends up being more convenient.</p>
+<p><strong>Deactivating an environment</strong> with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code> removes the path from
+the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>. So in this case, after deactivating the environment, calling
+<code class="docutils literal notranslate"><span class="pre">python</span></code> will find a different installation of Python. Typically it will find
+the Python in the base environment, or, after running <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code>
+again to deactivate the base environment, a location like <code class="docutils literal notranslate"><span class="pre">/usr/bin/python</span></code>
+(in the case of MacOS).</p>
+</section>
+<section id="difference-between-named-environment-and-a-path-environment">
+<h2>Difference between named environment and a path environment<a class="headerlink" href="#difference-between-named-environment-and-a-path-environment" title="Permalink to this heading">¶</a></h2>
+<p>If we create a new environment like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">proj</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>then it will create the environment directory wherever we have installed my
+version of conda. Others might not have access to that directory. We need to
+remember the name of the environment, or otherwise run <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">list</span></code> and
+study the list to remember which one we should use. We would activate it like
+this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">proj</span>
+</pre></div>
+</div>
+<p>If we instead create a new environment like this, say, after changing to our
+project directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">env</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>then it will create the environment in a directory called <code class="docutils literal notranslate"><span class="pre">env</span></code> in the current
+directory, and we would instead activate it like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="o">./</span><span class="n">env</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">./</span></code> is important. We can alternatively use <code class="docutils literal notranslate"><span class="pre">env/</span></code>. The point is that
+conda needs to see that <code class="docutils literal notranslate"><span class="pre">/</span></code> indicating that it’s a <em>directory</em> not an
+<em>environment name</em> that should be activated. If we used <code class="docutils literal notranslate"><span class="pre">conda</span>
+<span class="pre">activate</span> <span class="pre">env</span></code> then it would look for an environment named <code class="docutils literal notranslate"><span class="pre">env</span></code> which we might
+not have created.</p>
+<p>A path environment is very helpful when working in a shared directory. Anyone
+with access to the directory can activate the environment and be using the exact
+same set of packages as anyone else. This makes it easier for
+someone else to jump in and help troubleshoot immediately rather than have to
+worry about matching dependencies and do lots of installation work before they
+can even start to reproduce the thing they’re trying to troubleshoot. If we
+maintain a consistent naming convention, then it’s very clear which environment
+should be used for the project.</p>
+</section>
+<section id="conventions-for-project-specific-environments">
+<h2>Conventions for project-specific environments<a class="headerlink" href="#conventions-for-project-specific-environments" title="Permalink to this heading">¶</a></h2>
+<p>In BSPC, we have the convention that each project directory should have at least
+an <code class="docutils literal notranslate"><span class="pre">env</span></code> directory, at the top level of the project, containing the conda
+environment to be used by that project.</p>
+<p>Some projects may have a separate <code class="docutils literal notranslate"><span class="pre">env-r</span></code> directory, or may have multiple
+environments either for historical reasons (like keeping a copy of an env from
+a previous version of the analysis) or for logistical reasons (like splitting
+R and non-R packages into separate envs to save time). But in general, having
+an obvious environment directory name
+makes it easy for others to find.</p>
+</section>
+<section id="creating-an-environment">
+<h2>Creating an environment<a class="headerlink" href="#creating-an-environment" title="Permalink to this heading">¶</a></h2>
+<p>There are three ways to specify what should go into an environment:</p>
+<ol class="arabic simple">
+<li><p>Directly on the command line. Not advisable because it’s harder to track
+what’s in there.</p></li>
+<li><p>Plain text file, one package per line (by convention called
+<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>)</p></li>
+<li><p>An environment file in YAML format (by convention called <code class="docutils literal notranslate"><span class="pre">env.yml</span></code>)</p></li>
+</ol>
+<p>Directly on the command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">create</span> <span class="o">./</span><span class="n">env</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>Using a plain text file called <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> with the following contents
+(one line per requirement):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span>
+</pre></div>
+</div>
+<p>would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">create</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">env</span> <span class="o">--</span><span class="n">file</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>Using an environment file in YAML format called <code class="docutils literal notranslate"><span class="pre">env.yml</span></code> with the following
+contents:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channels</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bioconda</span><span class="w"></span>
+<span class="nt">dependencies</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+</pre></div>
+</div>
+<p>would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mamba</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">env</span> <span class="o">--</span><span class="n">file</span> <span class="n">env</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>That is, use <code class="docutils literal notranslate"><span class="pre">create</span></code> for a text file, and <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">create</span></code> for a YAML file.</p>
+</section>
+<section id="updating-and-managing-environments">
+<h2>Updating and managing environments<a class="headerlink" href="#updating-and-managing-environments" title="Permalink to this heading">¶</a></h2>
+<p>In BSPC, we have the policy that <em>anything added to the environment should be
+recorded in a file</em> which is then used to update the environment. That way, the
+environment file is the authoritative source of what was put into the
+environment.</p>
+<p>If you need to add something to the environment, <strong>add it to the requirements
+first</strong> (either requirements.txt or env.yaml) and then with the environment
+activated, install the entire requirements file. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate ./env
+mamba install --file requirements.txt
+</pre></div>
+</div>
+<p>This will only install packages (and dependencies) that have not already been
+installed, and in this case <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> contains the packages that were
+installed.</p>
+</section>
+<section id="conda-envs-cannot-be-moved">
+<h2>Conda envs cannot be moved<a class="headerlink" href="#conda-envs-cannot-be-moved" title="Permalink to this heading">¶</a></h2>
+<p>Due to the way that libraries (typically C and C++) are handled in conda, the
+absolute path to an environment is written into many of the executable files at
+install time. This means that if the environment is moved to another location,
+those absolute paths will no longer be pointing to the paths where the libraries
+are, which breaks the environment.</p>
+</section>
+<section id="recording-installed-packages">
+<h2>Recording installed packages<a class="headerlink" href="#recording-installed-packages" title="Permalink to this heading">¶</a></h2>
+<p>If you have been rigorous about maintaining the contents of the requirements,
+that should be sufficient for someone else to build the new environment.
+Otherwise, or if you want to be sure, you can <em>export</em> the environment.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env <span class="nb">export</span> --no-builds &gt; env_export.yaml
+</pre></div>
+</div>
+<p>This will include all dependencies in a YAML format file ready to be used by
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">--file</span></code>. This will also included depencencies that you
+didn’t explicitly install. For example, building an evironment with just Python
+in it will also install lots of other things that Python needs (like pip,
+setuptools, sqlite, tk, wheel, ca-certificates, and more). These will also be
+included in the export.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--no-builds</span></code> part is helpful for maintaining the reproducibility – see
+below for more on this.</p>
+<p>Least reproducible (but may still be perfectly fine!):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span>
+<span class="n">pandas</span>
+</pre></div>
+</div>
+<p>Or, assuming you know that you need features from pandas that
+were added in version 1.5.1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span>
+<span class="n">pandas</span><span class="o">&gt;=</span><span class="mf">1.5.1</span>
+</pre></div>
+</div>
+<p>Those files must be hand-written based on what you know your codebase requires.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">export</span></code> allows you to report <em>everything</em> that got installed
+(dependencies of dependencies of depencencies of….) in the environment.</p>
+</section>
+<section id="installing-a-previously-exported-env-yaml-and-dealing-with-version-conflicts">
+<h2>Installing a previously-exported env.yaml and dealing with version conflicts<a class="headerlink" href="#installing-a-previously-exported-env-yaml-and-dealing-with-version-conflicts" title="Permalink to this heading">¶</a></h2>
+<p>If you re-create an environment from an env.yaml within a short amount of time
+(say a few months) then it is likely that it will work with no problems.
+However, over time, packages may get fixed which could cause issues.</p>
+<p>This primarily happens when there are <em>build numbers</em> included in the env.yml.
+To understand this, first take a look at a typical conda package name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zlib</span><span class="o">-</span><span class="mf">1.2.12</span><span class="o">-</span><span class="n">h5eee18b_3</span>
+<span class="o">^^^^</span> <span class="o">^^^^^^</span> <span class="o">^^^^^^^^^^</span>
+<span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>
+<span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span> <span class="n">build</span> <span class="n">string</span>
+<span class="o">|</span>       <span class="o">|</span>
+<span class="o">|</span>       <span class="o">|</span> <span class="n">package</span> <span class="n">version</span>
+<span class="o">|</span>
+<span class="o">|</span> <span class="n">package</span> <span class="n">name</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">zlib</span></code> is the package name (it’s used by MANY other packages to handle
+file compression, so there’s a good chance it’s in your environments). The
+<code class="docutils literal notranslate"><span class="pre">1.1.12</span></code> is the version of zlib. The <code class="docutils literal notranslate"><span class="pre">h5eee18b_3</span></code> is called the <em>build
+number</em> or sometimes the <em>build string</em>. Technically, that <code class="docutils literal notranslate"><span class="pre">h5eee18b</span></code> part is
+the hash of all of the pinned packages and versions used by this package that
+are also pinned to a specific version by the build infrastructure (that is,
+conda-forge or bioconda). In other words, it’s a string that will change if
+a version changes in <em>any</em> of the packages it depends on. The <code class="docutils literal notranslate"><span class="pre">_3</span></code> part means
+that this is the fourth time (the number is zero-indexed) that zlib version
+1.1.12 has been rebuilt using this same collection of underlying packages.</p>
+<p><strong>Do not expect build numbers to be stable over time.</strong> For example, a packager
+might realize that they forgot to copy over a file, and this issue wasn’t caught
+until later. Or a packager included large amounts of supplementary data into
+a package and was asked to remove it to avoid very long download times. In both
+cases, the package version doesn’t change – it’s just other parts around it
+that change. This is reflected in changes to the build number.</p>
+<p>Excluding build numbers is useful because it allows packages to “float” to the
+most recent available build, while still keeping the package version the same.
+There are cases where the channel (like conda-forge or bioconda) removes
+a particular build because it is known to be broken. If an environment yaml
+happened to contain that broken build, recreating that environment would fail
+because it wouldn’t be found.</p>
+</section>
+<section id="completely-remove-defaults-channels">
+<h2>Completely remove defaults channels<a class="headerlink" href="#completely-remove-defaults-channels" title="Permalink to this heading">¶</a></h2>
+<p>If you get an error like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">Multi</span><span class="o">-</span><span class="n">download</span> <span class="n">failed</span><span class="o">.</span> <span class="n">Reason</span><span class="p">:</span> <span class="n">Transfer</span> <span class="n">finalized</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="mi">403</span> <span class="p">[</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">repo</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pkgs</span><span class="o">/</span><span class="n">r</span><span class="o">/</span><span class="n">noarch</span><span class="o">/</span><span class="n">repodata</span><span class="o">.</span><span class="n">json</span><span class="p">]</span> <span class="mi">4020</span> <span class="nb">bytes</span>
+</pre></div>
+</div>
+<p>then you can fix it by completely removing the default channels from conda by
+adding this to your <code class="docutils literal notranslate"><span class="pre">~/.condarc</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">default_channels</span><span class="p">:</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>Then run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">remove</span> <span class="n">channels</span> <span class="n">defaults</span>
+</pre></div>
+</div>
+<p>While you’re at it, you may want to set strict channel priorities, as
+recommended by the <a class="reference external" href="https://bioconda.github.io">bioconda docs</a>.</p>
+<p>So a working <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> looks like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+  <span class="o">-</span> <span class="n">bioconda</span>
+<span class="n">channel_priority</span><span class="p">:</span> <span class="n">strict</span>
+<span class="n">default_channels</span><span class="p">:</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</section>
+<section id="installation-on-helix-biowulf">
+<h2>Installation on Helix/Biowulf<a class="headerlink" href="#installation-on-helix-biowulf" title="Permalink to this heading">¶</a></h2>
+<p>On NIH’s Helix/Biowulf cluster, trying to install miniconda can result in the
+installation directory having only a <code class="docutils literal notranslate"><span class="pre">conda.exe</span></code> file in it, and you also get
+warnings about libraries. This appears to be an issue with how temp files are
+handled on the system.</p>
+<p>In general, the latest info is on <a class="reference external" href="https://hpc.nih.gov/apps/python.html#envs">Biowulf docs on conda</a>. Here is a summary of that
+section showing how to use a new temp directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+<span class="nv">TMPDIR</span><span class="o">=</span>/scratch/<span class="nv">$USER</span>/temp bash <span class="se">\</span>
+  Miniconda3-latest-Linux-x86_64.sh <span class="se">\</span>
+  -p /data/<span class="nv">$USER</span>/miniconda3 <span class="se">\</span>
+  -b
+</pre></div>
+</div>
+<p>Biowulf staff also recommend NOT activating your base environment by default. Why?</p>
+<ul class="simple">
+<li><p>activating an environment runs conda, which runs Python</p></li>
+<li><p>Python touches a lot of files when starting up</p></li>
+<li><p>If you run thousands of jobs on the cluster, session each job will activate
+the base environment (and therefore using Python), which will possibly touch
+hundreds of thousands of files before any computational work is done,
+potentially causing I/O lag on the cluster.</p></li>
+</ul>
+<p>There are a few ways around this. The one I have found most convenient is to
+first run <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">init</span> <span class="pre">bash</span></code>, which adds lines to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file that
+look like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
+<span class="c1"># !! Contents within this block are managed by &#39;conda init&#39; !!</span>
+<span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="s1">&#39;/data/$USER/miniconda3/bin/conda&#39;</span> <span class="s1">&#39;shell.bash&#39;</span> <span class="s1">&#39;hook&#39;</span> <span class="m">2</span>&gt; /dev/null<span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">eval</span> <span class="s2">&quot;</span><span class="nv">$__conda_setup</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+    <span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        . <span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span>
+    <span class="k">else</span>
+        <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+    <span class="k">fi</span>
+<span class="k">fi</span>
+<span class="nb">unset</span> __conda_setup
+<span class="c1"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
+</pre></div>
+</div>
+<p>Edit your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>, and wrap that newly-added-by-conda-init code in
+a function. Here, the function is called <code class="docutils literal notranslate"><span class="pre">c</span></code> just because it’s easy to type
+but it can be whatever you want. Here, I also added <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">$1</span></code> to
+the end of it. So I converted those lines to something that looks like this in
+my <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> (added lines emphasized):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="k">function</span> c<span class="o">()</span> <span class="o">{</span>
+</span>    <span class="c1"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
+    <span class="c1"># !! Contents within this block are managed by &#39;conda init&#39; !!</span>
+    <span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="s1">&#39;/data/$USER/miniconda3/bin/conda&#39;</span> <span class="s1">&#39;shell.bash&#39;</span> <span class="s1">&#39;hook&#39;</span> <span class="m">2</span>&gt; /dev/null<span class="k">)</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">eval</span> <span class="s2">&quot;</span><span class="nv">$__conda_setup</span><span class="s2">&quot;</span>
+    <span class="k">else</span>
+        <span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+            . <span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span>
+        <span class="k">else</span>
+            <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+        <span class="k">fi</span>
+    <span class="k">fi</span>
+    <span class="nb">unset</span> __conda_setup
+    <span class="c1"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
+
+<span class="hll">    conda activate <span class="nv">$1</span>
+</span><span class="hll"><span class="o">}</span>
+</span></pre></div>
+</div>
+<p>Now, I can either activate my base environment with <code class="docutils literal notranslate"><span class="pre">c</span></code>, or activate an
+environment with <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">./env</span></code>…but my base environment is not activated at the
+start of every session, thus reducing the I/O burden on the cluster.</p>
+</section>
+<section id="source-activate-vs-conda-activate">
+<h2>source activate vs conda activate<a class="headerlink" href="#source-activate-vs-conda-activate" title="Permalink to this heading">¶</a></h2>
+<p>The “old” way of activating an environment was <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">env</span></code>.
+This should still work.</p>
+<p>The “new” way of activating an environment is <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">env</span></code>.</p>
+<p>The new way requires to do a one-time setup, <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">init</span> <span class="pre">bash</span></code>, which adds
+a bunch of stuff into your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>.</p>
+<p>However if you try <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code> within a script, you’ll get an error
+because the script does not source <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>. The solution is to change</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate ./env
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>conda shell.bash hook<span class="k">)</span><span class="s2">&quot;</span>
+conda activate ./env
+</pre></div>
+</div>
+<p>Note that if you inspect what <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">init</span> <span class="pre">bash</span></code> adds to your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>,
+it’s basically doing the same thing.</p>
+</section>
+<section id="detailed-troubleshooting-example">
+<h2>Detailed troubleshooting example<a class="headerlink" href="#detailed-troubleshooting-example" title="Permalink to this heading">¶</a></h2>
+<p>Here are some notes on a recent conda troubleshooting session that may provide
+some useful tools for future cases.</p>
+<p>This issue started when cutadapt in the original env was giving CRC errors
+apparently because it thought the gzipped fasta files were corrupt. I verified
+the files themselves in various ways, it didn’t look to be the input files that
+caused the problem. So I started to suspect the tool.</p>
+<p>I created a quick script that would perform the test to isolate the issue and
+so that I would have a quick way of seeing if a possible fix worked or not, to
+minimize downtime between tests.</p>
+<p>OK, first thing to check:  maybe it’s something with the env. Tried <code class="docutils literal notranslate"><span class="pre">module</span>
+<span class="pre">load</span> <span class="pre">cutadapt</span></code> on Biowulf, to use the version installed by Biowulf staff. Ran
+the test script, and it worked.</p>
+<p>OK, maybe it’s version thing? The biowulf module was using cutadapt 3.0, and
+the original env was using cutadapt 3.3. So I made a new env with cutadapt 3.0
+(<code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">create</span> <span class="pre">-p</span> <span class="pre">./env-cutadapt3.0</span> <span class="pre">cutadapt=3.0</span></code>). It worked. Also verified
+running cutadapt 3.4 worked in another environment created similarly. So using
+3.0 or 3.4 worked, that’s good.</p>
+<p>To verify that it’s in fact a version thing, I created a fresh env with just
+cutadapt 3.3, expecting it to fail. But it worked! Oh no. Is this some sort of
+strange filesystem thing that is now magically resolved? I went back to the
+original env that had 3.3, and verified that yes, it’s still failing. So there
+must be something in particular about that original env.</p>
+<p>To test that idea, I created a new version of the original environment but with
+cutadapt 3.4 to see what other packages are brought in. I probably should have
+done this with cutadapt 3.3; this was not a properly controlled experiment!
+Anyway, this new environment did work.</p>
+<p>So the signs were pointing to the fact that something <em>else</em>, brought in as
+a dependency of cutadapt in that original envirnoment, was the cause. So
+I needed to figure out what was different between the original env and the new
+one with cutadapt 3.4 (besides cutadapt itself of course).</p>
+<p>To do this, I used <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">export</span></code> on the original and newly-created envs,
+and then studied the diff between the two files. After chasing a couple of
+false leads, I eventually saw that <code class="docutils literal notranslate"><span class="pre">python-isal</span></code> was at version 0.8.0 in the
+original environment…but 0.9.0 in the newly working one. I looked up what
+<code class="docutils literal notranslate"><span class="pre">python-isal</span></code> was, and it’s a compression library. The original problem I was
+trying to solve was that error with gzip, so this was a promising reasonable
+lead. After checking the github page, I did find a closed issue,
+<a class="reference external" href="https://github.com/pycompression/python-isal/issues/60">https://github.com/pycompression/python-isal/issues/60</a>, that described the
+problem and showed that the problem was fixed in 0.8.1. Note that this github
+issue did not come up when I was searching for the original error!</p>
+<p>So the solution was to pin <code class="docutils literal notranslate"><span class="pre">python-isal&gt;0.8.0</span></code> in the requreiments.txt in the
+original environment…and that worked!</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Conda</a><ul>
+<li><a class="reference internal" href="#what-is-an-environment">What is an environment?</a></li>
+<li><a class="reference internal" href="#activating-and-deactivating-environments">Activating and deactivating environments</a></li>
+<li><a class="reference internal" href="#difference-between-named-environment-and-a-path-environment">Difference between named environment and a path environment</a></li>
+<li><a class="reference internal" href="#conventions-for-project-specific-environments">Conventions for project-specific environments</a></li>
+<li><a class="reference internal" href="#creating-an-environment">Creating an environment</a></li>
+<li><a class="reference internal" href="#updating-and-managing-environments">Updating and managing environments</a></li>
+<li><a class="reference internal" href="#conda-envs-cannot-be-moved">Conda envs cannot be moved</a></li>
+<li><a class="reference internal" href="#recording-installed-packages">Recording installed packages</a></li>
+<li><a class="reference internal" href="#installing-a-previously-exported-env-yaml-and-dealing-with-version-conflicts">Installing a previously-exported env.yaml and dealing with version conflicts</a></li>
+<li><a class="reference internal" href="#completely-remove-defaults-channels">Completely remove defaults channels</a></li>
+<li><a class="reference internal" href="#installation-on-helix-biowulf">Installation on Helix/Biowulf</a></li>
+<li><a class="reference internal" href="#source-activate-vs-conda-activate">source activate vs conda activate</a></li>
+<li><a class="reference internal" href="#detailed-troubleshooting-example">Detailed troubleshooting example</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/conda.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="git.html" title="Previous document">Git</a>
+        </li>
+        <li>
+          <a href="gitlab.html" title="Next document">GitLab</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0.
+
+  </footer>
+
+  
+  </body>
+</html>

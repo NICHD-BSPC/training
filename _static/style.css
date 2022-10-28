@@ -334,21 +334,21 @@ pre {
     background-color: #f6f7f9;
     border: 1px solid #9aa2ab;
     color: #222;
-    font-size: 0.75em;
+    font-size: 1.0em;
     line-height: 1.5em;
     margin: 1.5em 0 1.5em 0;
     padding: 10px;
 }
 
 pre, tt, code {
-    font-family: 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    font-family: 'Inconsolata', 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
 }
 
 tt, code, code.xref {
     padding: 2px;
-    background-color: #fff;
-    border: 1px solid #daebea;
-    font-size: 0.75em;
+    /* background-color: #fff; */
+    /* border: 1px solid #daebea; */
+    /*font-size: 0.75em; */
 }
 
 tt.descname, code.descname {
@@ -568,12 +568,12 @@ a {
 }
 
 a:visited {
-    color: #337ab7;
+  color: rgb(162 78 187);
 }
 
 
 a {
-  color: rgb(35,82,124);
+    color: #337ab7;
   }
 
 .toc.-backref a a:hover a:focus a:visited {

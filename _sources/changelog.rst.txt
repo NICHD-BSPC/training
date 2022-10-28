@@ -3,6 +3,10 @@
 Changelog
 =========
 
+2022-10-27
+----------
+- Added a new section on conda
+
 2021-08-30
 ----------
 
