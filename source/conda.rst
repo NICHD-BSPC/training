@@ -3,7 +3,7 @@
 Conda
 =====
 
-Conda is a means of installing software packages in a separate environment that
+Conda helps install and manage software packages in a separate environment that
 is isolated from the rest of the system. You install conda once, and from there
 you use use conda to install lots of other software, without needing root
 access. Typically, you will be creating an environment for each project. That
@@ -56,25 +56,39 @@ it go faster. Instead of ``conda create`` use ``mamba create``. And so on. There
 are also some nice troubleshooting tools that come with ``mamba`` that can come
 in handy.
 
+.. warning::
+
+    If you have a new Mac that uses the M1 chip, **this is not yet supported by
+    Bioconda**. All packages need to be re-built for ARM64 architecture, which
+    is a rather large task. There are plans to do this but the packages are not
+    available yet.
+
+
 What is an environment?
 -----------------------
+The purpose of conda is to create environments. We create environments and then
+*activate* them to use them.
 
-Briefly: an activated environment is a directory containing executables that has
-been prepended to the ``$PATH``.
+What is an environment?
+
+Briefly: an environment is a directory containing executables and supporting
+files for those executables, and environment activated when its directory of
+executables is been prepended to the ``$PATH``.
 
 What does that mean?
 
-If you're on a Mac or Linux machine, you have access to the command ``ls`` that
-lists the contents of directories. ``ls`` is an executable program. When you
-type ``ls`` on the command line, the command line interpreter needs to figure
-out what you mean. It will look through its list of possible locations to try
-and find an executable called ``ls``. The first one it finds, it runs.
+First, let's understand the ``$PATH`` variable. For example, if you're on a Mac
+or Linux machine, you have access to the command ``ls`` that lists the contents
+of directories. ``ls`` is an executable program. When you type ``ls`` on the
+command line, the command line interpreter needs to figure out what you mean.
+It will look through its list of possible locations to try and find an
+executable called ``ls``. The first one it finds, it runs.
 
 How does it know where to look?
 
 By convention, the shell uses the ``$PATH`` variable. This is a variable that,
 again by convention, is separated by colon (``:``) characters. Here is
-a typical ``PATH`` from a fresh Linux machine, which I can see by running ``echo
+a typical ``PATH`` from a fresh Linux machine, which we can see by running ``echo
 $PATH``::
 
     /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -86,21 +100,23 @@ first look in ``/usr/local/sbin`` for the executable program ``ls``. If the file
 eventually ``/bin/ls`` is found (it happens to be the last place it looked) and
 it is **that** ``ls`` that runs.
 
-If ``ls`` can't be found at any of those locations, you'll get a ``ls: command
+If ``ls`` can't be found at any of those locations, we'll get a ``ls: command
 not found`` error.
 
-You can edit your ``PATH`` variable to add new locations. This is how you
-"install" programs on Linux. For example, imagine I made a new amazing version
-of ``ls`` that I wanted to be called any time I typed ``ls`` on the command
-line. I don't have root access to this machine, so I can't put my new ``ls`` in
-any of the paths in my ``PATH`` variable (they are all system-wide and owned by
-root). Instead, I modify the ``PATH`` variable. Say I was keeping my new ``ls``
-in my home directory, ``~/tools/ls``. Then I would modify my ``PATH`` like
+We can edit your ``PATH`` variable to add new locations. This is how we
+"install" programs on Linux. For example, imagine we made a new amazing version
+of ``ls`` that we wanted to be called any time we typed ``ls`` on the command
+line. We don't have root access to this machine, so we can't put my new ``ls`` in
+any of the paths in our ``PATH`` variable (they are all system-wide and owned by
+root). Instead, we modify the ``PATH`` variable. Say we were keeping the new ``ls``
+in our home directory, ``~/tools/ls``. Then we would modify ``PATH`` like
 this::
 
     export PATH="~/tools:$PATH"
 
-Here is an annotated version of that::
+Here is an annotated version of that:
+
+.. code-block:: text
 
     export PATH="~/tools:$PATH"
     ^      ^     ^       ^
@@ -116,72 +132,121 @@ Here is an annotated version of that::
     |__ Make the new PATH available to child processes,
         not just this one
 
-After running this:
+After running that command, we check the new value of ``$PATH``:
 
 .. code-block:: bash
 
     echo $PATH
-
     ~/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    # ^^^^^
+    # the directory has been prepended
 
-If I wanted that to be permanent so I had that every time I started a new shell,
-then I would put that ``export`` line in my ``.bashrc`` file, which is executed
+If we wanted that to be permanent so we had that every time we started a new shell,
+then we would put that ``export`` line in the ``~/.bashrc`` file, which is executed
 every time bash starts up.
 
 So now hopefully the following statment makes more sense: "an activated
 environment is a directory containing executables that has been prepended to the
 ``$PATH``.
 
+Activating and deactivating environments
+----------------------------------------
+
+**Activating an environment** with ``conda activate`` will add the
+environment's directory containing executables to the ``$PATH``. This is the
+``bin`` directory of the evironment. For example, if we create a simple
+environment with just Python:
+
+
+.. code-block:: bash
+
+    mamba create -p ./env python
+
+and look inside it with ``ls env/``, we see this:
+
+.. code-block:: text
+
+
+    ├── bin
+    ├── conda-meta
+    ├── include
+    ├── lib
+    ├── man
+    ├── share
+    └── ssl
+
+If we look inside the ``bin`` directory, we'll see lots of files. One of them
+is ``python``. If we activate the environment with ``conda activate ./env``,
+and check the path, **the bin directory of the environment has been prepended
+to the path**. So if we use ``which python``, it should point to the Python
+installation in that directory because the shell found ``python`` at the first
+place it looked: the ``bin`` directory of the environment. As long as this
+environment is activated, any time we call ``python`` it will use *that*
+Python.
+
+If we wanted to, we could avoid using ``conda activate`` and just manually add
+things to the path. Or we could explicitly call that Python with
+``./env/bin/python``. But ``conda activate`` ends up being more convenient.
+
+**Deactivating an environment** with ``conda deactivate`` removes the path from
+the ``$PATH``. So in this case, after deactivating the environment, calling
+``python`` will find a different installation of Python. Typically it will find
+the Python in the base environment, or, after running ``conda deactivate``
+again to deactivate the base environment, a location like ``/usr/bin/python``
+(in the case of MacOS).
 
 Difference between named environment and a path environment
 -----------------------------------------------------------
 
-If I create a new environment like this::
+If we create a new environment like this::
 
     conda create -n proj python
 
-then it will create the environment directory wherever I have installed my
-version of conda. Others might not have access to that directory. I need to
+then it will create the environment directory wherever we have installed my
+version of conda. Others might not have access to that directory. We need to
 remember the name of the environment, or otherwise run ``conda env list`` and
-study the list to remember which one I should use. I would activate it like
+study the list to remember which one we should use. We would activate it like
 this::
 
     conda activate proj
 
-If I instead create a new environment like this, say, after changing to my
+If we instead create a new environment like this, say, after changing to our
 project directory::
 
     conda create -p ./env python
 
 then it will create the environment in a directory called ``env`` in the current
-directory, and I would instead activate it like this::
+directory, and we would instead activate it like this::
 
     conda activate ./env
 
-The ``./`` is important. You can alternatively use ``env/``. The point is that
+The ``./`` is important. We can alternatively use ``env/``. The point is that
 conda needs to see that ``/`` indicating that it's a *directory* not an
-*environment name* that should be activated. If I used ``conda
-activate env`` then it would look for an environment named ``env`` which I might
+*environment name* that should be activated. If we used ``conda
+activate env`` then it would look for an environment named ``env`` which we might
 not have created.
 
 A path environment is very helpful when working in a shared directory. Anyone
 with access to the directory can activate the environment and be using the exact
-same set of packages as anyone else. This makes it easier, for example, for
+same set of packages as anyone else. This makes it easier for
 someone else to jump in and help troubleshoot immediately rather than have to
 worry about matching dependencies and do lots of installation work before they
-can even start to reproduce the thing they're trying to troubleshoot. If you
+can even start to reproduce the thing they're trying to troubleshoot. If we
 maintain a consistent naming convention, then it's very clear which environment
 should be used for the project.
+
 
 Conventions for project-specific environments
 ---------------------------------------------
 In BSPC, we have the convention that each project directory should have at least
 an ``env`` directory, at the top level of the project, containing the conda
-environment to be used by that project. Some projects may have a separate
-``env-r`` directory, or may have multiple environments either for historical
-reasons (like keeping a copy of an env from a previous version of the analysis)
-or for logistical reasons (like splitting R and non-R packages into separate
-envs to save time). But in general, having an obvious environment directory name
+environment to be used by that project.
+
+Some projects may have a separate ``env-r`` directory, or may have multiple
+environments either for historical reasons (like keeping a copy of an env from
+a previous version of the analysis) or for logistical reasons (like splitting
+R and non-R packages into separate envs to save time). But in general, having
+an obvious environment directory name
 makes it easy for others to find.
 
 Creating an environment
@@ -254,8 +319,6 @@ install time. This means that if the environment is moved to another location,
 those absolute paths will no longer be pointing to the paths where the libraries
 are, which breaks the environment.
 
-
-
 Recording installed packages
 ----------------------------
 
@@ -305,6 +368,14 @@ This primarily happens when there are *build numbers* included in the env.yml.
 To understand this, first take a look at a typical conda package name::
 
     zlib-1.2.12-h5eee18b_3
+    ^^^^ ^^^^^^ ^^^^^^^^^^
+    |       |       |
+    |       |       | build string
+    |       |
+    |       | package version 
+    |
+    | package name
+
 
 Here, ``zlib`` is the package name (it's used by MANY other packages to handle
 file compression, so there's a good chance it's in your environments). The
@@ -322,5 +393,205 @@ might realize that they forgot to copy over a file, and this issue wasn't caught
 until later. Or a packager included large amounts of supplementary data into
 a package and was asked to remove it to avoid very long download times. In both
 cases, the package version doesn't change -- it's just other parts around it
-that change. This is reflected in changes to the build number. 
+that change. This is reflected in changes to the build number.
 
+Excluding build numbers is useful because it allows packages to "float" to the
+most recent available build, while still keeping the package version the same.
+There are cases where the channel (like conda-forge or bioconda) removes
+a particular build because it is known to be broken. If an environment yaml
+happened to contain that broken build, recreating that environment would fail
+because it wouldn't be found.
+
+
+Completely remove defaults channels
+-----------------------------------
+If you get an error like this::
+
+    RuntimeError: Multi-download failed. Reason: Transfer finalized, status: 403 [https://repo.anaconda.com/pkgs/r/noarch/repodata.json] 4020 bytes
+
+then you can fix it by completely removing the default channels from conda by
+adding this to your ``~/.condarc``::
+
+    default_channels: []
+
+Then run::
+
+    conda config --remove channels defaults
+
+While you're at it, you may want to set strict channel priorities, as
+recommended by the `bioconda docs <https://bioconda.github.io>`_.
+
+So a working ``.condarc`` looks like the following::
+
+    channels:
+      - conda-forge
+      - bioconda
+    channel_priority: strict
+    default_channels: []
+
+
+Installation on Helix/Biowulf
+-----------------------------
+
+On NIH's Helix/Biowulf cluster, trying to install miniconda can result in the
+installation directory having only a ``conda.exe`` file in it, and you also get
+warnings about libraries. This appears to be an issue with how temp files are
+handled on the system.
+
+In general, the latest info is on `Biowulf docs on conda
+<https://hpc.nih.gov/apps/python.html#envs>`_. Here is a summary of that
+section showing how to use a new temp directory:
+
+.. code-block:: bash
+
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    TMPDIR=/scratch/$USER/temp bash \
+      Miniconda3-latest-Linux-x86_64.sh \
+      -p /data/$USER/miniconda3 \
+      -b
+
+
+Biowulf staff also recommend NOT activating your base environment by default. Why?
+
+- activating an environment runs conda, which runs Python
+- Python touches a lot of files when starting up
+- If you run thousands of jobs on the cluster, session each job will activate
+  the base environment (and therefore using Python), which will possibly touch
+  hundreds of thousands of files before any computational work is done,
+  potentially causing I/O lag on the cluster.
+
+There are a few ways around this. The one I have found most convenient is to
+first run ``conda init bash``, which adds lines to your ``~/.bashrc`` file that
+look like this:
+
+.. code-block:: bash
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/data/$USER/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/data/$USER/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/data/$USER/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/data/$USER/miniconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+
+Edit your ``.bashrc``, and wrap that newly-added-by-conda-init code in
+a function. Here, the function is called ``c`` just because it's easy to type
+but it can be whatever you want. Here, I also added ``conda activate $1`` to
+the end of it. So I converted those lines to something that looks like this in
+my ``.bashrc`` (added lines emphasized):
+
+.. code-block:: bash
+    :emphasize-lines: 1,17,18
+
+    function c() {
+        # >>> conda initialize >>>
+        # !! Contents within this block are managed by 'conda init' !!
+        __conda_setup="$('/data/$USER/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+        if [ $? -eq 0 ]; then
+            eval "$__conda_setup"
+        else
+            if [ -f "/data/$USER/miniconda3/etc/profile.d/conda.sh" ]; then
+                . "/data/$USER/miniconda3/etc/profile.d/conda.sh"
+            else
+                export PATH="/data/$USER/miniconda3/bin:$PATH"
+            fi
+        fi
+        unset __conda_setup
+        # <<< conda initialize <<<
+
+        conda activate $1
+    }
+
+Now, I can either activate my base environment with ``c``, or activate an
+environment with ``c ./env``...but my base environment is not activated at the
+start of every session, thus reducing the I/O burden on the cluster.
+
+source activate vs conda activate
+---------------------------------
+
+The "old" way of activating an environment was ``source activate env``.
+This should still work.
+
+The "new" way of activating an environment is ``conda activate env``.
+
+The new way requires to do a one-time setup, ``conda init bash``, which adds
+a bunch of stuff into your ``.bashrc``.
+
+However if you try ``conda activate`` within a script, you'll get an error
+because the script does not source ``.bashrc``. The solution is to change
+
+.. code-block:: bash
+
+    conda activate ./env
+
+to
+
+.. code-block:: bash
+
+    eval "$(conda shell.bash hook)"
+    conda activate ./env
+
+Note that if you inspect what ``conda init bash`` adds to your ``.bashrc``,
+it's basically doing the same thing.
+
+
+Detailed troubleshooting example
+--------------------------------
+Here are some notes on a recent conda troubleshooting session that may provide
+some useful tools for future cases.
+
+This issue started when cutadapt in the original env was giving CRC errors
+apparently because it thought the gzipped fasta files were corrupt. I verified
+the files themselves in various ways, it didn't look to be the input files that
+caused the problem. So I started to suspect the tool.
+
+I created a quick script that would perform the test to isolate the issue and
+so that I would have a quick way of seeing if a possible fix worked or not, to
+minimize downtime between tests.
+
+OK, first thing to check:  maybe it's something with the env. Tried ``module
+load cutadapt`` on Biowulf, to use the version installed by Biowulf staff. Ran
+the test script, and it worked.
+
+OK, maybe it's version thing? The biowulf module was using cutadapt 3.0, and
+the original env was using cutadapt 3.3. So I made a new env with cutadapt 3.0
+(``mamba create -p ./env-cutadapt3.0 cutadapt=3.0``). It worked. Also verified
+running cutadapt 3.4 worked in another environment created similarly. So using
+3.0 or 3.4 worked, that's good.
+
+To verify that it's in fact a version thing, I created a fresh env with just
+cutadapt 3.3, expecting it to fail. But it worked! Oh no. Is this some sort of
+strange filesystem thing that is now magically resolved? I went back to the
+original env that had 3.3, and verified that yes, it's still failing. So there
+must be something in particular about that original env.
+
+To test that idea, I created a new version of the original environment but with
+cutadapt 3.4 to see what other packages are brought in. I probably should have
+done this with cutadapt 3.3; this was not a properly controlled experiment!
+Anyway, this new environment did work.
+
+So the signs were pointing to the fact that something *else*, brought in as
+a dependency of cutadapt in that original envirnoment, was the cause. So
+I needed to figure out what was different between the original env and the new
+one with cutadapt 3.4 (besides cutadapt itself of course).
+
+To do this, I used ``conda env export`` on the original and newly-created envs,
+and then studied the diff between the two files. After chasing a couple of
+false leads, I eventually saw that ``python-isal`` was at version 0.8.0 in the
+original environment...but 0.9.0 in the newly working one. I looked up what
+``python-isal`` was, and it's a compression library. The original problem I was
+trying to solve was that error with gzip, so this was a promising reasonable
+lead. After checking the github page, I did find a closed issue,
+https://github.com/pycompression/python-isal/issues/60, that described the
+problem and showed that the problem was fixed in 0.8.1. Note that this github
+issue did not come up when I was searching for the original error!
+
+So the solution was to pin ``python-isal>0.8.0`` in the requreiments.txt in the
+original environment...and that worked!
