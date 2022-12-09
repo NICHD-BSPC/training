@@ -27,7 +27,7 @@ Getting Started
 
 Tutorials
 """""""""
-this is probably the Harvard Bioinformatics Core
+This is probably the Harvard Bioinformatics Core
 training material. It’s still under development, but most of it is accessible
 here on their `main training page <https://github.com/hbctraining/main>`_.
 Specifically, you'll probably want to check out:
