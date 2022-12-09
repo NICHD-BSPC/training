@@ -22,7 +22,12 @@ Fig 1. RNA Sequence Analysis Workflow showing (a) pre-analysis (b) core-analysis
 Sourced from: `Conesa, et al 2016 <https://doi.org/10.1186/s13059-016-0881-8>`_ 
 
 
-**The best place to learn** this is probably the Harvard Bioinformatics Core
+Getting Started
+---------------
+
+Tutorials
+"""""""""
+this is probably the Harvard Bioinformatics Core
 training material. It’s still under development, but most of it is accessible
 here on their `main training page <https://github.com/hbctraining/main>`_.
 Specifically, you'll probably want to check out:
@@ -40,37 +45,8 @@ and `Introduction to R <https://hbctraining.github.io/Intro-to-R-flipped/schedul
     but if you can't find the linked tutorials, look around on their
     `main training page <https://github.com/hbctraining/main>`_.
 
-The remainder of this page goes into some more detail on various aspects of
-RNA-seq analysis.
-
-Experimental design
--------------------
-
-The `experimental planning considerations <https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon-flipped/lessons/02_experimental_planning_considerations.html>`_
-section from HBC training is a very good discussion on how much to sequence
-(more samples or more depth?), how to avoid a confounded experiment, and
-preventing batch effects in general.
-
-Especially when doing `in vitro` research with cell lines, it's important to
-think about what a replicate really is. `This blog post
-<https://paasp.net/accurate-design-of-in-vitro-experiments-why-does-it-matter/>`_
-is a good discussion of the difference between technical replicates and
-biological replicates `in vitro`.
-
-
-Strandedness in RNA-seq
------------------------
-
-Depending on what kit was used for the library prep, a library may be stranded,
-reverse stranded, or unstranded. `These figures
-<https://github.com/igordot/genomics/blob/master/notes/rna-seq-strand.md>`_
-help visualize the different strand-specific protocols. If you're unsure,
-RSeQC's `infer_experiment.py
-<http://rseqc.sourceforge.net/#infer-experiment-py>`_ can help you figure it
-out given a BAM and a BED file of genes. 
-
-Running your own differential expression analysis
--------------------------------------------------
+Practice RNA Datasets
+"""""""""""""""""""""
 
 When you’re ready, try your hand at analyzing a real-world RNA-seq data
 set. The best thing to do would be to find data from a paper of interest and
@@ -93,6 +69,36 @@ https://ro-che.info/articles/2016-11-28-rna-seq-normalization. The accompanying
 `slides <https://ro-che.info/docs/2016-11-27-rna-seq.pdf>`_ are useful for
 discussion.
 
+The remainder of this page goes into some more detail on various aspects of
+RNA-seq analysis.
+
+Considerations of Bulk RNASeq: 
+-------------------
+Experimental design
+"""""""""""""""""""
+
+The `experimental planning considerations <https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon-flipped/lessons/02_experimental_planning_considerations.html>`_
+section from HBC training is a very good discussion on how much to sequence
+(more samples or more depth?), how to avoid a confounded experiment, and
+preventing batch effects in general.
+
+Especially when doing `in vitro` research with cell lines, it's important to
+think about what a replicate really is. `This blog post
+<https://paasp.net/accurate-design-of-in-vitro-experiments-why-does-it-matter/>`_
+is a good discussion of the difference between technical replicates and
+biological replicates `in vitro`.
+
+
+Strandedness in RNA-seq
+"""""""""""""""""""""""
+
+Depending on what kit was used for the library prep, a library may be stranded,
+reverse stranded, or unstranded. `These figures
+<https://github.com/igordot/genomics/blob/master/notes/rna-seq-strand.md>`_
+help visualize the different strand-specific protocols. If you're unsure,
+RSeQC's `infer_experiment.py
+<http://rseqc.sourceforge.net/#infer-experiment-py>`_ can help you figure it
+out given a BAM and a BED file of genes. 
 
 
 Other resources
