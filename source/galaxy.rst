@@ -3,7 +3,7 @@
 Galaxy
 ======
 
-.. image::path/galaxyLogo.jpeg
+.. image::./images/galaxyLogo.jpeg
 
 `Galaxy <https://usegalaxy.org/>`_ is an open-source web application built for scientific analyses featuring a public server located within teh cloud, accessible open-source software packages, custom Galaxy tools (Galaxy ToolShed), and a user-friendly drop-and-drop interface. The platform is easy to learn, requiring no programming experience, and used to build reproducible bioinformatics workflows. Galaxy's community also serves as one of the few active forums for bioinformaticians to collaborate, with over 150 active members monthly. 
 
@@ -11,7 +11,7 @@ Multiple tools are available to the user, including popular ones such as FastQC 
 
 As of current, Galaxy is best for simple genomic analyses, as there are some drawbacks to the platform. 
 
-.. image::path/galaxyBulkRNASeqWorkflow
+.. image::./images/galaxyBulkRNASeqWorkflow
 
 Fig1: The Galaxy UI. The lefthand sidebar shows the tools available to the user. The center features a workflow for Bulk RNASeq. The righthand sidebar shows additional information. 
 
