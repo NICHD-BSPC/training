@@ -5,7 +5,7 @@ Galaxy
 
 .. image::path/galaxyLogo.jpeg
 
-`Galaxy <https://usegalaxy.org/>`_ is an open-source web application built for scientific analyses featuring a public server located within teh cloud, accessible open-source software packages, custom Galaxy tools (Galaxy ToolShed), and a user-friendly drop-and-drop interface. The platform is easy to learn, requiring no programming experience, and used to build reproducible bioinformatics workflows. 
+`Galaxy <https://usegalaxy.org/>`_ is an open-source web application built for scientific analyses featuring a public server located within teh cloud, accessible open-source software packages, custom Galaxy tools (Galaxy ToolShed), and a user-friendly drop-and-drop interface. The platform is easy to learn, requiring no programming experience, and used to build reproducible bioinformatics workflows. Galaxy's community also serves as one of the few active forums for bioinformaticians to collaborate, with over 150 active members monthly. 
 
 Multiple tools are available to the user, including popular ones such as FastQC (quality control), Bowtie2 (aligner), featureCounts (read counter). Galaxy's built-in drag-and-drop workflow also serves as a transparent way to quickly communicate analyses to other researchers and collaborators. 
 
@@ -16,7 +16,7 @@ As of current, Galaxy is best for simple genomic analyses, as there are some dra
 Fig1: The Galaxy UI. The lefthand sidebar shows the tools available to the user. The center features a workflow for Bulk RNASeq. The righthand sidebar shows additional information. 
 
 
-Galaxy is a great introductory tool for bioinformaticians and the Galaxy community is only getting stronger - with over 124,000 registered users since its inception in 2007 and over 2000 Galaxy Help members. 
+Galaxy is a great introductory tool for bioinformaticians and the Galaxy community is only getting stronger - with over 124,000 registered users since its inception in 2007 and over 2000 Galaxy Help members total. 
 
 Getting Started with Galaxy 
 ----
