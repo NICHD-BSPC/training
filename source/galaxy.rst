@@ -27,11 +27,11 @@ Drawbacks
 ----
 1. **Some tools have additional options that are not always available to the user, causing first-time users might be confused on what tool exactly to use.** Ex. Operate on Genomic Intervals:Intersect and BED:bedtools Intersect intervals are the same tool yet bedtools offers more options for the user to set. 
 
-3. **Many of Galaxy's tools only provide links to the original code's documentation.** This is unhelpful as there is a skill required in understanding the docs as well as the fact that Galaxy UI has purposefully changed the options names/descriptions.
+2. **Many of Galaxy's tools only provide links to the original code's documentation.** This is unhelpful as there is a skill required in understanding the docs as well as the fact that Galaxy UI has purposefully changed the options names/descriptions.
 
-4. **Some of Galaxy's tools do not have properly formatted documentation at the bottom.** This is the other extreme of Drawback #3. An example tool of this is the UpSet diagram tool. The figure in the tool is way too big. 
+3. **Some of Galaxy's tools do not have properly formatted documentation at the bottom.** This is the other extreme of Drawback #3. An example tool of this is the UpSet diagram tool. The figure in the tool is way too big. 
 
-5) **Searching for tools can be difficult and overwhelming.** The naming of the tools splits between Galaxy-programmed tools and Galaxy-adapted tools created by other pre-existing packages. Ex. In the "Get Data" tab, there are two options to get data from NCBI SRA that look very similar: "Faster Download and Extract Reads in FASTQ" and "Download and Extract Reads in FASTA/Q". How is someone supposed to know which tool to use and remember one over the other? What is the difference between the two? What is "faster"? 
+4. **Searching for tools can be difficult and overwhelming.** The naming of the tools splits between Galaxy-programmed tools and Galaxy-adapted tools created by other pre-existing packages. Ex. In the "Get Data" tab, there are two options to get data from NCBI SRA that look very similar: "Faster Download and Extract Reads in FASTQ" and "Download and Extract Reads in FASTA/Q". How is someone supposed to know which tool to use and remember one over the other? What is the difference between the two? What is "faster"? 
 
 A great example of a well documented tool is "Download and Extract reads in FASTA/Q". It is a simple tool with understandable documentation. It also has flags for what Galaxy is internally doing and how Galaxy will output these files to the user. 
 
