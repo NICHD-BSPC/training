@@ -15,8 +15,16 @@ As of current, Galaxy is best for simple genomic analyses, as there are some dra
 
 Fig1: The Galaxy UI. The lefthand sidebar shows the tools available to the user. The center features a workflow for Bulk RNASeq. The righthand sidebar shows additional information. 
 
+
 Galaxy is a great introductory tool for bioinformaticians and the Galaxy community is only getting stronger - with over 124,000 registered users since its inception in 2007 and over 2000 Galaxy Help members. 
 
+Getting Started with Galaxy 
+----
+Utilize the Galaxy Training pages to understand what workflows are possible for Galaxy: `Click Here <https://training.galaxyproject.org/training-material/>`_ 
+
+
+Drawbacks 
+----
 1. **Some tools have additional options that are not always available to the user, causing first-time users might be confused on what tool exactly to use.** Ex. Operate on Genomic Intervals:Intersect and BED:bedtools Intersect intervals are the same tool yet bedtools offers more options for the user to set. 
 
 3. **Many of Galaxy's tools only provide links to the original code's documentation.** This is unhelpful as there is a skill required in understanding the docs as well as the fact that Galaxy UI has purposefully changed the options names/descriptions.
@@ -29,6 +37,9 @@ A great example of a well documented tool is "Download and Extract reads in FAST
 
 A not-so-great example is the Filter FASTA. While simple, the tool's options are weirdly worded and confusing. The option: Match IDs by has two options: (1) Default: ID is expected at the beginning: >ID (2) Custom regex pattern. "Regex" refers to regular expression. What is a regular expression to a non-programmer? Where is regex defined? What can that entail? Maybe some documentation at the bottom could help. There is no documentation or examples below. The option "Criteria for filtering on sequences" includes: (1) No filtering (2) Sequence Length and (3) Regular expression pattern that the sequence should match. First of all, why do we have a "No filtering" option of the Filter Fasta tool, is filtering not the sole purpose of this tool? Secondly, Regex is now fully defined as regular expression, and an unlinked URL is supplied. 
 
+Papers
+----
+`The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2018 update (Afghan, et al. 2018) <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6030816/>`_ 
 
 .. todo::
 
