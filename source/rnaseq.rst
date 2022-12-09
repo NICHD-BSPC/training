@@ -1,7 +1,14 @@
 Bulk RNA-seq analysis
 =====================
 
-The basic steps in bulk RNA-seq analysis are:
+Bulk RNA-seq analysis is used to estimate the average gene expression level across a population of cells amongst different groups and conditions. Specific biological questions may be: 
+
+- How does the gene expression differs in my mutated sample vs a wild-type (non-mutated) sample?
+- Is my DNA sequence/construct properly align to my gene/genomic region of interest?
+- What genes does my DNA sequence/contruct aligns to?
+
+Basic Steps in RNA-Seq Analysis
+-------------------------------
 
 - quality control (FastQC, MultiQC, many other tools)
 - trim reads if needed (cutadapt, fastp)
