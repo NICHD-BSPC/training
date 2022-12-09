@@ -22,6 +22,7 @@ Getting Started with Galaxy
 ----
 Utilize the Galaxy Training pages to understand what workflows are possible for Galaxy: `Click Here <https://training.galaxyproject.org/training-material/>`_ 
 
+Bulk RNA Seq Analysis in Galaxy tutorial: `Click Here <https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#data-upload>`_
 
 Drawbacks 
 ----
@@ -40,6 +41,7 @@ A not-so-great example is the Filter FASTA. While simple, the tool's options are
 Papers
 ----
 `The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2018 update (Afghan, et al. 2018) <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6030816/>`_ 
+
 
 .. todo::
 
