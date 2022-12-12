@@ -3,7 +3,8 @@
 Galaxy
 ======
 
-.. image:: images/galaxyLogo.jpeg 
+.. image:: images/galaxyLogo.jpeg
+   :width: 50%
 
 `Galaxy <https://usegalaxy.org/>`_ is an open-source web application built for scientific analyses featuring a public server located within the cloud, accessible open-source software packages, custom Galaxy tools (Galaxy ToolShed), and a user-friendly drop-and-drop interface. The platform is easy to learn, requiring no programming experience, and used to build reproducible bioinformatics workflows. Galaxy's community also serves as one of the few active forums for bioinformaticians to collaborate, with over 150 active members monthly. 
 
