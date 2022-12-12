@@ -3,8 +3,6 @@
 Galaxy
 ======
 
-.. image::./images/galaxyLogo.jpeg
-
 `Galaxy <https://usegalaxy.org/>`_ is an open-source web application built for scientific analyses featuring a public server located within the cloud, accessible open-source software packages, custom Galaxy tools (Galaxy ToolShed), and a user-friendly drop-and-drop interface. The platform is easy to learn, requiring no programming experience, and used to build reproducible bioinformatics workflows. Galaxy's community also serves as one of the few active forums for bioinformaticians to collaborate, with over 150 active members monthly.
 
 Multiple tools are available to the user, including popular ones such as FastQC (quality control), Bowtie2 (aligner), featureCounts (count reads in genes), and many more. Galaxy's built-in drag-and-drop workflow also serves as a transparent way to quickly communicate analyses to other researchers and collaborators.
