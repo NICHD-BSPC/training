@@ -3,29 +3,25 @@
 Galaxy
 ======
 
-.. _galaxy:
-
 .. image:: images/galaxyLogo.jpeg 
 
 `Galaxy <https://usegalaxy.org/>`_ is an open-source web application built for scientific analyses featuring a public server located within the cloud, accessible open-source software packages, custom Galaxy tools (Galaxy ToolShed), and a user-friendly drop-and-drop interface. The platform is easy to learn, requiring no programming experience, and used to build reproducible bioinformatics workflows. Galaxy's community also serves as one of the few active forums for bioinformaticians to collaborate, with over 150 active members monthly. 
 
 Multiple tools are available to the user, including popular ones such as FastQC (quality control), Bowtie2 (aligner), featureCounts (count reads in genes), and many more. Galaxy's built-in drag-and-drop workflow also serves as a transparent way to quickly communicate analyses to other researchers and collaborators.
 
-As of current, Galaxy is great for genomic analyses, as there are some drawbacks to the platform. Overall, it's one of the few cloud-based community hubs for bioinformaticians of all skill-levels. The Galaxy community is only getting stronger - with over 124,000 registered users since its inception in 2007 and over 2000 GalaxyHelp members total. 
+Galaxy is great for genomic analyses, as there are some drawbacks to the platform. Overall, it's one of the few cloud-based community hubs for bioinformaticians of all skill-levels. The Galaxy community is only getting stronger - with over 124,000 registered users since its inception in 2007 and over 2000 GalaxyHelp members total. 
 
-.. image:: images/galaxyBulkRNASeqWF.png
+.. figure:: images/galaxyBulkRNASeqWF.png
 
-Fig1: The Galaxy UI. The lefthand sidebar shows the tools available to the user. The center features a workflow for Bulk RNASeq. The righthand sidebar shows additional information.
+    The Galaxy UI. The lefthand sidebar shows the tools available to the user. The center features a workflow for Bulk RNASeq. The righthand sidebar shows additional information.
 
 
 Getting Started with Galaxy 
-----
-Utilize the Galaxy Training pages to understand what workflows are possible for Galaxy: `Click Here <https://training.galaxyproject.org/training-material/>`_ 
-
-Bulk RNA Seq Analysis in Galaxy tutorial: `Click Here <https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#data-upload>`_
+---------------------------
+Utilize the `Galaxy Training pages <https://training.galaxyproject.org/training-material/>`_ to understand what workflows are possible for Galaxy and a specific workflow is the `Bulk RNA Seq Analysis <https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#data-upload>`_ Galaxy tutorial
 
 Benefits
-----
+--------
 
 1. **Easy to use** A Drag-and-Drog interface allows users to quickly understand where the data is located and what is happening every step of the workflow. This helps really helps both those who are in and outside of the lab. Anybody can quickly understand the input and output of a workflow. 
 
