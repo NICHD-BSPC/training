@@ -11,7 +11,7 @@ The basic steps in bulk RNA-seq analysis are:
 
 .. image:: images/bestPracticesRNASeq.png
 
-Fig 1. Generic roadmap for RNA-seq computational analyses. Sourced from: *https://doi.org/10.1186/s13059-016-0881-8*
+Fig 1. Generic roadmap for RNA-seq computational analyses, see `Conesa et al 2016 <https://doi.org/10.1186/s13059-016-0881-8>`_. 
 
 **The best place to learn** this is probably the Harvard Bioinformatics Core
 training material. It’s still under development, but most of it is accessible
