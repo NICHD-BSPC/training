@@ -85,7 +85,7 @@ Intermediate
 ------------
 
 - `Modern Statistics for Modern Biology
-  <http://web.stanford.edu/class/bios221/book/introduction.html>`_ assumes you
+  <http://web.stanford.edu/class/bios221/book>`_ assumes you
   know R, and goes deeper into many important and useful statistical methods.
   There are exercises and solutions as well. Very well written.
 
