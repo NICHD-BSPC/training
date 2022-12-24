@@ -65,6 +65,7 @@ Once you have the basics of programming, these sections will broaden your skills
    git
    conda
    gitlab
+   rsync
    making-your-linux-life-easier
    biology
 
