@@ -61,6 +61,7 @@ Once you have the basics of programming, these sections will broaden your skills
    :maxdepth: 1
 
    vim
+   ssh
    git
    conda
    gitlab
