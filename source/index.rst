@@ -62,11 +62,11 @@ Once you have the basics of programming, these sections will broaden your skills
 
    vim
    ssh
+   making-your-linux-life-easier
    git
    conda
-   gitlab
    rsync
-   making-your-linux-life-easier
+   gitlab
    biology
 
 Genomics

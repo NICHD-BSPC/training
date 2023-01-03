@@ -1,13 +1,13 @@
+.. _making-your-linux-life-easier:
+
 Making your Linux life easier
 =============================
 
-Intermediate command-line use
------------------------------
 Here are some tips that you might not have picked up from introductory
 command-line tutorials.
 
 Aliases
-~~~~~~~
+-------
 
 You can put any bash commands you’d like into an alias (see
 http://tldp.org/LDP/abs/html/aliases.html for more).
@@ -22,10 +22,10 @@ To change to a frequently-visited directory,
 
 .. code-block:: bash
 
-   alias N="cd /data/NICDH-core0/"
+   alias N="cd /data/project/"
 
 Middle-click paste
-~~~~~~~~~~~~~~~~~~
+------------------
 
 This is frequently overlooked in intro Linux tutorials, but in most
 software on Linux when you highlight text it goes into a separate copy
@@ -33,40 +33,63 @@ buffer that can be pasted with middle-mouse-button. This means you
 effectively have two buffers, the typical Ctrl-C/Ctrl-X/Ctrl-V as well
 as the last-selected text buffer.
 
-Ctrl-C in terminals
-~~~~~~~~~~~~~~~~~~~
+This will work if you're on a Linux graphical user interface, for example if
+you're using `NoMachine to log in to Biowulf
+<https://hpc.nih.gov/docs/nx.html>`_.
 
-To interrupt a command, use Ctrl-C. To paste text from the Ctrl-C/X/V
-buffer, use Ctrl-Shift-C or Ctrl-Shift-V (using most terminal
-emulators).
+
+
+Ctrl-C in terminals
+-------------------
+
+To interrupt a command, use Ctrl-C.
+
+To paste text from the Ctrl-C/X/V buffer, use Ctrl-Shift-C or Ctrl-Shift-V
+(using most terminal emulators).
+
+If you're using tmux, it gets a little trickier -- see the :ref:`tmux` section
+for more.
+
+Opening files on Mac
+--------------------
+Use ``open`` on Mac to open the file in the appropriate program, e.g., ``open
+document.docx`` to open in Word.
+
+Opening HTML files
+------------------
+
+When a URL shows up somewhere in the terminal, depending on your terminal you
+can easily open it on your local machine:
+
+- macOS Terminal app: Commad-double-click
+- iTerm2 app: Command-click
+- Alacritty: click
 
 dotfiles
-~~~~~~~~
+--------
 
-I’ve collected a lot of configurations over the years. You can grow your
-own over time, or see https://github.com/daler/dotfiles to start with
-“the works”.
+"Dotfiles" collectively refers to the various configuration files used by bash
+(``.bashrc``, ``.bash_profile``), git (``.gitconfig``), tmux ``.tmux.conf``),
+vim (``~/.vimrc`` or ``.config/nvim/init.vim``), and others. To prevent them
+from showing up in a standard ``ls`` call, they start with a leading ``.``,
+hence dotfiles.
+
+You can grow your own over time, or see https://github.com/daler/dotfiles to
+start with “the works”.
 
 Ctrl-R
-~~~~~~
+------
 
-This lets you search through your history . . . but see ``fzf`` below in the
-tools section for a fancier way.
+Ctrl-R lets you search through your history. It works in the R interpreter,
+too. See ``fzf`` below in the tools section for a fancier way for searching
+through history.
 
 Tools
 -----
 
-.. _meld:
-
-meld
-~~~~
-
-`Meld <http://meldmerge.org/>`__ is an amazing tool for visually looking
-at the differences between two files and merging them. I used meld for a
-while but have now moved to using ``vim`` in diff mode, and the
-`vim-fugitive <https://github.com/tpope/vim-fugitive>`__ vim plugin
-helps especially with Git-related diffs and merges.
-
+Here are some useful tools to install. If you're using `my dotfiles
+<https://github.com/daler/dotfiles>`_, you can use the ``setup.sh`` script to
+easily install them.
 
 visidata
 ~~~~~~~~
@@ -84,7 +107,7 @@ See a lightning demo `here <https://www.youtube.com/watch?v=N1CBDTgGtOU>`_.
 
 .. _tmux:
 
-Tmux
+tmux
 ~~~~
 
 -  Brief guide to tmux:
@@ -102,27 +125,8 @@ fzf
 `fzf <https://github.com/junegunn/fzf>`_ is a fuzzy-finder. The installation
 script will make Ctrl-R, for searching through history, use ``fzf``.
 
-Any content can be piped through fzf. For example, to search through ``conda``
-environments here's a function to put in your ``.bashrc``. Then you can use
-the ``sa`` command to search through your environments, and when you hit enter
-that environment will be activated.
-
-.. code-block:: bash
-
-   # Select a conda env to activate
-   sa() {
-       local name=$(conda env list | grep -v "#" | fzf)
-       local env=$(echo $name | awk '{print $1}');
-       eval "source activate $env";
-   }
-
-autojump
-~~~~~~~~
-`autojump <https://github.com/wting/autojump>`_ remembers where you've changed
-directories, and lets you jump right there with ``j``. Or hit ``j`` and
-tab-complete to see alternatives.
-
-This is a huge time saver when you're frequently visting highly-nested directories.
+Any content can be piped through fzf -- see the home page for all sorts of ways
+it can be used.
 
 ripgrep
 ~~~~~~~
