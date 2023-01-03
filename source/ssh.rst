@@ -124,11 +124,9 @@ For more details, `see this documentation page from GitHub
 Tell other hosts about your key
 -------------------------------
 
-In order to use your private key with another system, you need to tell that
+In order to use your keypair with another system, you need to tell that
 other system about it. But you only tell the other system about the *public*
-key, and you use your private key to access. You can sort of think of it like
-installing a lock (the private key) on another system that only you have the key
-to unlock.
+key, and you use your private key to access.
 
 Copy your public key automatically to another host like this:
 
@@ -146,6 +144,25 @@ because the remote host is convinced it's really us.
 
 The next time you log in to that host from the same machine, it will recognize
 you have set up keys and will then ask you for your *ssh key passphrase*.
+
+Using SSH keys for accessing GitHub, etc
+----------------------------------------
+
+Some sites, notably GitHub and GitLab, use SSH keys to authenticate. That's
+because you're typically interfacing with those sites via command-line ``git``,
+and they need some secure way of authenticating. User/password could be one
+way, but SSH keys are considered more secure.
+
+In general, you log in to the site as normal. Go to your profile settings, and
+there will be a section on SSH keys where you can add your public key. For
+example, here are the `GitHub docs
+<https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account>`_
+for adding your SSH key to your GitHub account.
+
+Similarly, here are the `GitLab docs
+<https://docs.gitlab.com/ee/user/ssh.html>`_ for adding your SSH key to your
+GitLab account.
+
 
 Start the agent for automatic login
 -----------------------------------
