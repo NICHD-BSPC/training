@@ -110,6 +110,19 @@ See a lightning demo `here <https://www.youtube.com/watch?v=N1CBDTgGtOU>`_.
 tmux
 ~~~~
 
+Start tmux when you're on a remote host (like `Biowulf
+<https://hpc.nih.gov>`_), and you'll get a persistent terminal. That means you
+can lose the connection, or shut your laptop off and when you reconnect to the
+remote host, when you reattach to the tmux session you'll have everything
+exactly where it was -- running programs will keep running on the host even
+when you're not logged in with your laptop.
+
+In addition, you can split the full-screen terminal window into panes or
+collections of panes, effectively getting multiple terminals that you can
+quickly switch between. This makes it great to, for example, have a file open
+in a text editor in one pane while testing it out at the command line in
+another pane.
+
 -  Brief guide to tmux:
    https://medium.com/actualize-network/a-minimalist-guide-to-tmux-13675fb160fa
 -  Lots more details: https://leanpub.com/the-tao-of-tmux/read
