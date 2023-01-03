@@ -21,9 +21,10 @@ Do this on *each* machine you will be connecting from:
 
 - Log in to your GitHub account, GitLab account, or any other services that use
   SSH keys. Paste the contents of ``~/.ssh/id_ed25519.pub`` into the settings
-  of your account profile
+  of your account profile. 
 
-- Once per session run this to load your key into memory:
+- Once per bash session, run this to load your key into memory for the duration
+  of that session:
 
   .. code-block:: bash
 
@@ -59,9 +60,9 @@ Basic usage
 
 From the command line, ssh as ``user`` to the host machine ``host`` with::
 
-    ssh username@host
+    ssh user@host
 
-Where ``host`` is an IP address or a hostname like `biowulf.nih.gov`.
+Where ``host`` is an IP address or a hostname like ``biowulf.nih.gov``.
 
 When you hit enter, you will be asked for the password for that user on that
 host. You may get a message saying something about a fingerprint and if you
@@ -74,7 +75,7 @@ here is going to the remote machine.** If you want commands to go to the local
 machine, you must open a new shell (or terminal window), or exit ssh.
 
 To exit ssh, use the ``exit`` command. It will close the connection and put you
-back on your local machine (again, pay attention to the prompt).
+back on your local machine (again, pay attention to the prompt for clues).
 
 Setting up SSH keys
 -------------------
@@ -93,7 +94,12 @@ private key can open that lock, so the private key needs to be kept safe. That
 private key is typically also protected with a *passphrase* -- a password
 separate from any user accounts.
 
-The reason this is useful is that you can use the *ssh-agent* to store, in
+Another way to think about keypairs, and how they can be secure even if one is
+public, is with the "color mixing" analogy, visually represented in `this
+section of a description of the Diffie-Hellman key exchange
+<https://www.comparitech.com/blog/information-security/diffie-hellman-key-exchange/#How_does_the_Diffie-Hellman_key_exchange_work>`_.
+
+Another reason keys are useful is that you can use the *ssh-agent* to store, in
 memory and for the duration of a terminal session, the decrypted key. Then you
 can ssh, use git push/pull, rsync, and anything else using the ssh protocol,
 without entering a password. This will be described below; first how to set up
@@ -134,6 +140,10 @@ You will be prompted for your *password for that user on the remote host*. The
 command will copy your public key(s) over to the remote host (technically, into
 the ``~/.ssh/authorized_keys`` file on that host).
 
+So we are using the username/password to authenticate to the remote host, and
+using that authentication to allow transferring our public key over there
+because the remote host is convinced it's really us.
+
 The next time you log in to that host from the same machine, it will recognize
 you have set up keys and will then ask you for your *ssh key passphrase*.
 
@@ -151,8 +161,7 @@ This is the most basic:
 .. code-block:: bash
 
     # most basic usage
-    eval "$(ssh-agent)"
-    ssh-add
+    eval "$(ssh-agent)"; ssh-add
 
 You may find it convenient to put it into a function in your ``.bashrc``, say,
 called ``s``, so that you just need to remember to run ``s`` once per session:
@@ -220,12 +229,13 @@ use the keychain for any hosts:
 Next steps
 ----------
 
-  <https://hpc.nih.gov/docs/tunneling/>`_ docs for more on this.
+These are all optional, but some next logical steps might be:
+
 - Modify your ssh config file, ``~/.ssh/config``, to have aliases for different
   hosts
 - Make aliases to login to commonly-used hosts
 - SSH tunneling is a way of attaching other hosts to ports on your local
-  machine. See the `Biowulf SSH tunneling
+  machine. See the `Biowulf SSH tunneling <https://hpc.nih.gov/docs/tunneling/>`_ docs for more on this.
 
 References
 ----------
