@@ -30,48 +30,61 @@ Typical usage is:
     rsync -av --progress from/ user@hostname:/to/
 
 See `explainshell <https://explainshell.com/explain?cmd=rsync+-av+--progress>`_
-for this command to read more on what those arguments do, but this effectively recursively copies everything from the ``from/`` directory, preserving group, owner, permissions, and times, and shows progress while it's running.
+for this command to read more on what those arguments do, but this effectively
+recursively copies everything from the ``from/`` directory, preserving group,
+owner, permissions, and times, and shows progress while it's running.
 
-The trickiest thing about rsync is that **it is sensitive to trailing slashes
-(/) on the source directory.** In contrast, a trailing slash on the destination
+One tricky thing about rsync is that **it is sensitive to trailing slashes
+(/) on the source directory.** A trailing slash on the destination, however,
 has no effect.
 
-To demonstrate, imagine we have a directory, ``from``, with one file in it::
+To demonstrate, imagine we have a directory, ``source``, with one file in it::
 
-    from/
+    source/
     └── a.txt
 
-Then we run these commands:
+Then we run these commands to transfer to the ``dest`` directory:
 
 .. code-block:: bash
 
-    rsync -r from to
+    rsync -r source dest
 
-    # No trailing slash on "from" puts the whole directory *inside* the
-    # destination
-    # to/
-    # └── from
-    #    └── a.txt
 
-(then remove ``to`` so we can run the next test:)
+When we check the contents of ``dest``, we see that no trailing slash on
+``source`` put the whole directory *inside* the destination::
+
+    dest/
+    └── source/
+       └── a.txt
+
+If we instead add a trailing slash in the command:
+
 
 .. code-block:: bash
 
-    rsync -r from/ to
-    #            ^
-    #            |
-    #            Trailing slash
-    #
-    # Copies the *contents* of source inside the destination
-    to/
+    rsync -r source/ dest
+    #              ^
+    #              |
+    #              Trailing slash
+
+
+Then the *contents* of ``source`` get copied inside ``dest``::
+
+    dest/
     └── a.txt
+
+
 
 Working in shared directories
 -----------------------------
-Be careful using ``-a`` when transferring to shared directories, because
-preserving the owner and group can mess up permissions. It's generally useful
-to keep everything else, especially times since that's the primary information
-rsync uses to decide if a file is up-to-date. So when transferring to a shared directory, use:
+When transferring to a shared directory, or any directory that might have
+special permissions (like `Biowulf's datashare directories
+<https://hpc.nih.gov/nih/datashare.html>`) then be careful using the ``-a``
+argument. This is because that argument tries to preserve the owner and group
+can mess up permissions in the shared directory.
+
+It's generally useful to use all the other arguments implied by ``-a``, so when
+transferring to a shared directory, use:
 
 .. code-block:: bash
 
@@ -84,23 +97,27 @@ rsync uses to decide if a file is up-to-date. So when transferring to a shared d
 Other useful options
 --------------------
 
-Sometimes you want to copy the files that symlinks point to, rather than the
-symlink. In such a case, use the ``-L`` argument to follow symlinks.
+- Sometimes you want to copy the files that symlinks point to, rather than the
+  symlink. In such a case, use the ``-L`` argument to follow symlinks.
 
-If you have large uncompressed files or a slow connection, use ``-z`` to
-compress over the wire. Rsync will automatically decompress on the remote. This
-sends less data over the network at the cost of CPU to compress/decompress. It
-uses zlib compression, so if you have lots of data in gzip or tar.gz files,
-using ``-z`` will try to compress already-compressed data, wasting CPU. 
+- If you have large uncompressed files or a slow connection, use ``-z`` to
+  compress over the wire. Rsync will automatically decompress on the remote.
+  This sends less data over the network at the cost of CPU to
+  compress/decompress. It uses zlib compression, so if you have lots of data in
+  gzip or tar.gz files, using ``-z`` will try to compress already-compressed
+  data, wasting CPU. 
 
-Use ``--partial`` (or ``-P``, which implies both ``--partial`` and
-``--progress``) which will keep partially-transferred files on the remote. This
-is especially good for large files, so rsync can pick up where it left off on
-the same file.
+- Use ``--partial`` (or ``-P``, which implies both ``--partial`` and
+  ``--progress``) which will keep partially-transferred files on the remote.
+  This is especially good for large files, so rsync can pick up where it left
+  off on the same file.
 
-More recent versions of rsync support the ``--info=progress2`` argument, which
-reports the transfer speeds for the *entire transfer* rather than for each
-file. This can give you a better idea of the real transfer speed.
+- More recent versions of rsync support the ``--info=progress2`` argument,
+  which reports the transfer speeds for the *entire transfer* rather than for
+  each file. This can give you a better idea of the real transfer speed.
 
-Use ``--exclude`` to avoid transferring matching patterns. Useful to avoid
-copying conda environments.
+- Use ``--exclude`` to avoid transferring matching patterns. Useful to avoid
+  copying conda environments, for example.
+
+There are many more options for rsync, so as usual, read the manual (e.g.,
+``man rsync``)!
