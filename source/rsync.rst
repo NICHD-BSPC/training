@@ -1,3 +1,5 @@
+.. _rsync:
+
 Rsync
 =====
 
@@ -13,6 +15,8 @@ system. It has features like:
 - Can compress data over the wire, resulting in faster transfers
 
 - Verifies if the file was correctly transferred
+
+- More performant, flexible, and configurable than alternatives like scp or cp
 
 Rsync is installed by default on most Mac and Linux machines. It works over SSH
 so it's secure, and has more features than scp and even cp. Use it any time
