@@ -3,6 +3,27 @@
 SSH
 ===
 
+Overview
+--------
+
+SSH (secure shell) is the primary way to connect from one machine to another
+from a terminal. Technically ssh is a *protocol* that specifies how a client and
+a server talk to each other. Mac and Linux have ssh clients installed by
+default, it's available with the ``ssh`` command from the terminal. On Windows,
+`PuTTY <https://www.putty.org/>`_ is a commonly used one (if a bit basic);
+`MobaXTerm <https://mobaxterm.mobatek.net/>`_ has many more options.
+
+For example, using ssh from a laptop you could:
+
+- log in to a high-performance cluster like `Biowulf <https://hpc.nih.gov>`_ to
+  write code and start jobs running
+- set up a web server in the cloud
+- log in to your desktop at work to copy files over to your laptop
+
+SSH is also used anytime something needs to be transferred securely. For
+example, when you are cloning, pushing, and pulling commits from GitHub, this is
+typically done over SSH.
+
 Quickstart
 ----------
 
@@ -33,27 +54,6 @@ Do this on *each* machine you will be connecting from:
 
 
 More details below....
-
-Overview
---------
-
-SSH (secure shell) is the primary way to connect from one machine to another
-from a terminal. Technically ssh is a *protocol* that specifies how a client and
-a server talk to each other. Mac and Linux have ssh clients installed by
-default, it's available with the ``ssh`` command from the terminal. On Windows,
-`PuTTY <https://www.putty.org/>`_ is a commonly used one (if a bit basic);
-`MobaXTerm <https://mobaxterm.mobatek.net/>`_ has many more options.
-
-For example, using ssh from a laptop you could:
-
-- log in to a high-performance cluster like `Biowulf <https://hpc.nih.gov>`_ to
-  write code and start jobs running
-- set up a web server in the cloud
-- log in to your desktop at work to copy files over to your laptop
-
-SSH is also used anytime something needs to be transferred securely. For
-example, when you are cloning, pushing, and pulling commits from GitHub, this is
-typically done over SSH.
 
 Basic usage
 -----------
