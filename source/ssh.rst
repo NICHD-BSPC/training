@@ -264,4 +264,4 @@ References
 - `GitHub docs
   <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent>`_
   on generating a keypair
-- ``man`` pages for ``ssh``, ``ssh-keygen``, ``ssh-copy-id``, ``ssh-agent``, ``ssh add``
+- ``man`` pages for ``ssh``, ``ssh-keygen``, ``ssh-copy-id``, ``ssh-agent``, ``ssh-add``
