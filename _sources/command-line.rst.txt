@@ -47,8 +47,8 @@ presented in different ways.
 Here is a list of skills you should have for basic command-line usage:
 
 - open a terminal on your computer
-- connect to a remote machine with SSH
 - navigate with ``ls``, ``cd``, ``pwd``.
+- move, copy, rename files
 - inspect files with ``head``, ``less``, ``tail``, ``wc``
 - search for text in a file with ``grep``
 - manipulate delimited text with ``awk``
@@ -56,16 +56,16 @@ Here is a list of skills you should have for basic command-line usage:
 - edit a file with ``nano`` or ``vim`` or ``emacs``
 - extract columns with ``cut``
 - pipe commands together
-- change permissions with ``chmod``
-- move, copy, rename files
-- make directories
 - know the difference between stdin/stdout/stderr
-- redirecting stdout and/or stderr
+- redirect stdout and/or stderr
+- change permissions with ``chmod``
+- make directories
 - download files with ``wget`` and/or ``curl``
-- creating scripts
 - making symlinks -- both to files and directories and how they behave
   differently
 - “install” a program by putting it on the ``$PATH``
+- connect to a remote machine with SSH
+- create scripts to run sequences of commands
 
 The resources below will teach you these.
 
@@ -131,8 +131,8 @@ Here are skills that might be considered more intermediate:
 - associative arrays (Bash 5)
 - POSIX compliance
 - various tests like ``-z``, ``-e``, etc
-- subshells
-- process substitution
+- subshells with ``()``
+- process substitution with ``<()``
 - interpolating command output (with ``$()`` or backticks)
 - piping to ``xargs``
 - functions
@@ -166,17 +166,12 @@ Other intermediate resources:
 - Julia Evans' `bash quirks <https://jvns.ca/blog/2017/03/26/bash-quirks/>`_
   has some overlap with the previous links and some new ones as well.
 
-- This 3-part blog series starts with why you would want to learn ``awk``
-  anyway, and then shows you the ropes. The later tutorials get a bit advanced
-  to the point where I would probably be using R or Python instead, but it can
-  be useful to know how to do these kinds of things directly from the command
-  line.
-
-  - `Why Learn AWK? <https://blog.jpalardy.com/posts/why-learn-awk/>`_
-  - `Awk tutorial part 1 <https://blog.jpalardy.com/posts/awk-tutorial-part-1/>`_
-  - `Awk tutorial part 2 <https://blog.jpalardy.com/posts/awk-tutorial-part-2/>`_
-  - `Awk tutorial part 3 <https://blog.jpalardy.com/posts/awk-tutorial-part-3/>`_
-  - `Awk tricks <https://blog.jpalardy.com/posts/my-best-awk-tricks/>`_
+- `This three-part blog series
+  <https://blog.jpalardy.com/posts/why-learn-awk/>`_ explains why you want to
+  learn ``awk`` in more detail and then shows you the ropes. The later
+  tutorials get a bit advanced to the point where I would probably be using
+  R or Python instead, but it can be useful to know how to do these kinds of
+  things directly from the command line.
 
 - `Defensive bash programming
   <https://kfirlavi.herokuapp.com/blog/2012/11/14/defensive-bash-programming/>`_
@@ -187,3 +182,13 @@ Advanced command line
 
 The Linux documentation project's `advanced bash scripting guide
 <https://tldp.org/LDP/abs/html/index.html>`_ will keep you busy for a while....
+
+Next steps
+----------
+
+Other parts of this documentation will help round out your command-line skills:
+
+- :ref:`rsync` for the best way to transfer files
+- :ref:`ssh` for the details of getting set up with SSH
+- :ref:`making-your-linux-life-easier` for some additional tools and techniques
+  to make you more efficient

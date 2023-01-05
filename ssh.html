@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>SSH</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Making your Linux life easier" href="making-your-linux-life-easier.html" />
+    <link rel="prev" title="Vim" href="vim.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lato:bold,italic,bolditalic|Lora|Oswald|Inconsolata&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="vim.html" title="Previous document">Vim</a>
+        </li>
+        <li>
+          <a href="making-your-linux-life-easier.html" title="Next document">Making your Linux life easier</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="ssh">
+<span id="id1"></span><h1>SSH<a class="headerlink" href="#ssh" title="Permalink to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>SSH (secure shell) is the primary way to connect from one machine to another
+from a terminal. Technically ssh is a <em>protocol</em> that specifies how a client and
+a server talk to each other. Mac and Linux have ssh clients installed by
+default, it’s available with the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> command from the terminal. On Windows,
+<a class="reference external" href="https://www.putty.org/">PuTTY</a> is a commonly used one (if a bit basic);
+<a class="reference external" href="https://mobaxterm.mobatek.net/">MobaXTerm</a> has many more options.</p>
+<p>For example, using ssh from a laptop you could:</p>
+<ul class="simple">
+<li><p>log in to a high-performance cluster like <a class="reference external" href="https://hpc.nih.gov">Biowulf</a> to
+write code and start jobs running</p></li>
+<li><p>set up a web server in the cloud</p></li>
+<li><p>log in to your desktop at work to copy files over to your laptop</p></li>
+</ul>
+<p>SSH is also used anytime something needs to be transferred securely. For
+example, when you are cloning, pushing, and pulling commits from GitHub, this is
+typically done over SSH.</p>
+</section>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading">¶</a></h2>
+<p>Do this on <em>each</em> machine you will be connecting from:</p>
+<ul>
+<li><p>Create a new keypair:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">ed25519</span> <span class="o">-</span><span class="n">C</span> <span class="s2">&quot;your_email@example.com&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Copy the public key to each host you want to connect to:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># for each host you want to connect to</span>
+ssh-copy-id<span class="w"> </span>user@hostname
+</pre></div>
+</div>
+</li>
+<li><p>Log in to your GitHub account, GitLab account, or any other services that use
+SSH keys. Paste the contents of <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519.pub</span></code> into the settings
+of your account profile.</p></li>
+<li><p>Once per bash session, run this to load your key into memory for the duration
+of that session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># See below for more info on macOS</span>
+<span class="nb">eval</span><span class="w"> </span><span class="sb">`</span>ssh-agent<span class="sb">`</span><span class="p">;</span><span class="w"> </span>ssh-add
+</pre></div>
+</div>
+</li>
+</ul>
+<p>More details below….</p>
+</section>
+<section id="basic-usage">
+<h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading">¶</a></h2>
+<p>From the command line, ssh as <code class="docutils literal notranslate"><span class="pre">user</span></code> to the host machine <code class="docutils literal notranslate"><span class="pre">host</span></code> with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">user</span><span class="nd">@host</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">host</span></code> is an IP address or a hostname like <code class="docutils literal notranslate"><span class="pre">biowulf.nih.gov</span></code>.</p>
+<p>When you hit enter, you will be asked for the password for that user on that
+host. You may get a message saying something about a fingerprint and if you
+really want to connect. This is normal for the first time you are connecting and
+you can choose “yes” (this is discussed more below).</p>
+<p>You will then be on the remote machine, which should also be indicated by
+a change in the prompt (e.g. <code class="docutils literal notranslate"><span class="pre">user&#64;remote.host.name</span></code>). <strong>Anything you type
+here is going to the remote machine.</strong> If you want commands to go to the local
+machine, you must open a new shell (or terminal window), or exit ssh.</p>
+<p>To exit ssh, use the <code class="docutils literal notranslate"><span class="pre">exit</span></code> command. It will close the connection and put you
+back on your local machine (again, pay attention to the prompt for clues).</p>
+</section>
+<section id="setting-up-ssh-keys">
+<h2>Setting up SSH keys<a class="headerlink" href="#setting-up-ssh-keys" title="Permalink to this heading">¶</a></h2>
+<p>SSH has the concept of a <em>keypair</em> which can take the place of a password. This
+can be more secure than a password, and can also be useful for automation when
+it is inconvenient (or impossible) to manually enter a password. You can read
+more about why keys are preferred over passwords in <a class="reference external" href="https://security.stackexchange.com/questions/69407/why-is-using-an-ssh-key-more-secure-than-using-passwords">this
+security.stackexchange answer</a>.</p>
+<p>A keypair consists of a <strong>public key</strong> and a <strong>private key</strong>. One way to think
+about them is that the public key is like a lock. That lock can be put on
+anything, and it’s OK for the lock to be seen by others. Only the corresponding
+private key can open that lock, so the private key needs to be kept safe. That
+private key is typically also protected with a <em>passphrase</em> – a password
+separate from any user accounts.</p>
+<p>Another way to think about keypairs, and how they can be secure even if one is
+public, is with the “color mixing” analogy, visually represented in <a class="reference external" href="https://www.comparitech.com/blog/information-security/diffie-hellman-key-exchange/#How_does_the_Diffie-Hellman_key_exchange_work">this
+section of a description of the Diffie-Hellman key exchange</a>.</p>
+<p>Another reason keys are useful is that you can use the <em>ssh-agent</em> to store, in
+memory and for the duration of a terminal session, the decrypted key. Then you
+can ssh, use git push/pull, rsync, and anything else using the ssh protocol,
+without entering a password. This will be described below; first how to set up
+your keys.</p>
+<p>The command is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># replace the email with your own</span>
+ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;your_email@example.com&quot;</span>
+</pre></div>
+</div>
+<p>This will create two files: <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519</span></code> (the <em>private</em> key) and
+<code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519.pub</span></code> (the <em>public</em> key). The <code class="docutils literal notranslate"><span class="pre">ed25519</span></code> specifies the
+algorithm. The default algorithm is <code class="docutils literal notranslate"><span class="pre">RSA</span></code> which is OK if you use longer than
+2048 bits, but it is generally recommended to use <code class="docutils literal notranslate"><span class="pre">ed25519</span></code> because it is
+more secure and more performant.</p>
+<p>For more details, <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">see this documentation page from GitHub</a>.</p>
+</section>
+<section id="tell-other-hosts-about-your-key">
+<h2>Tell other hosts about your key<a class="headerlink" href="#tell-other-hosts-about-your-key" title="Permalink to this heading">¶</a></h2>
+<p>In order to use your keypair with another system, you need to tell that
+other system about it. But you only tell the other system about the <em>public</em>
+key, and you use your private key to access.</p>
+<p>Copy your public key automatically to another host like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-copy-id<span class="w"> </span>user@hostname
+</pre></div>
+</div>
+<p>You will be prompted for your <em>password for that user on the remote host</em>. The
+command will copy your public key(s) over to the remote host (technically, into
+the <code class="docutils literal notranslate"><span class="pre">~/.ssh/authorized_keys</span></code> file on that host).</p>
+<p>So we are using the username/password to authenticate to the remote host, and
+using that authentication to allow transferring our public key over there
+because the remote host is convinced it’s really us.</p>
+<p>The next time you log in to that host from the same machine, it will recognize
+you have set up keys and will then ask you for your <em>ssh key passphrase</em>.</p>
+</section>
+<section id="using-ssh-keys-for-accessing-github-etc">
+<h2>Using SSH keys for accessing GitHub, etc<a class="headerlink" href="#using-ssh-keys-for-accessing-github-etc" title="Permalink to this heading">¶</a></h2>
+<p>Some sites, notably GitHub and GitLab, use SSH keys to authenticate. That’s
+because you’re typically interfacing with those sites via command-line <code class="docutils literal notranslate"><span class="pre">git</span></code>,
+and they need some secure way of authenticating. User/password could be one
+way, but SSH keys are considered more secure.</p>
+<p>In general, you log in to the site as normal. Go to your profile settings, and
+there will be a section on SSH keys where you can add your public key. For
+example, here are the <a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">GitHub docs</a>
+for adding your SSH key to your GitHub account.</p>
+<p>Similarly, here are the <a class="reference external" href="https://docs.gitlab.com/ee/user/ssh.html">GitLab docs</a> for adding your SSH key to your
+GitLab account.</p>
+</section>
+<section id="start-the-agent-for-automatic-login">
+<h2>Start the agent for automatic login<a class="headerlink" href="#start-the-agent-for-automatic-login" title="Permalink to this heading">¶</a></h2>
+<p>It’s pretty common to log in to multiple machines, pop on and off of servers,
+make multiple pushes and pulls over git, and run rsync transfers over ssh. To
+avoid needing to enter password or passphrase every single time, you can just
+enter it once per Bash session (or once per restart on Mac). This will load it
+into memory so ssh can provide it automatically.</p>
+<p>This is the most basic:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># most basic usage</span>
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span>ssh-add
+</pre></div>
+</div>
+<p>You may find it convenient to put it into a function in your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>, say,
+called <code class="docutils literal notranslate"><span class="pre">s</span></code>, so that you just need to remember to run <code class="docutils literal notranslate"><span class="pre">s</span></code> once per session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># function to go in, e.g., ~/.bashrc</span>
+<span class="k">function</span><span class="w"> </span>s<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span>ssh-add
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>On Mac, it can be more convenient to allow the keychain to handle this, however
+this depends on the version of macOS you’re using. See <a class="reference external" href="https://apple.stackexchange.com/a/250572">this apple.stackexchange
+answer</a> for details:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># On macOS versions &lt;12.0</span>
+<span class="k">function</span><span class="w"> </span>s<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span>ssh-add<span class="w"> </span>-K
+<span class="o">}</span>
+
+<span class="c1"># On macOS versions &gt;=12.0</span>
+<span class="k">function</span><span class="w"> </span>s<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span>ssh-add<span class="w"> </span>--apple-use-keychain
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Here’s a function you can use in all your dotfiles on all hosts – it sets arguments correctly depending on Linux/Mac and macOS version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start the ssh-agent and add keys to the agent.</span>
+<span class="c1"># Detects if on Mac; if so detects the macOS version and provides the</span>
+<span class="c1"># appropriate args to add keys to the keychain</span>
+<span class="nv">SSH_ENV</span><span class="o">=</span><span class="nv">$HOME</span>/.ssh/environment
+<span class="k">function</span><span class="w"> </span>start_agent<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Initializing new SSH agent...&quot;</span>
+<span class="w">    </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="w">    </span><span class="nv">additional_arg</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$OSTYPE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>darwin*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>sw_vers<span class="w"> </span>-productVersion<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-f1<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="k">)</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nv">additional_arg</span><span class="o">=</span><span class="s2">&quot;-K&quot;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="nv">additional_arg</span><span class="o">=</span><span class="s2">&quot;--apple-use-keychain&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span>ssh-add<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$additional_arg</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>On Mac, you <em>also</em> need to make this change in your ssh config to allow ssh to
+use the keychain for any hosts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># this goes in ~/.ssh/config</span>
+<span class="n">Host</span> <span class="o">*</span>
+  <span class="n">UseKeychain</span> <span class="n">yes</span>
+  <span class="n">AddKeysToAgent</span> <span class="n">yes</span>
+  <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_ed25519</span>
+</pre></div>
+</div>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">¶</a></h2>
+<p>These are all optional, but some next logical steps might be:</p>
+<ul class="simple">
+<li><p>Modify your ssh config file, <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code>, to have aliases for different
+hosts</p></li>
+<li><p>Make aliases to login to commonly-used hosts</p></li>
+<li><p>SSH tunneling is a way of attaching other hosts to ports on your local
+machine. See the <a class="reference external" href="https://hpc.nih.gov/docs/tunneling/">Biowulf SSH tunneling</a> docs for more on this.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ssh.com/academy/ssh">ssh.com</a>, which has lots of good
+information on SSH (despite trying to sell products)</p></li>
+<li><p><a class="reference external" href="https://apple.stackexchange.com/questions/48502/how-can-i-permanently-add-my-ssh-private-key-to-keychain-so-it-is-automatically">apple.stackexchange answer</a>
+about adding SSH private key to the keychain on Mac</p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">GitHub docs</a>
+on generating a keypair</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">man</span></code> pages for <code class="docutils literal notranslate"><span class="pre">ssh</span></code>, <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code>, <code class="docutils literal notranslate"><span class="pre">ssh-copy-id</span></code>, <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code>, <code class="docutils literal notranslate"><span class="pre">ssh-add</span></code></p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">SSH</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#quickstart">Quickstart</a></li>
+<li><a class="reference internal" href="#basic-usage">Basic usage</a></li>
+<li><a class="reference internal" href="#setting-up-ssh-keys">Setting up SSH keys</a></li>
+<li><a class="reference internal" href="#tell-other-hosts-about-your-key">Tell other hosts about your key</a></li>
+<li><a class="reference internal" href="#using-ssh-keys-for-accessing-github-etc">Using SSH keys for accessing GitHub, etc</a></li>
+<li><a class="reference internal" href="#start-the-agent-for-automatic-login">Start the agent for automatic login</a></li>
+<li><a class="reference internal" href="#next-steps">Next steps</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ssh.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="vim.html" title="Previous document">Vim</a>
+        </li>
+        <li>
+          <a href="making-your-linux-life-easier.html" title="Next document">Making your Linux life easier</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0.
+
+  </footer>
+
+  
+  </body>
+</html>

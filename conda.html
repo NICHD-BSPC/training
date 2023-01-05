@@ -17,7 +17,7 @@
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GitLab" href="gitlab.html" />
+    <link rel="next" title="Rsync" href="rsync.html" />
     <link rel="prev" title="Git" href="git.html" />
 
 
@@ -36,7 +36,7 @@
           <a href="git.html" title="Previous document">Git</a>
         </li>
         <li>
-          <a href="gitlab.html" title="Next document">GitLab</a>
+          <a href="rsync.html" title="Next document">Rsync</a>
           &rarr;
         </li>
     </ul>
@@ -79,17 +79,17 @@ of 16 GB can actually be too small after installing a lot of packages.</p>
 See the note above if you are working on NIH’s Biowulf cluster.</p>
 <p>Then set up the channels like this, which follows the
 <a class="reference external" href="https://bioconda.github.io/">bioconda docs</a>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge
-conda config --set channel_priority strict
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>config<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>defaults
+conda<span class="w"> </span>config<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>bioconda
+conda<span class="w"> </span>config<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>conda-forge
+conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>channel_priority<span class="w"> </span>strict
 </pre></div>
 </div>
 <p><strong>Optional:</strong> Much of the bioinformatics community is moving to <a class="reference external" href="https://mamba.readthedocs.io/en/latest/index.html">mamba</a>, which is a faster
 drop-in replacement for <code class="docutils literal notranslate"><span class="pre">conda</span></code> which is <a class="reference external" href="https://pythonspeed.com/articles/faster-conda-install/">quite a bit faster</a>. So typically the
 next step is to install <code class="docutils literal notranslate"><span class="pre">mamba</span></code> into your base environment. You only have to
 do this once:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -n base mamba
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>mamba
 </pre></div>
 </div>
 <p>From now on, instead of <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code> you can use <code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">install</span></code> to make
@@ -162,7 +162,7 @@ this:</p>
 </pre></div>
 </div>
 <p>After running that command, we check the new value of <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PATH</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
 ~/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 <span class="c1"># ^^^^^</span>
 <span class="c1"># the directory has been prepended</span>
@@ -181,7 +181,7 @@ environment is a directory containing executables that has been prepended to the
 environment’s directory containing executables to the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>. This is the
 <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory of the evironment. For example, if we create a simple
 environment with just Python:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba create -p ./env python
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba<span class="w"> </span>create<span class="w"> </span>-p<span class="w"> </span>./env<span class="w"> </span>python
 </pre></div>
 </div>
 <p>and look inside it with <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">env/</span></code>, we see this:</p>
@@ -287,11 +287,11 @@ what’s in there.</p></li>
 </div>
 <p>Using an environment file in YAML format called <code class="docutils literal notranslate"><span class="pre">env.yml</span></code> with the following
 contents:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channels</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bioconda</span><span class="w"></span>
-<span class="nt">dependencies</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bioconda</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
 </pre></div>
 </div>
 <p>would be:</p>
@@ -309,8 +309,8 @@ environment.</p>
 <p>If you need to add something to the environment, <strong>add it to the requirements
 first</strong> (either requirements.txt or env.yaml) and then with the environment
 activated, install the entire requirements file. For example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate ./env
-mamba install --file requirements.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>./env
+mamba<span class="w"> </span>install<span class="w"> </span>--file<span class="w"> </span>requirements.txt
 </pre></div>
 </div>
 <p>This will only install packages (and dependencies) that have not already been
@@ -330,7 +330,7 @@ are, which breaks the environment.</p>
 <p>If you have been rigorous about maintaining the contents of the requirements,
 that should be sufficient for someone else to build the new environment.
 Otherwise, or if you want to be sure, you can <em>export</em> the environment.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env <span class="nb">export</span> --no-builds &gt; env_export.yaml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--no-builds<span class="w"> </span>&gt;<span class="w"> </span>env_export.yaml
 </pre></div>
 </div>
 <p>This will include all dependencies in a YAML format file ready to be used by
@@ -430,11 +430,11 @@ warnings about libraries. This appears to be an issue with how temp files are
 handled on the system.</p>
 <p>In general, the latest info is on <a class="reference external" href="https://hpc.nih.gov/apps/python.html#envs">Biowulf docs on conda</a>. Here is a summary of that
 section showing how to use a new temp directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-<span class="nv">TMPDIR</span><span class="o">=</span>/scratch/<span class="nv">$USER</span>/temp bash <span class="se">\</span>
-  Miniconda3-latest-Linux-x86_64.sh <span class="se">\</span>
-  -p /data/<span class="nv">$USER</span>/miniconda3 <span class="se">\</span>
-  -b
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+<span class="nv">TMPDIR</span><span class="o">=</span>/scratch/<span class="nv">$USER</span>/temp<span class="w"> </span>bash<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Miniconda3-latest-Linux-x86_64.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span>/data/<span class="nv">$USER</span>/miniconda3<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-b
 </pre></div>
 </div>
 <p>Biowulf staff also recommend NOT activating your base environment by default. Why?</p>
@@ -451,17 +451,17 @@ first run <code class="docutils literal notranslate"><span class="pre">conda</sp
 look like this:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
 <span class="c1"># !! Contents within this block are managed by &#39;conda init&#39; !!</span>
-<span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="s1">&#39;/data/$USER/miniconda3/bin/conda&#39;</span> <span class="s1">&#39;shell.bash&#39;</span> <span class="s1">&#39;hook&#39;</span> <span class="m">2</span>&gt; /dev/null<span class="k">)</span><span class="s2">&quot;</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">eval</span> <span class="s2">&quot;</span><span class="nv">$__conda_setup</span><span class="s2">&quot;</span>
+<span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="s1">&#39;/data/$USER/miniconda3/bin/conda&#39;</span><span class="w"> </span><span class="s1">&#39;shell.bash&#39;</span><span class="w"> </span><span class="s1">&#39;hook&#39;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null<span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$__conda_setup</span><span class="s2">&quot;</span>
 <span class="k">else</span>
-    <span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        . <span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span>
-    <span class="k">else</span>
-        <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-    <span class="k">fi</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>.<span class="w"> </span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
-<span class="nb">unset</span> __conda_setup
+<span class="nb">unset</span><span class="w"> </span>__conda_setup
 <span class="c1"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
 </pre></div>
 </div>
@@ -470,23 +470,23 @@ a function. Here, the function is called <code class="docutils literal notransla
 but it can be whatever you want. Here, I also added <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">$1</span></code> to
 the end of it. So I converted those lines to something that looks like this in
 my <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> (added lines emphasized):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="k">function</span> c<span class="o">()</span> <span class="o">{</span>
-</span>    <span class="c1"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
-    <span class="c1"># !! Contents within this block are managed by &#39;conda init&#39; !!</span>
-    <span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="s1">&#39;/data/$USER/miniconda3/bin/conda&#39;</span> <span class="s1">&#39;shell.bash&#39;</span> <span class="s1">&#39;hook&#39;</span> <span class="m">2</span>&gt; /dev/null<span class="k">)</span><span class="s2">&quot;</span>
-    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">eval</span> <span class="s2">&quot;</span><span class="nv">$__conda_setup</span><span class="s2">&quot;</span>
-    <span class="k">else</span>
-        <span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-            . <span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span>
-        <span class="k">else</span>
-            <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-        <span class="k">fi</span>
-    <span class="k">fi</span>
-    <span class="nb">unset</span> __conda_setup
-    <span class="c1"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="k">function</span><span class="w"> </span>c<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span class="w">    </span><span class="c1"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
+<span class="w">    </span><span class="c1"># !! Contents within this block are managed by &#39;conda init&#39; !!</span>
+<span class="w">    </span><span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="s1">&#39;/data/$USER/miniconda3/bin/conda&#39;</span><span class="w"> </span><span class="s1">&#39;shell.bash&#39;</span><span class="w"> </span><span class="s1">&#39;hook&#39;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$__conda_setup</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span>.<span class="w"> </span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/etc/profile.d/conda.sh&quot;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/</span><span class="nv">$USER</span><span class="s2">/miniconda3/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="nb">unset</span><span class="w"> </span>__conda_setup
+<span class="w">    </span><span class="c1"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
 
-<span class="hll">    conda activate <span class="nv">$1</span>
+<span class="hll"><span class="w">    </span>conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$1</span>
 </span><span class="hll"><span class="o">}</span>
 </span></pre></div>
 </div>
@@ -503,12 +503,12 @@ This should still work.</p>
 a bunch of stuff into your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>.</p>
 <p>However if you try <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code> within a script, you’ll get an error
 because the script does not source <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>. The solution is to change</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate ./env
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>./env
 </pre></div>
 </div>
 <p>to</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>conda shell.bash hook<span class="k">)</span><span class="s2">&quot;</span>
-conda activate ./env
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+conda<span class="w"> </span>activate<span class="w"> </span>./env
 </pre></div>
 </div>
 <p>Note that if you inspect what <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">init</span> <span class="pre">bash</span></code> adds to your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>,
@@ -616,7 +616,7 @@ original environment…and that worked!</p>
           <a href="git.html" title="Previous document">Git</a>
         </li>
         <li>
-          <a href="gitlab.html" title="Next document">GitLab</a>
+          <a href="rsync.html" title="Next document">Rsync</a>
           &rarr;
         </li>
     </ul>

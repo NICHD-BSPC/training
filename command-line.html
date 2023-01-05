@@ -90,8 +90,8 @@ presented in different ways.</p>
 <p>Here is a list of skills you should have for basic command-line usage:</p>
 <ul class="simple">
 <li><p>open a terminal on your computer</p></li>
-<li><p>connect to a remote machine with SSH</p></li>
 <li><p>navigate with <code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, <code class="docutils literal notranslate"><span class="pre">pwd</span></code>.</p></li>
+<li><p>move, copy, rename files</p></li>
 <li><p>inspect files with <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">less</span></code>, <code class="docutils literal notranslate"><span class="pre">tail</span></code>, <code class="docutils literal notranslate"><span class="pre">wc</span></code></p></li>
 <li><p>search for text in a file with <code class="docutils literal notranslate"><span class="pre">grep</span></code></p></li>
 <li><p>manipulate delimited text with <code class="docutils literal notranslate"><span class="pre">awk</span></code></p></li>
@@ -99,16 +99,16 @@ presented in different ways.</p>
 <li><p>edit a file with <code class="docutils literal notranslate"><span class="pre">nano</span></code> or <code class="docutils literal notranslate"><span class="pre">vim</span></code> or <code class="docutils literal notranslate"><span class="pre">emacs</span></code></p></li>
 <li><p>extract columns with <code class="docutils literal notranslate"><span class="pre">cut</span></code></p></li>
 <li><p>pipe commands together</p></li>
-<li><p>change permissions with <code class="docutils literal notranslate"><span class="pre">chmod</span></code></p></li>
-<li><p>move, copy, rename files</p></li>
-<li><p>make directories</p></li>
 <li><p>know the difference between stdin/stdout/stderr</p></li>
-<li><p>redirecting stdout and/or stderr</p></li>
+<li><p>redirect stdout and/or stderr</p></li>
+<li><p>change permissions with <code class="docutils literal notranslate"><span class="pre">chmod</span></code></p></li>
+<li><p>make directories</p></li>
 <li><p>download files with <code class="docutils literal notranslate"><span class="pre">wget</span></code> and/or <code class="docutils literal notranslate"><span class="pre">curl</span></code></p></li>
-<li><p>creating scripts</p></li>
 <li><p>making symlinks – both to files and directories and how they behave
 differently</p></li>
 <li><p>“install” a program by putting it on the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code></p></li>
+<li><p>connect to a remote machine with SSH</p></li>
+<li><p>create scripts to run sequences of commands</p></li>
 </ul>
 <p>The resources below will teach you these.</p>
 </section>
@@ -164,8 +164,8 @@ option – as of Nov 30 2019 it’s $9 for the full content.</p>
 <li><p>associative arrays (Bash 5)</p></li>
 <li><p>POSIX compliance</p></li>
 <li><p>various tests like <code class="docutils literal notranslate"><span class="pre">-z</span></code>, <code class="docutils literal notranslate"><span class="pre">-e</span></code>, etc</p></li>
-<li><p>subshells</p></li>
-<li><p>process substitution</p></li>
+<li><p>subshells with <code class="docutils literal notranslate"><span class="pre">()</span></code></p></li>
+<li><p>process substitution with <code class="docutils literal notranslate"><span class="pre">&lt;()</span></code></p></li>
 <li><p>interpolating command output (with <code class="docutils literal notranslate"><span class="pre">$()</span></code> or backticks)</p></li>
 <li><p>piping to <code class="docutils literal notranslate"><span class="pre">xargs</span></code></p></li>
 <li><p>functions</p></li>
@@ -193,19 +193,11 @@ which talks about making menus, printf, and various test options for files and
 directories.</p></li>
 <li><p>Julia Evans’ <a class="reference external" href="https://jvns.ca/blog/2017/03/26/bash-quirks/">bash quirks</a>
 has some overlap with the previous links and some new ones as well.</p></li>
-<li><p>This 3-part blog series starts with why you would want to learn <code class="docutils literal notranslate"><span class="pre">awk</span></code>
-anyway, and then shows you the ropes. The later tutorials get a bit advanced
-to the point where I would probably be using R or Python instead, but it can
-be useful to know how to do these kinds of things directly from the command
-line.</p>
-<ul>
-<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/why-learn-awk/">Why Learn AWK?</a></p></li>
-<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/awk-tutorial-part-1/">Awk tutorial part 1</a></p></li>
-<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/awk-tutorial-part-2/">Awk tutorial part 2</a></p></li>
-<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/awk-tutorial-part-3/">Awk tutorial part 3</a></p></li>
-<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/my-best-awk-tricks/">Awk tricks</a></p></li>
-</ul>
-</li>
+<li><p><a class="reference external" href="https://blog.jpalardy.com/posts/why-learn-awk/">This three-part blog series</a> explains why you want to
+learn <code class="docutils literal notranslate"><span class="pre">awk</span></code> in more detail and then shows you the ropes. The later
+tutorials get a bit advanced to the point where I would probably be using
+R or Python instead, but it can be useful to know how to do these kinds of
+things directly from the command line.</p></li>
 <li><p><a class="reference external" href="https://kfirlavi.herokuapp.com/blog/2012/11/14/defensive-bash-programming/">Defensive bash programming</a>
 also reiterates some of the suggestions from above and adds some additional ones.</p></li>
 </ul>
@@ -213,6 +205,16 @@ also reiterates some of the suggestions from above and adds some additional ones
 <section id="advanced-command-line">
 <h2>Advanced command line<a class="headerlink" href="#advanced-command-line" title="Permalink to this heading">¶</a></h2>
 <p>The Linux documentation project’s <a class="reference external" href="https://tldp.org/LDP/abs/html/index.html">advanced bash scripting guide</a> will keep you busy for a while….</p>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">¶</a></h2>
+<p>Other parts of this documentation will help round out your command-line skills:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="rsync.html#rsync"><span class="std std-ref">Rsync</span></a> for the best way to transfer files</p></li>
+<li><p><a class="reference internal" href="ssh.html#ssh"><span class="std std-ref">SSH</span></a> for the details of getting set up with SSH</p></li>
+<li><p><a class="reference internal" href="making-your-linux-life-easier.html#making-your-linux-life-easier"><span class="std std-ref">Making your Linux life easier</span></a> for some additional tools and techniques
+to make you more efficient</p></li>
+</ul>
 </section>
 </section>
 
@@ -238,6 +240,7 @@ also reiterates some of the suggestions from above and adds some additional ones
 </li>
 <li><a class="reference internal" href="#intermediate-command-line">Intermediate command line</a></li>
 <li><a class="reference internal" href="#advanced-command-line">Advanced command line</a></li>
+<li><a class="reference internal" href="#next-steps">Next steps</a></li>
 </ul>
 </li>
 </ul>

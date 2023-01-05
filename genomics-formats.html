@@ -201,7 +201,7 @@ to view it (hint: probably want to pipe to head or less).</p>
 <p>Hint: the column command helps nicely print tab-delimited files, and the
 -S argument to less ignores wrapping. So a convenient way of viewing BAM
 files on the command line is:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>samtools view bamExample.bam <span class="p">|</span> column -t <span class="p">|</span> less -S
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>samtools<span class="w"> </span>view<span class="w"> </span>bamExample.bam<span class="w"> </span><span class="p">|</span><span class="w"> </span>column<span class="w"> </span>-t<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w"> </span>-S
 </pre></div>
 </div>
 <ul class="simple">
@@ -292,7 +292,7 @@ to view it (hint: probably want to pipe to head or less).</p>
 <p>Hint: the column command helps nicely print tab-delimited files, and the
 -S argument to less ignores wrapping. So a convenient way of viewing BAM
 files on the command line is:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>samtools view bamExample.bam <span class="p">|</span> column -t <span class="p">|</span> less -S
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>samtools<span class="w"> </span>view<span class="w"> </span>bamExample.bam<span class="w"> </span><span class="p">|</span><span class="w"> </span>column<span class="w"> </span>-t<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w"> </span>-S
 </pre></div>
 </div>
 <ul class="simple">
@@ -333,7 +333,7 @@ gets the line count (using zcat to uncompress on the fly), but then we
 need to divide by 4 since one record takes up 4 lines. A tricky way of
 doing this all in one line is the following, which takes advantage of
 echo’s arithmetic expansion with the $(()) syntax:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zcat sample1.tiny_R1.fastq.gz <span class="p">|</span> <span class="nb">echo</span> <span class="k">$((</span><span class="sb">`</span>wc -l<span class="sb">`</span><span class="o">/</span><span class="m">4</span><span class="k">))</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zcat<span class="w"> </span>sample1.tiny_R1.fastq.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="k">$((</span><span class="sb">`</span>wc<span class="w"> </span>-l<span class="sb">`</span><span class="o">/</span><span class="m">4</span><span class="k">))</span>
 </pre></div>
 </div>
 <div class="admonition-todo admonition" id="id1">

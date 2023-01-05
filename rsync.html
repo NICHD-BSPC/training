@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Rsync</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GitLab" href="gitlab.html" />
+    <link rel="prev" title="Conda" href="conda.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lato:bold,italic,bolditalic|Lora|Oswald|Inconsolata&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="conda.html" title="Previous document">Conda</a>
+        </li>
+        <li>
+          <a href="gitlab.html" title="Next document">GitLab</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="rsync">
+<span id="id1"></span><h1>Rsync<a class="headerlink" href="#rsync" title="Permalink to this heading">¶</a></h1>
+<p>Rsync is the best way to transfer files between hosts or even within the same
+system. It has features like:</p>
+<ul class="simple">
+<li><p>If a connection is broken, it will pick up where it left off.</p></li>
+<li><p>It will synchronize a directory, only copying over files that are newer. If
+configured to do so, it can also clean up files on the remote that have been
+deleted locally</p></li>
+<li><p>Can compress data over the wire, resulting in faster transfers</p></li>
+<li><p>Verifies if the file was correctly transferred</p></li>
+<li><p>More performant, flexible, and configurable than alternatives like scp or cp</p></li>
+</ul>
+<p>Rsync is installed by default on most Mac and Linux machines. It works over SSH
+so it’s secure, and has more features than scp and even cp. Use it any time
+you’re transferring between local and remote, and use it any time you’re
+copying large directories locally.</p>
+<p>Typical usage is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-av<span class="w"> </span>--progress<span class="w"> </span>from/<span class="w"> </span>user@hostname:/to/
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://explainshell.com/explain?cmd=rsync+-av+--progress">explainshell</a>
+for this command to read more on what those arguments do, but this effectively
+recursively copies everything from the <code class="docutils literal notranslate"><span class="pre">from/</span></code> directory, preserving group,
+owner, permissions, and times, and shows progress while it’s running.</p>
+<p>One tricky thing about rsync is that <strong>it is sensitive to trailing slashes
+(/) on the source directory.</strong> A trailing slash on the destination, however,
+has no effect.</p>
+<p>To demonstrate, imagine we have a directory, <code class="docutils literal notranslate"><span class="pre">source</span></code>, with one file in it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>source/
+└── a.txt
+</pre></div>
+</div>
+<p>Then we run these commands to transfer to the <code class="docutils literal notranslate"><span class="pre">dest</span></code> directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-r<span class="w"> </span><span class="nb">source</span><span class="w"> </span>dest
+</pre></div>
+</div>
+<p>When we check the contents of <code class="docutils literal notranslate"><span class="pre">dest</span></code>, we see that no trailing slash on
+<code class="docutils literal notranslate"><span class="pre">source</span></code> put the whole directory <em>inside</em> the destination:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>dest/
+└── source/
+   └── a.txt
+</pre></div>
+</div>
+<p>If we instead add a trailing slash in the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-r<span class="w"> </span>source/<span class="w"> </span>dest
+<span class="c1">#              ^</span>
+<span class="c1">#              |</span>
+<span class="c1">#              Trailing slash</span>
+</pre></div>
+</div>
+<p>Then the <em>contents</em> of <code class="docutils literal notranslate"><span class="pre">source</span></code> get copied inside <code class="docutils literal notranslate"><span class="pre">dest</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>dest/
+└── a.txt
+</pre></div>
+</div>
+<section id="working-in-shared-directories">
+<h2>Working in shared directories<a class="headerlink" href="#working-in-shared-directories" title="Permalink to this heading">¶</a></h2>
+<p>When transferring to a shared directory, or any directory that might have
+special permissions (like <cite>Biowulf’s datashare directories
+&lt;https://hpc.nih.gov/nih/datashare.html&gt;</cite>) then be careful using the <code class="docutils literal notranslate"><span class="pre">-a</span></code>
+argument. This is because that argument tries to preserve the owner and group
+can mess up permissions in the shared directory.</p>
+<p>It’s generally useful to use all the other arguments implied by <code class="docutils literal notranslate"><span class="pre">-a</span></code>, so when
+transferring to a shared directory, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>--recursive<span class="w"> </span>--times<span class="w"> </span>--permissions<span class="w"> </span>--progress<span class="w"> </span>source/<span class="w"> </span>dest/
+
+<span class="c1"># shorter version</span>
+rsync<span class="w"> </span>-rtp<span class="w"> </span>--progress<span class="w"> </span>source/<span class="w"> </span>dest/
+</pre></div>
+</div>
+</section>
+<section id="other-useful-options">
+<h2>Other useful options<a class="headerlink" href="#other-useful-options" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Sometimes you want to copy the files that symlinks point to, rather than the
+symlink. In such a case, use the <code class="docutils literal notranslate"><span class="pre">-L</span></code> argument to follow symlinks.</p></li>
+<li><p>If you have large uncompressed files or a slow connection, use <code class="docutils literal notranslate"><span class="pre">-z</span></code> to
+compress over the wire. Rsync will automatically decompress on the remote.
+This sends less data over the network at the cost of CPU to
+compress/decompress. It uses zlib compression, so if you have lots of data in
+gzip or tar.gz files, using <code class="docutils literal notranslate"><span class="pre">-z</span></code> will try to compress already-compressed
+data, wasting CPU.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">--partial</span></code> (or <code class="docutils literal notranslate"><span class="pre">-P</span></code>, which implies both <code class="docutils literal notranslate"><span class="pre">--partial</span></code> and
+<code class="docutils literal notranslate"><span class="pre">--progress</span></code>) which will keep partially-transferred files on the remote.
+This is especially good for large files, so rsync can pick up where it left
+off on the same file.</p></li>
+<li><p>More recent versions of rsync support the <code class="docutils literal notranslate"><span class="pre">--info=progress2</span></code> argument,
+which reports the transfer speeds for the <em>entire transfer</em> rather than for
+each file. This can give you a better idea of the real transfer speed.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">--exclude</span></code> to avoid transferring matching patterns. Useful to avoid
+copying conda environments, for example.</p></li>
+</ul>
+<p>There are many more options for rsync, so as usual, read the manual (e.g.,
+<code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">rsync</span></code>)!</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Rsync</a><ul>
+<li><a class="reference internal" href="#working-in-shared-directories">Working in shared directories</a></li>
+<li><a class="reference internal" href="#other-useful-options">Other useful options</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/rsync.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="conda.html" title="Previous document">Conda</a>
+        </li>
+        <li>
+          <a href="gitlab.html" title="Next document">GitLab</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0.
+
+  </footer>
+
+  
+  </body>
+</html>

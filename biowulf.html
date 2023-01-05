@@ -101,13 +101,13 @@ ecdsa algorithms.</p>
 </pre></div>
 </div>
 <p>Then run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-add -K ~/.ssh/id_rsa
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-add<span class="w"> </span>-K<span class="w"> </span>~/.ssh/id_rsa
 </pre></div>
 </div>
 <p>to add it to the keychain.</p>
 <p>More info <a class="reference external" href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent">here</a>.</p>
 <p>You can always add an alias to your <cite>.bashrc</cite>, like:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">b</span><span class="o">=</span><span class="s2">&quot;ssh </span><span class="nv">$USER</span><span class="s2">@biowulf.nih.gov&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="nv">b</span><span class="o">=</span><span class="s2">&quot;ssh </span><span class="nv">$USER</span><span class="s2">@biowulf.nih.gov&quot;</span>
 </pre></div>
 </div>
 <p>So that to connect Biowulf, you open a terminal, type <code class="docutils literal notranslate"><span class="pre">b</span></code>, then Enter, and you’re in.</p>
@@ -124,9 +124,9 @@ conda-installed version of Python to your path, NoMachine will fail. This is
 because it needs the system-wide installed Python version.</p>
 <p>To avoid this, you can wrap the block of code that <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">init</span> <span class="pre">bash</span></code> adds to
 your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> in an if-clause:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$NX_CLIENT</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NX_CLIENT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 
-    <span class="c1"># conda activate stuff</span>
+<span class="w">    </span><span class="c1"># conda activate stuff</span>
 
 <span class="k">fi</span>
 </pre></div>
@@ -162,7 +162,7 @@ Helix has lots more resources available and tends to have less lag or slowdown
 issues than the Biowulf head node.</p>
 <p>Helix reboots the first Monday of each month, so make sure you’re done with
 your tmux session by then!</p>
-<p>See <a class="reference internal" href="making-your-linux-life-easier.html#tmux"><span class="std std-ref">Tmux</span></a> for more info.</p>
+<p>See <a class="reference internal" href="making-your-linux-life-easier.html#tmux"><span class="std std-ref">tmux</span></a> for more info.</p>
 </section>
 </section>
 <section id="limitations-of-mounted-drives">
@@ -196,7 +196,7 @@ destroyed and replaced with a regular file</strong>.</p></li>
 it’s a pain (for me) to type. Digging through the man page for squeue, I
 found you can control which columns are shown. Here’s what I’ve aliased
 to <code class="docutils literal notranslate"><span class="pre">q</span></code> in my biowulf <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">q</span><span class="o">=</span><span class="s1">&#39;squeue -u $USER -o &quot;%9A %18j %5C %5m %.9L %.9M %9N %8T %o&quot;&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="nv">q</span><span class="o">=</span><span class="s1">&#39;squeue -u $USER -o &quot;%9A %18j %5C %5m %.9L %.9M %9N %8T %o&quot;&#39;</span>
 </pre></div>
 </div>
 <p>Now the easier-to-type <code class="docutils literal notranslate"><span class="pre">q</span></code> gives output with info on the node resources, how
@@ -213,7 +213,7 @@ what it’s doing with <code class="docutils literal notranslate"><span class="p
 <p>To mimic this behavior when using conda environment containing
 <code class="docutils literal notranslate"><span class="pre">sratools</span></code>, you can acheive the same thing by putting this in your
 <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">VDB_CONFIG</span><span class="o">=</span>/usr/local/apps/ncbi/config/biowulf.kfg
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">VDB_CONFIG</span><span class="o">=</span>/usr/local/apps/ncbi/config/biowulf.kfg
 </pre></div>
 </div>
 <p>When writing swarmfiles or otherwise using fastq-dump to get lots of
@@ -227,25 +227,25 @@ doesn’t add any time.</p>
 reads you might want to consider writing out to stdout and piping to
 gzip for single-end.</p>
 <p>For example, to download a single-end FASTQ, a swarmfile entry might be:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SRR</span><span class="o">=</span>SRR00001<span class="p">;</span> <span class="se">\</span>
-<span class="nb">export</span> <span class="nv">TEMP_PATH</span><span class="o">=</span>/temp/directory<span class="p">;</span> <span class="se">\</span>
-<span class="nb">export</span> <span class="nv">FINAL_PATH</span><span class="o">=</span>/directory/for/final/data<span class="p">;</span> <span class="se">\</span>
-<span class="nb">cd</span> <span class="nv">$TEMP_PATH</span><span class="p">;</span> <span class="se">\</span>
-  module load sratoolkit<span class="p">;</span> <span class="se">\</span>
-  fastq-dump <span class="nv">$SRR</span> --gzip <span class="se">\</span>
-  <span class="o">&amp;&amp;</span> mv <span class="nv">$TEMP_PATH</span>/<span class="nv">$SRR_1</span>.fastq.gz <span class="nv">$FINAL_PATH</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SRR</span><span class="o">=</span>SRR00001<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">TEMP_PATH</span><span class="o">=</span>/temp/directory<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">FINAL_PATH</span><span class="o">=</span>/directory/for/final/data<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="nb">cd</span><span class="w"> </span><span class="nv">$TEMP_PATH</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>module<span class="w"> </span>load<span class="w"> </span>sratoolkit<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>fastq-dump<span class="w"> </span><span class="nv">$SRR</span><span class="w"> </span>--gzip<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>mv<span class="w"> </span><span class="nv">$TEMP_PATH</span>/<span class="nv">$SRR_1</span>.fastq.gz<span class="w"> </span><span class="nv">$FINAL_PATH</span>
 </pre></div>
 </div>
 <p><strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">TEMP_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">FINAL_PATH</span></code> should be absolute paths.</p>
 <p>For paired-end, use <code class="docutils literal notranslate"><span class="pre">--split-files</span></code> and move both ends over the final
 directory.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SRR</span><span class="o">=</span>SRR00001<span class="p">;</span> <span class="se">\</span>
-<span class="nb">export</span> <span class="nv">TEMP_PATH</span><span class="o">=</span>/temp/directory<span class="p">;</span> <span class="se">\</span>
-<span class="nb">export</span> <span class="nv">FINAL_PATH</span><span class="o">=</span>/directory/for/final/data<span class="p">;</span> <span class="se">\</span>
-<span class="nb">cd</span> <span class="nv">$TEMP_PATH</span><span class="p">;</span> <span class="se">\</span>
-  module load sratoolkit<span class="p">;</span> <span class="se">\</span>
-  fastq-dump <span class="nv">$SRR</span> --split-files --gzip <span class="se">\</span>
-  <span class="o">&amp;&amp;</span> mv <span class="nv">$TEMP_PATH</span>/<span class="nv">$SRR_</span><span class="o">{</span><span class="m">1</span>,2<span class="o">}</span>.fastq.gz <span class="nv">$FINAL_PATH</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SRR</span><span class="o">=</span>SRR00001<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">TEMP_PATH</span><span class="o">=</span>/temp/directory<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">FINAL_PATH</span><span class="o">=</span>/directory/for/final/data<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="nb">cd</span><span class="w"> </span><span class="nv">$TEMP_PATH</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>module<span class="w"> </span>load<span class="w"> </span>sratoolkit<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>fastq-dump<span class="w"> </span><span class="nv">$SRR</span><span class="w"> </span>--split-files<span class="w"> </span>--gzip<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>mv<span class="w"> </span><span class="nv">$TEMP_PATH</span>/<span class="nv">$SRR_</span><span class="o">{</span><span class="m">1</span>,2<span class="o">}</span>.fastq.gz<span class="w"> </span><span class="nv">$FINAL_PATH</span>
 </pre></div>
 </div>
 </section>
