@@ -2,6 +2,15 @@
 
 Changelog
 =========
+2022-12-23
+----------
+
+- new page on ssh
+- new page on rsync
+
+2022-12-13
+----------
+- New page on Galaxy (thanks @lillypi)
 
 2022-10-27
 ----------

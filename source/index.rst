@@ -61,10 +61,12 @@ Once you have the basics of programming, these sections will broaden your skills
    :maxdepth: 1
 
    vim
+   ssh
+   making-your-linux-life-easier
    git
    conda
+   rsync
    gitlab
-   making-your-linux-life-easier
    biology
 
 Genomics
