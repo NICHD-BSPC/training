@@ -11,7 +11,7 @@ Some basics assumptions I have made:
 Command Line, Vim, and Bash Basics
 ''''''''''''''''''''''''''''''''''
 
-Setting up your working directory is really important and keeping a clean, organized workspace will save you time in the future. Developing a standardized directory setup may help when you develop automated testing, need to check if certain directories (you know should) exist, and help remind you about where files are located days, weeks, months, maybe even years later. 
+Setting up your working directory is important and keeping a clean, organized workspace will save you time in the future. Developing a standardized directory setup may help when you develop automated testing, need to check if certain directories (you know should) exist, and help remind you about where files are located days, weeks, months, maybe even years later. 
 
 Let's start by creating a directory and filling it with some items - do all of this in your terminal. 
 
