@@ -24,12 +24,20 @@ sacrificing privacy.
 Typical Setup of Snakefile
 ''''''''''''''''''''''''''
 
-rule all: input: "finalOutput.txt"
+rule all: 
+    input: "finalOutput.txt"
 
-rule one: input: "initFile.txt" output: "outputRule1.txt" shell: a bash command
+rule one: 
+    input: "initFile.txt" 
+    output: "outputRule1.txt" 
+    shell: 
+        a bash command
 
-rule two: input: "outputRule1.txt" output: "finalOutput.txt" shell: a bash
-command
+rule two: 
+    input: "outputRule1.txt" 
+    output: "finalOutput.txt" 
+    shell: 
+        a bash command
 
 
 Directed Acyclic Graph (DAG)
