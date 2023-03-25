@@ -52,7 +52,7 @@ a Raspberry Pi camera
 <https://flask.palletsprojects.com/>`_, and much more.
 
 The statistical methods available in R are unparalleled. Python does have some
-statistics, for example in the `statsmodels <https://www.statsmodels.org/>`_
+statistics, for example in the ``statsmodels``
 and `scipy.stats
 <https://docs.scipy.org/doc/scipy/tutorial/stats.html>`_ packages,
 but these are just playing catch-up to R.

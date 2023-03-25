@@ -6,7 +6,7 @@ Visualization
    great discussions on what makes a plot good or bad (channeling a fair
    amount of Tufte in the process)
 
-- `Fundamentals of Data Visualization <https://serialmentor.com/dataviz/>`_
+- `Fundamentals of Data Visualization <https://clauswilke.com/dataviz/>`_
 
 - `A relatively succinct read on graphics design and thinking about how to plot
   things <https://socviz.co/lookatdata.html>`__ From an R-focused tutorial,
