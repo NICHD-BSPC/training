@@ -10,9 +10,6 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/better.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -91,6 +88,7 @@ presented in different ways.</p>
 <ul class="simple">
 <li><p>open a terminal on your computer</p></li>
 <li><p>navigate with <code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, <code class="docutils literal notranslate"><span class="pre">pwd</span></code>.</p></li>
+<li><p>TAB completion</p></li>
 <li><p>move, copy, rename files</p></li>
 <li><p>inspect files with <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">less</span></code>, <code class="docutils literal notranslate"><span class="pre">tail</span></code>, <code class="docutils literal notranslate"><span class="pre">wc</span></code></p></li>
 <li><p>search for text in a file with <code class="docutils literal notranslate"><span class="pre">grep</span></code></p></li>
@@ -117,6 +115,21 @@ differently</p></li>
 <p>Each of these is partly redundant with the others. Based on feedback
 from others going through these resources, the Unix Workbench is more
 streamlined and allows you to spend more time on the exercises.</p>
+<section id="software-carpentry-the-unix-shell-and-shell-extras">
+<h3>Software Carpentry: The Unix Shell and “Shell Extras”<a class="headerlink" href="#software-carpentry-the-unix-shell-and-shell-extras" title="Permalink to this heading">¶</a></h3>
+<p>(updated 2023-03-25)</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://swcarpentry.github.io/shell-novice/">https://swcarpentry.github.io/shell-novice/</a></p></li>
+<li><p><a class="reference external" href="https://carpentries-incubator.github.io/shell-extras/">https://carpentries-incubator.github.io/shell-extras/</a></p></li>
+</ul>
+<p>This is two consecutive tutorials. The first is an official Software Carpentry
+lesson; the second more advanced one is technically in the Carpentries
+Incubator but has lots of good content.</p>
+<p>Software Carpentry lessons are known for having clear style, lots of exercises,
+and for being battle-tested in hundreds of live workshops. Be sure to check out
+the <a class="reference external" href="https://swcarpentry.github.io/shell-novice/reference">references</a> for
+the first lesson as well.</p>
+</section>
 <section id="the-unix-workbench">
 <h3>The Unix Workbench<a class="headerlink" href="#the-unix-workbench" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://seankross.com/the-unix-workbench">https://seankross.com/the-unix-workbench</a></p>
@@ -134,26 +147,30 @@ running command-line BLAST. It also has quite a few exercises to work on. Part
 II of the book is on Python, Part III is on R. If you are planning on learning
 Python or R, reading this book cover-to-cover will get you quite far!</p>
 </section>
-<section id="learn-the-command-line">
-<h3>Learn the Command Line<a class="headerlink" href="#learn-the-command-line" title="Permalink to this heading">¶</a></h3>
-<p><a class="reference external" href="https://www.codecademy.com/learn/learn-the-command-line">https://www.codecademy.com/learn/learn-the-command-line</a></p>
-<p>Like many of the Codecademy tutorials, this is kind of gamified. This can be
-a powerful motivator for some people. They want you to sign in, and they offer
-paid upgrades.</p>
+<section id="the-linux-command-line">
+<h3>The Linux Command Line<a class="headerlink" href="#the-linux-command-line" title="Permalink to this heading">¶</a></h3>
+<p>(updated 2023-03-25)</p>
+<p><a class="reference external" href="http://linuxcommand.org/tlcl.php">http://linuxcommand.org/tlcl.php</a></p>
+<p>(or directly download the PDF: <a class="reference download internal" download="" href="_downloads/389c1a29a27c416321ff2f29817c4f13/TLCL-19.01.pdf"><code class="xref download docutils literal notranslate"><span class="pre">downloads/TLCL-19.01.pdf</span></code></a>)</p>
+<p>This book is published with a Creative Commons license. This will give you the
+most comprehensive knowledge of the command line. It’s over 500 pages, so may
+be more useful as a reference than a tutorial. It does demonstrate how much
+there is to learn though!</p>
 </section>
-<section id="learn-enough-command-line-to-be-dangerous">
-<h3>Learn Enough Command Line to be Dangerous<a class="headerlink" href="#learn-enough-command-line-to-be-dangerous" title="Permalink to this heading">¶</a></h3>
-<p><a class="reference external" href="https://www.learnenough.com/command-line-tutorial">https://www.learnenough.com/command-line-tutorial</a></p>
-<p>This one has some asides to get you up to speed on “programming culture” things
-that you will see throughout your career in many contexts, like using <code class="docutils literal notranslate"><span class="pre">foo</span></code>
-or <code class="docutils literal notranslate"><span class="pre">bar</span></code> as variable names, or explaining some in-jokes. It’s heavy-handed on
-the outdated memes, but if you can get past that it’s pretty good.</p>
+</section>
+<section id="previous-recommendations">
+<h2>Previous recommendations<a class="headerlink" href="#previous-recommendations" title="Permalink to this heading">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For anything beyond chapters 1 and 2, this has recently become a paid
-option – as of Nov 30 2019 it’s $9 for the full content.</p>
+<p>We used to recommend
+<a class="reference external" href="https://www.codecademy.com/learn/learn-the-command-line">https://www.codecademy.com/learn/learn-the-command-line</a>, but this was too
+basic and relied too much on an in-browser environment.</p>
 </div>
-</section>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We used to recommend <a class="reference external" href="https://www.learnenough.com/command-line-tutorial">https://www.learnenough.com/command-line-tutorial</a>, but
+it’s $9 for the content after chapters 1 and 2.</p>
+</div>
 </section>
 <section id="intermediate-command-line">
 <h2>Intermediate command line<a class="headerlink" href="#intermediate-command-line" title="Permalink to this heading">¶</a></h2>
@@ -206,6 +223,24 @@ also reiterates some of the suggestions from above and adds some additional ones
 <h2>Advanced command line<a class="headerlink" href="#advanced-command-line" title="Permalink to this heading">¶</a></h2>
 <p>The Linux documentation project’s <a class="reference external" href="https://tldp.org/LDP/abs/html/index.html">advanced bash scripting guide</a> will keep you busy for a while….</p>
 </section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">¶</a></h2>
+<p>Here are some exercises that tie together the material you would learn above.
+The questions should be answered exclusively through the command line. For
+example, “how many <code class="docutils literal notranslate"><span class="pre">.pdb</span></code> files are there?” could easily be answered by
+manually counting them, but the point is to figure out the commands that would
+get you the answer directly!</p>
+<ul class="simple">
+<li><p>Using the command line, download and unzip this file: <a class="reference external" href="https://swcarpentry.github.io/shell-novice/data/shell-lesson-data.zip">https://swcarpentry.github.io/shell-novice/data/shell-lesson-data.zip</a></p></li>
+<li><p>How many files are there across the multiple subdirectories?</p></li>
+<li><p>How many <code class="docutils literal notranslate"><span class="pre">.pdb</span></code> files are there?</p></li>
+<li><p>What is the most common animal found in <code class="docutils literal notranslate"><span class="pre">exercise-data/animal-counts/animals.csv</span></code>?</p></li>
+<li><p>How many sequences are there (the lines with “ATCG..”) in <code class="docutils literal notranslate"><span class="pre">exercise-data/creatures/unicorn.dat</span></code>?</p></li>
+<li><p>Which file, out of all of the files in <code class="docutils literal notranslate"><span class="pre">exercise-data</span></code> has the most lines?</p></li>
+<li><p>Which of the files in <code class="docutils literal notranslate"><span class="pre">exercise-data/creatures</span></code> has the most occurrences of the subsequence <code class="docutils literal notranslate"><span class="pre">AAA</span></code>?</p></li>
+<li><p>Which sister is mentioned most often in <code class="docutils literal notranslate"><span class="pre">exercise-data/writing/LittleWomen.txt</span></code>?</p></li>
+</ul>
+</section>
 <section id="next-steps">
 <h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">¶</a></h2>
 <p>Other parts of this documentation will help round out your command-line skills:</p>
@@ -232,14 +267,16 @@ to make you more efficient</p></li>
 <li><a class="reference internal" href="#optional-textbooks">Optional textbooks</a></li>
 <li><a class="reference internal" href="#id2">Command line</a></li>
 <li><a class="reference internal" href="#resources-for-learning-the-command-line">Resources for learning the command line</a><ul>
+<li><a class="reference internal" href="#software-carpentry-the-unix-shell-and-shell-extras">Software Carpentry: The Unix Shell and “Shell Extras”</a></li>
 <li><a class="reference internal" href="#the-unix-workbench">The Unix Workbench</a></li>
 <li><a class="reference internal" href="#id3">A Primer for Computational Biology</a></li>
-<li><a class="reference internal" href="#learn-the-command-line">Learn the Command Line</a></li>
-<li><a class="reference internal" href="#learn-enough-command-line-to-be-dangerous">Learn Enough Command Line to be Dangerous</a></li>
+<li><a class="reference internal" href="#the-linux-command-line">The Linux Command Line</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#previous-recommendations">Previous recommendations</a></li>
 <li><a class="reference internal" href="#intermediate-command-line">Intermediate command line</a></li>
 <li><a class="reference internal" href="#advanced-command-line">Advanced command line</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
 <li><a class="reference internal" href="#next-steps">Next steps</a></li>
 </ul>
 </li>
@@ -285,7 +322,7 @@ to make you more efficient</p></li>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      5.3.0.
+      6.1.3.
 
   </footer>
 
