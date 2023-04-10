@@ -37,6 +37,40 @@ workflows or use something like `lcdb-wf <https://github.com/lcdb/lcdb-wf>`_.
 
     We have not rewritten these tutorials for NIH's Biowulf, for example.
 
+Skills for RNA-seq
+------------------
+This gives a very rough sense of what beginner/intermediate RNA-seq skills
+might look like:
+
+Level 1
+~~~~~~~
+- Be able to describe the lines and fields of the following formats: FASTQ, FASTA, BAM, GTF
+- Be able to compare and contrast the same formats (what information is
+  included/missing; how are they created; when you would use them)
+- Locate and prepare reference data (including aligner/pseudoaligner indexes)
+- Run FastQC on FASTQ and BAM files
+- Align reads with STAR, HISAT2, or other aligner and quantify reads with
+  featureCounts
+- Quantify reads with Kallisto or Salmon
+- Import a counts table into R
+- Run basic 2-condition DESeq2 differential expression analysis
+- Find the most highly-changed genes
+- Plot an MA plot or volcano plot
+- Export results to TSV or Excel
+- Do functional enrichment analysis to find pathways enriched in changed genes
+
+Level 2
+~~~~~~~
+- Run QC using multiple tools (preseq, rRNA contamination, Picard, RSeQC, MultiQC)
+- Interpret QC reports to make suggestions for future bench work
+- Interpret raw p-value histograms
+- Be able to describe what fold-change shrinkage is doing
+- Be able to describe how DESeq2 handles low counts
+- Work with more complex experimental designs (batch effects, interaction
+  terms) in DESeq2 and explain the results
+- Visualize data (bam, bigwig) in a genome browser
+- Using automated reproducible workflows (Snakemake, Nextflow, etc)
+
 Other resources
 ---------------
 The remainder of this page goes into some more detail on various aspects of
