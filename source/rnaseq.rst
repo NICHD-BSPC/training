@@ -76,8 +76,7 @@ Other resources
 The remainder of this page goes into some more detail on various aspects of
 RNA-seq analysis, to be used as supplemental material.
 
-- The introductory paper `Hitchiker's guide to expression analysis
-  <https://doi.org/10.1146/annurev-biodatasci-072018-021255>`_ is co-authored
+- The introductory paper `Hitchiker's guide to expression analysis https://www.annualreviews.org/doi/10.1146/annurev-biodatasci-072018-021255>`_ is co-authored
   by many big names in the field and gives a great overview and history.
 
 - The `DESeq2 paper

@@ -53,7 +53,7 @@ Below we’ll upload specific files to experiment with.
 IGV
 ---
 
-http://software.broadinstitute.org/software/igv/
+https://software.broadinstitute.org/software/igv/
 
 IGV (Integrated Genome Viewer) is a standalone Java program. It’s best used for
 local data, and excels at detailed looks at BAM and VCF files. Since it can
@@ -63,7 +63,7 @@ be made public.
 UCSC Genome Browser
 -------------------
 
-http://genome.ucsc.edu/
+https://genome.ucsc.edu/
 
 The UCSC Genome Browser is a web-based browser. It looks like the design
 hasn’t changed since the 90s, but it is extremely powerful and is
@@ -151,9 +151,9 @@ page: https://genome.ucsc.edu/goldenPath/help/bam.html, and view the BAM
 in UCSC Genome Browser.
 
 Then download the BAM file from that example
-(http://genome.ucsc.edu/goldenPath/help/examples/bamExample.bam). You
+(https://genome.ucsc.edu/goldenPath/help/examples/bamExample.bam). You
 will also need to download the index
-(http://genome.ucsc.edu/goldenPath/help/examples/bamExample.bam.bai,
+(https://genome.ucsc.edu/goldenPath/help/examples/bamExample.bam.bai,
 more on indexes later). Then load the BAM into IGV.
 
 -  how do the browsers display the same data differently?
@@ -243,7 +243,7 @@ VCF files are used for storing variant information and the additional
 metadata that goes along with it. Typically, any kind of variant-calling
 involves VCF files.
 
-VCF format description: http://samtools.github.io/hts-specs/VCFv4.2.pdf.
+VCF format description: https://samtools.github.io/hts-specs/VCFv4.2.pdf.
 Lots of details and terminology here!
 
 To practice, scroll down to Example #1 on this page to visualize:
