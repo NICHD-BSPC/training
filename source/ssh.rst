@@ -258,6 +258,9 @@ References
 ----------
 - `ssh.com <https://www.ssh.com/academy/ssh>`_, which has lots of good
   information on SSH (despite trying to sell products)
+- `Tech tip <http://www.unixwiz.net/techtips/ssh-agent-forwarding.html>`_ has
+  some nice descriptions of what happens when connecting via ssh along with an
+  explanation of agent forwarding.
 - `apple.stackexchange answer
   <https://apple.stackexchange.com/questions/48502/how-can-i-permanently-add-my-ssh-private-key-to-keychain-so-it-is-automatically>`_
   about adding SSH private key to the keychain on Mac
