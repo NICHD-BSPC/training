@@ -52,17 +52,409 @@
             
   <section id="snakemake">
 <span id="id1"></span><h1>Snakemake<a class="headerlink" href="#snakemake" title="Permalink to this heading">¶</a></h1>
+<p>A workflow manager like Snakemake is the next step after simple bash scripts
+towards fully scalable and reproducible analyses. Another popular workflow
+manager for genomics is <a class="reference external" href="https://www.nextflow.io/">Nextflow</a> and <a class="reference external" href="https://www.nature.com/articles/s41592-021-01254-9">Wratten et
+al 2021</a> is a review of
+the current state. You can see how many workflow managers in general are
+out there with <a class="reference external" href="https://github.com/common-workflow-language/common-workflow-language/wiki/Existing-Workflow-systems">this list</a>
+(over 300 at the time of this writing).</p>
+<p>In BSPC, we prefer Snakemake over other workflow managers because:</p>
 <ul class="simple">
-<li><p>Introductory <a class="reference external" href="https://slides.com/johanneskoester/snakemake-short">snakemake slides</a></p></li>
-<li><p>Live <a class="reference external" href="https://youtu.be/hPrXcUUp70Y">demo video</a></p></li>
-<li><p><a class="reference external" href="https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html#tutorial">Official Snakemake tutorial</a></p></li>
+<li><p>Its simple combination of bash and Python make it straightforward to convert
+individual tools’ command-line calls into working Snakemake code</p></li>
+<li><p>Any valid Python is valid Snakemake, and we write a lot of Python so we can
+leverage that knowledge in our Snakemake files</p></li>
+<li><p>It affords the most flexibility and customization out of all the workflows
+we’ve tried. This is important to us as a bioinformatics core working on
+a wide variety of projects that often need customization</p></li>
+<li><p>Snakemake integrates very well with conda and high-performance compute
+clusters, which we also use a lot</p></li>
+</ul>
+<p>Snakemake is a superset of Python that allows for workflow management using
+“rules” that dictate input/output files for each rule, the commands to convert
+inputs to outputs, and the dependencies between rules. It can be run locally or
+on a cluster with no code changes. In the context of genomics workflows, if
+a new sample is added Snakemake will figure out just the rules that need to be
+run on that single sample, leaving everything else untouched. It also trivially
+parallelizes tasks that are run, dramatically speeding up workflow runs.</p>
+<section id="learning-snakemake">
+<h2>Learning Snakemake<a class="headerlink" href="#learning-snakemake" title="Permalink to this heading">¶</a></h2>
+<p>The following resources are ordered from most basic to more advanced.</p>
+<ul class="simple">
+<li><p>Introductory <a class="reference external" href="https://slides.com/johanneskoester/snakemake-short">snakemake slides</a> give a very brief
+overview of what Snakemake is about.</p></li>
+<li><p>Live <a class="reference external" href="https://youtu.be/hPrXcUUp70Y">demo video</a> given by the author.</p></li>
+<li><p>The official <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/tutorial/short.html">short tutorial</a> gives a quick overview.</p></li>
+<li><p>The <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html#tutorial">official Snakemake tutorial</a>
+will give you a more in-depth understanding.</p></li>
 <li><p>Additional <a class="reference external" href="https://hackmd.io/jXwbvOyQTqWqpuWwrpByHQ?view">tutorial from Titus Brown</a> on Snakemake</p></li>
 <li><p><a class="reference external" href="https://github.com/NIH-HPC/snakemake-class">Snakemake tutorial specific to NIH’s Biowulf</a></p></li>
 </ul>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>need lots more context here – why we use snakemake in bspc and why it’s generally useful</p>
+</section>
+<section id="supporting-information-tips-and-tricks">
+<h2>Supporting information, tips and tricks<a class="headerlink" href="#supporting-information-tips-and-tricks" title="Permalink to this heading">¶</a></h2>
+<p>The rest of this page offers some suggestions, clarifications, and tips. The
+goal is to add some additional information on topics that we typically see new
+users struggling with.</p>
+<section id="thinking-like-snakemake">
+<h3>Thinking like Snakemake<a class="headerlink" href="#thinking-like-snakemake" title="Permalink to this heading">¶</a></h3>
+<p>When teaching Snakemake, it’s often useful to “think like Snakemake” to
+understand how all the moving parts fit together. For this exercise, let’s
+create an example Snakefile.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+
+<span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;report.txt&quot;</span>
+
+<span class="n">rule</span> <span class="n">sort</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">.txt&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">_sorted.txt&quot;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s2">&quot;sort </span><span class="si">{input}</span><span class="s2"> &gt; </span><span class="si">{output}</span><span class="s2">&quot;</span>
+
+<span class="n">rule</span> <span class="n">report</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">_sorted.txt&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="n">samples</span><span class="p">),</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;report.txt&quot;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s2">&quot;cat /dev/null &gt; </span><span class="si">{output}</span><span class="s2">; &quot;</span>
+        <span class="s2">&quot;for i in </span><span class="si">{input}</span><span class="s2">; do head -n1 </span><span class="si">{input}</span><span class="s2"> &gt;&gt; </span><span class="si">{output}</span><span class="s2">&quot;</span>
+</pre></div>
 </div>
+<p>This file sorts each text file (the <code class="docutils literal notranslate"><span class="pre">sort</span></code> rule, 1 input –&gt; 1 output) and
+then the first line of each of those sorted files are added to the report (the
+<code class="docutils literal notranslate"><span class="pre">report</span></code> rule, a many input –&gt; 1 output rule or “aggregation” rule).</p>
+<ul class="simple">
+<li><p>Run the first rule encountered. This is the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule</p></li>
+<li><p>Check the input. Here, it’s <code class="docutils literal notranslate"><span class="pre">report.txt</span></code>. Does that file exist? If
+yes, then we’re done. If no, then we need to figure out how to make it. For
+the purposes of this exercise, assume it doesn’t exist yet.</p></li>
+<li><p>Check the rest of the rules. Are there any rules whose output files match the pattern “report.txt”?</p></li>
+<li><p>Yes, the <code class="docutils literal notranslate"><span class="pre">report</span></code> rule’s output matches. It’s actually an exact match and there are no wildcards to worry about.</p></li>
+<li><p>OK, so we at least have to run the <code class="docutils literal notranslate"><span class="pre">report</span></code> rule. Let’s check its input.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">expand()</span></code> function just returns a list. So the input for the <code class="docutils literal notranslate"><span class="pre">report</span></code>
+rule is <code class="docutils literal notranslate"><span class="pre">[&quot;A_sorted.txt&quot;,</span> <span class="pre">&quot;B_sorted.txt&quot;,</span> <span class="pre">&quot;C_sorted.txt&quot;]</span></code>.</p></li>
+<li><p>Let’s take those one at a time. The first input is <code class="docutils literal notranslate"><span class="pre">A_sorted.txt</span></code>. Does the
+file already exist? Let’s assume no.</p></li>
+<li><p>Check the rest of the rules. Are there any rules whose output files match the pattern “A_sorted.txt”?</p></li>
+<li><p>Yes, the <code class="docutils literal notranslate"><span class="pre">sort</span></code> rule’s output matches if we set the <code class="docutils literal notranslate"><span class="pre">{sample}</span></code> wildcard
+to be <code class="docutils literal notranslate"><span class="pre">A</span></code> (Snakemake does this wildcard matching internally; sometimes it
+gets things wrong, see the “wildcard constraints” section below for some
+hints if that happens)</p></li>
+<li><p>OK, so we have to run the <code class="docutils literal notranslate"><span class="pre">sort</span></code> rule with the <code class="docutils literal notranslate"><span class="pre">{sample}</span></code> wildcard set to
+<code class="docutils literal notranslate"><span class="pre">A</span></code>. So let’s check it’s input. What’s the input of the <code class="docutils literal notranslate"><span class="pre">sort</span></code> rule, if
+we fill in <code class="docutils literal notranslate"><span class="pre">A</span></code> as the value of the <code class="docutils literal notranslate"><span class="pre">{{sample}}</span></code> wildcard?</p></li>
+<li><p>Assuming <code class="docutils literal notranslate"><span class="pre">{sample}</span></code> is <code class="docutils literal notranslate"><span class="pre">A</span></code>, we need <code class="docutils literal notranslate"><span class="pre">A.txt</span></code>. Does the file already
+exist? Here we’ll assume that yes it does exist because there are no other
+rules. Otherwise, the Snakefile could not run; it would complain about
+a missing input file <code class="docutils literal notranslate"><span class="pre">A.txt</span></code> because it can’t find any rules that could
+make it, and we’d either have to make a rule to
+create it, or make sure our starting input data exists.</p></li>
+<li><p>That took care of the first input for the <code class="docutils literal notranslate"><span class="pre">report</span></code> rule. On to the next
+one!</p></li>
+<li><p>Does <code class="docutils literal notranslate"><span class="pre">B_sorted.txt</span></code> exist? Let’s assume that it doesn’t exist, just like
+<code class="docutils literal notranslate"><span class="pre">A_sorted.txt</span></code>. We’ll go through the same process we did for
+<code class="docutils literal notranslate"><span class="pre">A_sorted.txt</span></code>. That is, check if any rules’ output matches the pattern of
+this file; if so then create value(s) for the wildcard(s) (here,
+<code class="docutils literal notranslate"><span class="pre">sample=&quot;B&quot;</span></code>); fill in the input with the wildcard value; check to see if
+that input exists; if yes, nothing else to do with this “chain” of rule to
+run; if no then we need to figure out what rule will make the output. Again,
+here we’re assuming that the starting file <code class="docutils literal notranslate"><span class="pre">B.txt</span></code> does exist.</p></li>
+<li><p>OK, back to the <code class="docutils literal notranslate"><span class="pre">report</span></code> rule, and that last output file, <code class="docutils literal notranslate"><span class="pre">C_sorted.txt</span></code>.
+Let’s now imagine it <em>does</em> exist (unlike <code class="docutils literal notranslate"><span class="pre">A_sorted.txt</span></code> and
+<code class="docutils literal notranslate"><span class="pre">B_sorted.txt</span></code>).</p></li>
+<li><p>If the file exists, then check to see if it is older than the input. If it’s
+older, then we’ll need to remake it. If it’s newer, it’s up-to-date and
+there’s nothing more we need to do with <code class="docutils literal notranslate"><span class="pre">C_sorted.txt</span></code>.</p></li>
+</ul>
+<p>This process of checking input to see if it exists, finding rules whose output
+patterns match, filling in wildcards into input and seeing if <em>that</em> exists, is
+the general process. Keeping this in mind can help when debugging.</p>
+</section>
+<section id="be-careful-using-for-loops-in-rules">
+<h3>Be careful using for-loops in rules<a class="headerlink" href="#be-careful-using-for-loops-in-rules" title="Permalink to this heading">¶</a></h3>
+<p>When initially learning Snakemake, you may be inclined to use <code class="docutils literal notranslate"><span class="pre">expand()</span></code> to
+get a list of files, and then iterate over them in a for-loop within the rule.</p>
+<p>For example in a <code class="docutils literal notranslate"><span class="pre">shell:</span></code> block it might look something like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+
+<span class="c1"># Don&#39;t do this.</span>
+
+<span class="n">rule</span> <span class="n">example1</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">.txt&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">.txt.sorted&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s2">&quot;for i in </span><span class="si">{input}</span><span class="s2">; do &quot;</span>
+        <span class="s2">&quot;sort $i &gt; $i.sorted; &quot;</span>
+        <span class="s2">&quot;done&quot;</span>
+</pre></div>
+</div>
+<p>or for a <code class="docutils literal notranslate"><span class="pre">run:</span></code> block it might look something like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+
+<span class="c1"># Don&#39;t do this either.</span>
+
+<span class="n">rule</span> <span class="n">example2</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">.txt&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">.txt.sorted&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
+    <span class="n">run</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">fin</span><span class="p">,</span> <span class="n">fout</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+            <span class="n">shell</span><span class="p">(</span><span class="s2">&quot;sort </span><span class="si">{fin}</span><span class="s2"> &gt; </span><span class="si">{fout}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The reasoning for writing a rule like this is typically something like, “I
+want to do this thing many times, and in R/Python/Bash I use a for-loop to do
+something many times, so let’s figure out how to make a for-loop work in
+Snakemake”.</p>
+<p><strong>However, in general, you don’t want to use a for-loop in a rule if the number
+of inputs equals the number of outputs</strong>. Let’s explain why.</p>
+<p>Each of these rules, <code class="docutils literal notranslate"><span class="pre">example1</span></code> and <code class="docutils literal notranslate"><span class="pre">example2</span></code>,  will only run once.
+Because of the for-loop, the sorting of sample <code class="docutils literal notranslate"><span class="pre">B</span></code> won’t be run until sample
+<code class="docutils literal notranslate"><span class="pre">A</span></code> completes sorting. That is, rather than running in parallel, this runs in
+serial. So even if we had 3 CPUs to run the sorting of A, B, and C on each one,
+the way it is written they will all run on a single CPU, so it will take 3x the
+time it would take if running in parallel.</p>
+<p>Furthermore, if we add a new sample <code class="docutils literal notranslate"><span class="pre">D</span></code>, it will force <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">C</span></code> to run again, even if they were up to date – wasting time and resources.</p>
+<p>Here’s what it <em>should</em> look like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Do it this way instead.</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+
+<span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span> <span class="n">expand</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">.txt.sorted&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
+
+<span class="n">rule</span> <span class="n">example3</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">.txt&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">.txt.sorted&quot;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s2">&quot;sort </span><span class="si">{input}</span><span class="s2"> &gt; </span><span class="si">{output}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>This last rule will <strong>run once for each sample, in parallel</strong>. Snakemake
+will kick of one job for sample <code class="docutils literal notranslate"><span class="pre">A</span></code>, another for sample <code class="docutils literal notranslate"><span class="pre">B</span></code>, and a third
+for sample <code class="docutils literal notranslate"><span class="pre">C</span></code>. If multiple cores have been provided on the command line with
+<code class="docutils literal notranslate"><span class="pre">--cores/-j</span></code>, then these three jobs will run in parallel.</p>
+<p><strong>In general, a rule will run in parallel as many times as there are unique
+combinations of output files.</strong></p>
+<p>If we look at rules <code class="docutils literal notranslate"><span class="pre">example1</span></code> and <code class="docutils literal notranslate"><span class="pre">example2</span></code> above, how many unique
+combinations of output are there? The answer is <em>one</em>, because the <code class="docutils literal notranslate"><span class="pre">expand()</span></code>
+fills in the <code class="docutils literal notranslate"><span class="pre">{sample}</span></code> wildcard, giving a single list of the three
+filenames.</p>
+<p>In contrast, for the <code class="docutils literal notranslate"><span class="pre">example3</span></code> rule there are 3 unique sets of output. The
+rule will run one time where the single output is <code class="docutils literal notranslate"><span class="pre">A.txt.sorted</span></code> (where
+sample=A), another time where the single output file is <code class="docutils literal notranslate"><span class="pre">B.txt.sorted</span></code>
+(sample=B) and a third time for <code class="docutils literal notranslate"><span class="pre">C.txt.sorted</span></code> (sample=C). Snakemake can run
+each of these three rules in parallel, one per CPU as long as there are enough
+CPUs to do so (most modern machines have multiple cores).</p>
+<p>How about this example – how many times will the <code class="docutils literal notranslate"><span class="pre">fastqc</span></code> rule run?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s1">&#39;C&quot;]</span>
+<span class="n">read_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">_R</span><span class="si">{N}</span><span class="s2">_fastqc.html&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">read_numbers</span><span class="p">)</span>
+
+<span class="n">rule</span> <span class="n">fastqc</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">_R</span><span class="si">{n}</span><span class="s2">.fastqc.gz&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">_R</span><span class="si">{n}</span><span class="s2">_fastqc.html&quot;</span>
+    <span class="n">wrapper</span><span class="p">:</span>
+       <span class="s2">&quot;v1.25.0/bio/fastqc&quot;</span>
+</pre></div>
+</div>
+<p>There are two different wildcards in the output, <code class="docutils literal notranslate"><span class="pre">{sample}</span></code> and <code class="docutils literal notranslate"><span class="pre">{n}</span></code>.
+There are 3 values for <code class="docutils literal notranslate"><span class="pre">sample</span></code> (A, B, C), and 2 values for <code class="docutils literal notranslate"><span class="pre">n</span></code> (1, 2) so
+it will run 6 times in parallel.</p>
+<p>This is much more subtle than it looks though – we have <code class="docutils literal notranslate"><span class="pre">read_numbers</span></code>,
+<code class="docutils literal notranslate"><span class="pre">N</span></code>, and <code class="docutils literal notranslate"><span class="pre">n</span></code>. What does Snakemake actually use? The next section goes into
+more detail on this.</p>
+</section>
+<section id="wildcards-are-not-global-variables">
+<h3>Wildcards are NOT global variables<a class="headerlink" href="#wildcards-are-not-global-variables" title="Permalink to this heading">¶</a></h3>
+<p>Consider the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s1">&#39;C&quot;]</span>
+<span class="n">read_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">_R</span><span class="si">{N}</span><span class="s2">_fastqc.html&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">read_numbers</span><span class="p">),</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">_R</span><span class="si">{N}</span><span class="s2">_fastqc.count&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">read_numbers</span><span class="p">),</span>
+
+
+<span class="n">rule</span> <span class="n">fastqc</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">_R</span><span class="si">{n}</span><span class="s2">.fastqc.gz&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{sample}</span><span class="s2">_R</span><span class="si">{n}</span><span class="s2">_fastqc.html&quot;</span>
+    <span class="n">wrapper</span><span class="p">:</span>
+       <span class="s2">&quot;v1.25.0/bio/fastqc&quot;</span>
+
+<span class="n">rule</span> <span class="n">count</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{X}</span><span class="s2">_R</span><span class="si">{Y}</span><span class="s2">.fastq.gz&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;</span><span class="si">{X}</span><span class="s2">_R</span><span class="si">{Y}</span><span class="s2">.fastq.count&quot;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s1">&#39;LINES=$(wc -l </span><span class="si">{input}</span><span class="s1"> | cut -f1 -d &quot; &quot;); &#39;</span>
+        <span class="s1">&#39;echo $(($LINES / 4)) &gt; </span><span class="si">{output}</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>At first, this looks pretty confusing:</p>
+<ul class="simple">
+<li><p>We have a list, <code class="docutils literal notranslate"><span class="pre">read_numbers</span></code>.</p></li>
+<li><p>We have a wildcard placeholder <code class="docutils literal notranslate"><span class="pre">N</span></code> in the <code class="docutils literal notranslate"><span class="pre">expand</span></code> call, and we provide
+the argument <code class="docutils literal notranslate"><span class="pre">N=read_numbers</span></code>.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">fastqc</span></code> rule, we have an <code class="docutils literal notranslate"><span class="pre">{n}</span></code> wildcard.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">count</span></code> rule, we have completely different wildcards altogether
+(<code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code>)</p></li>
+</ul>
+<p><strong>There is no variable</strong> <code class="docutils literal notranslate"><span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">X</span></code> or <code class="docutils literal notranslate"><span class="pre">Y</span></code> or <code class="docutils literal notranslate"><span class="pre">sample</span></code>. So how does
+Snakemake know what to use for <code class="docutils literal notranslate"><span class="pre">{n}</span></code> in the output pattern of the <code class="docutils literal notranslate"><span class="pre">fastqc</span></code>
+rule, or <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> in the <code class="docutils literal notranslate"><span class="pre">count</span></code> rule?</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section assumes you understand the section above on “Thinking like
+Snakemake”, so make sure to go back and read that if you need to.</p>
+</div>
+<p>Let’s think like snakemake. Rule <code class="docutils literal notranslate"><span class="pre">all</span></code> has an <code class="docutils literal notranslate"><span class="pre">expand()</span></code>, which results in
+a list of filenames. So when Snakemake starts looking at the rules to figure
+out what rules it needs to run, <em>the input of the “all” rule is just a list of
+filenames</em>. That is, there is no <code class="docutils literal notranslate"><span class="pre">{N}</span></code> wildcard anywhere.</p>
+<p>Let’s now take the first filename resulting from that <code class="docutils literal notranslate"><span class="pre">expand()</span></code> call,
+<code class="docutils literal notranslate"><span class="pre">A_R1_fastqc.html</span></code>. Snakemake looks for a rule whose output matches that
+pattern, and identifies the <code class="docutils literal notranslate"><span class="pre">fastqc</span></code> rule. Snakemake internally figures out
+that the output pattern of the <code class="docutils literal notranslate"><span class="pre">fastqc</span></code> rule will match if <code class="docutils literal notranslate"><span class="pre">sample=&quot;A&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">n=1</span></code>. So it sets the values of those wildcards for the input. <strong>The input
+wildcards must be found in the output wildcards of the same rule.</strong> So the fact
+that we have <code class="docutils literal notranslate"><span class="pre">{n}</span></code> in the output means that we must use <code class="docutils literal notranslate"><span class="pre">{n}</span></code> in the input.
+And we can only use <code class="docutils literal notranslate"><span class="pre">{n}</span></code> in the input because it also exists in the output.
+But <em>other</em> rules’ wildcards are <em>independent</em>.</p>
+<p>For example, when Snakemake looks at the input to the <code class="docutils literal notranslate"><span class="pre">all</span></code> rule and finds
+<code class="docutils literal notranslate"><span class="pre">A_R1_fastqc.count</span></code>, it finds that <code class="docutils literal notranslate"><span class="pre">count</span></code> rule’s output pattern will
+match. In that case, Snakemake figures out that it needs to make <code class="docutils literal notranslate"><span class="pre">X=&quot;A&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Y=1</span></code> for the duration of this rule, and fills in the <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code>
+accordingly for the input.</p>
+<p>This was a contrived example; in practice, we generally keep the wildcards
+consistent across rules for clarity.</p>
+</section>
+<section id="directed-acyclic-graph-dag">
+<h3>Directed Acyclic Graph (DAG)<a class="headerlink" href="#directed-acyclic-graph-dag" title="Permalink to this heading">¶</a></h3>
+<p>This is a quick way to visualize the workflow and associated wildcards. Using
+this tool at various parts of your snakefile development process can help you
+understand where splitting/aggregation steps have occurred and the rule
+dependencies of your data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you don’t already have it in your conda environment, on NIH’s Biowulf
+you can get graphviz with <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">graphviz</span></code> on an interactive node.</p>
+</div>
+<ul class="simple">
+<li><p>a DAG will include the wildcards</p></li>
+<li><p>a rulegraph will <strong>not</strong> include the wildcards</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-dag<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>--Tpng<span class="w"> </span>&gt;<span class="w"> </span>dag.png
+snakemake<span class="w"> </span>--rulegraph<span class="w"> </span><span class="p">|</span><span class="w"> </span>dot<span class="w"> </span>--Tpng<span class="w"> </span>&gt;<span class="w"> </span>rulegraph.png
+</pre></div>
+</div>
+</section>
+<section id="expand">
+<h3>Expand<a class="headerlink" href="#expand" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">expand()</span></code> function is not anything magical or special – it is simply
+a convenient way to generate a regular Python list.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">states</span><span class="o">=[</span><span class="s2">&quot;Colorado&quot;</span>,<span class="w"> </span><span class="s2">&quot;Texas&quot;</span>,<span class="w"> </span>Maryland<span class="s2">&quot;]</span>
+<span class="s2">rule all:</span>
+<span class="s2">    input:</span>
+<span class="s2">        expand(&quot;</span><span class="o">{</span>state<span class="o">}</span>.txt<span class="s2">&quot;, states_list=state)</span>
+</pre></div>
+</div>
+<p>is exactly equivalent to:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rule<span class="w"> </span>all:
+<span class="w">    </span>input:
+<span class="w">        </span><span class="o">[</span><span class="s2">&quot;Colorado.txt&quot;</span>,<span class="w"> </span><span class="s2">&quot;Texas.txt&quot;</span>,<span class="w"> </span>Maryland.txt<span class="s2">&quot;]</span>
+</pre></div>
+</div>
+<p>Sometimes, you want to “protect” wildcards for feeding them into the next rule.
+In earlier versions of Snakemake, you can “escape” the <code class="docutils literal notranslate"><span class="pre">{</span></code> by using <code class="docutils literal notranslate"><span class="pre">{{</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">expand()</span></code> function will fill in other wildcards, and the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">}}</span></code> will
+become <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code> in the resulting list. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">states</span><span class="o">=[</span><span class="s2">&quot;Colorado&quot;</span>,<span class="w"> </span><span class="s2">&quot;Texas&quot;</span>,<span class="w"> </span>Maryland<span class="s2">&quot;]</span>
+<span class="s2">expand(&quot;</span><span class="o">{</span>state<span class="o">}</span>_<span class="o">{{</span>n<span class="o">}}</span>.txt<span class="s2">&quot;, state=states)</span>
+
+<span class="s2"># returns:</span>
+
+<span class="s2">[&quot;</span>Colorado_<span class="o">{</span>n<span class="o">}</span>.txt<span class="s2">&quot;, &quot;</span>Texas_<span class="o">{</span>n<span class="o">}</span>.txt<span class="s2">&quot;, Maryland_{n}.txt&quot;</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>In later versions of Snakemake, you can use the <code class="docutils literal notranslate"><span class="pre">allow_missing=True</span></code> argument when calling <code class="docutils literal notranslate"><span class="pre">expand()</span></code></p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p>Snakemake docs <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/project_info/faq.html#i-don-t-want-expand-to-use-every-wildcard-what-can-i-do">FAQ on not expanding every wildcard</a></p></li>
+<li><p>Snakemake docs <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#the-expand-function">section on expand()</a></p></li>
+<li><p><a class="reference external" href="https://github.com/snakemake/snakemake/blob/bdde680f01b5d276c68ef2d7ef71536e6d976652/snakemake/io.py#L1199">Source code for expand()</a> in a recent version (look in the <cite>snakemake/io.py</cite> file in any version)</p></li>
+</ul>
+</div>
+</section>
+<section id="wildcard-constraints">
+<h3>Wildcard constraints<a class="headerlink" href="#wildcard-constraints" title="Permalink to this heading">¶</a></h3>
+<p>Another way to help control the wildcard is to use a <code class="docutils literal notranslate"><span class="pre">wildcard_constraint</span></code>.
+This can be added at the top of your Snakefile (acting as a global variable) or
+within your individual rules (local variable). A wildcard constraint can help
+minimize all the possible combinations that are filled in. For example in
+<code class="docutils literal notranslate"><span class="pre">{state}_{number}.txt</span></code> you may want to specify that <code class="docutils literal notranslate"><span class="pre">{state}</span></code> may only be
+filled in with the following names: “Colorado”, “Texas”, or “Maryland” and
+<code class="docutils literal notranslate"><span class="pre">{number}</span></code> with “1”, “2”, “3”. Why? Because maybe you have a list that pulls
+all the possible combinations so you don’t want something called
+“1_Colorado.txt” or “2_3.txt” (total of 18 possible unique filename
+combinations), you want something like “Colorado_1.txt”, “Colorado_2.txt”,
+“Colorado_3.txt”, “Texas_1.txt”, “Texas_2.txt”, etc (total of 9 possible unique
+filename combinations). Constraints are specified using regular expressions, so
+it may look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wildcard_constraints</span><span class="p">:</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Colorado|Texas|Maryland&quot;</span><span class="p">,</span>
+    <span class="n">number</span><span class="o">=</span><span class="s2">&quot;1|2|3&quot;</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://snakemake.readthedocs.io/en/stable/tutorial/additional_features.html#constraining-wildcards">wildcard constraint section of tutorial</a></p></li>
+<li><p><a class="reference external" href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#snakefiles-wildcards">wildcards section</a> of the Snakemake docs has some more info</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/re.html">Python regular expression docs</a></p></li>
+<li><p><a class="reference external" href="https://pythex.org/">Pythex</a>, a great website for interactively building/debugging regular expressions</p></li>
+</ul>
+</div>
+</section>
+<section id="conda-envs-and-run-blocks">
+<h3>Conda envs and <code class="docutils literal notranslate"><span class="pre">run:</span></code> blocks<a class="headerlink" href="#conda-envs-and-run-blocks" title="Permalink to this heading">¶</a></h3>
+<p>You may find it useful to use <code class="docutils literal notranslate"><span class="pre">conda:</span></code> directives in rules so that the rule
+runs in its own environment. Keep in mind though that you can’t use this
+mechanism if you have a <code class="docutils literal notranslate"><span class="pre">run:</span></code> block. A <code class="docutils literal notranslate"><span class="pre">run</span></code> block doesn’t work with
+a separate conda environment because the Python code is sort of interleaved
+within the Snakefile, and there’s no way to activate a conda environment from
+within a running Python instance and somehow swap over all running code from
+memory into the new environment. <code class="docutils literal notranslate"><span class="pre">shell</span></code>, <code class="docutils literal notranslate"><span class="pre">wrapper</span></code>, and <code class="docutils literal notranslate"><span class="pre">script</span></code> are all
+fine to use with the <code class="docutils literal notranslate"><span class="pre">conda:</span></code> directive, so the solution is typically to
+refactor the code into a script or wrapper.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>This is also discussed in <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/project_info/faq.html#why-can-t-i-use-the-conda-directive-with-a-run-block">this Snakemake FAQ</a>.</p>
+</div>
+</section>
+</section>
 </section>
 
 
@@ -72,6 +464,26 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Snakemake</a><ul>
+<li><a class="reference internal" href="#learning-snakemake">Learning Snakemake</a></li>
+<li><a class="reference internal" href="#supporting-information-tips-and-tricks">Supporting information, tips and tricks</a><ul>
+<li><a class="reference internal" href="#thinking-like-snakemake">Thinking like Snakemake</a></li>
+<li><a class="reference internal" href="#be-careful-using-for-loops-in-rules">Be careful using for-loops in rules</a></li>
+<li><a class="reference internal" href="#wildcards-are-not-global-variables">Wildcards are NOT global variables</a></li>
+<li><a class="reference internal" href="#directed-acyclic-graph-dag">Directed Acyclic Graph (DAG)</a></li>
+<li><a class="reference internal" href="#expand">Expand</a></li>
+<li><a class="reference internal" href="#wildcard-constraints">Wildcard constraints</a></li>
+<li><a class="reference internal" href="#conda-envs-and-run-blocks">Conda envs and <code class="docutils literal notranslate"><span class="pre">run:</span></code> blocks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
