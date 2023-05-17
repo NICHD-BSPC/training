@@ -76,7 +76,7 @@ Other resources
 The remainder of this page goes into some more detail on various aspects of
 RNA-seq analysis, to be used as supplemental material.
 
-- The introductory paper `Hitchiker's guide to expression analysis https://www.annualreviews.org/doi/10.1146/annurev-biodatasci-072018-021255>`_ is co-authored
+- The introductory paper `Hitchiker's guide to expression analysis <https://www.annualreviews.org/doi/10.1146/annurev-biodatasci-072018-021255>`_ is co-authored
   by many big names in the field and gives a great overview and history.
 
 - The `DESeq2 paper
@@ -104,7 +104,8 @@ RNA-seq analysis, to be used as supplemental material.
   help visualize the different strand-specific protocols. If you're unsure,
   RSeQC's `infer_experiment.py
   <http://rseqc.sourceforge.net/#infer-experiment-py>`_ can help you figure it
-  out given a BAM and a BED file of genes.
+  out given a BAM and a BED file of genes. The `Griffith lab's post <https://rnabio.org/module-09-appendix/0009/12/01/StrandSettings/>`_
+  on strandedness also includes which library prep kits result in which kinds of libraries.
 
 - We base part of our RNA-seq template off of the `Bioconductor RNA-seq
   workflow
