@@ -93,6 +93,30 @@ transferring to a shared directory, use:
     # shorter version
     rsync -rtp --progress source/ dest/
 
+Transferring files from external storage to NIH HPC using rsync
+---------------------------------------------------------------
+
+The ``rsync`` command provides a straightforward way to manage file transfers from external 
+storage to NIH HPC. It's useful for transferring files without having to rely on Globus.
+
+
+Once you have the storage mounted on your machine, check the path by using the terminal. Let's 
+assume that the path to the mounted storate is ``/Volumes/collab-storage/geo-files``.
+
+.. code-block:: bash
+
+    # Transfer files to a temp directory
+    rsync --progress -rv --times /Volumes/collab-storage/geo-files username@helix.nih.gov:/scratch/transfer-to-bspc
+
+    # OR
+
+    # Transfer files to a destination directory in NICHD-core0 if present
+    rsync --progress -rv --times /Volumes/collab-storage/geo-files username@helix.nih.gov:/data/NICHD-core0/analysis/serpe/misc/GEO-submission
+
+
+Note that the ``/scratch`` is a temporary space available to all biowulf users, with a time limit. 
+Visit the `Storage on Biowulf & Helix <https://hpc.nih.gov/storage/>`_ for more info.
+
 
 Other useful options
 --------------------
