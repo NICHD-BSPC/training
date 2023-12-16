@@ -126,6 +126,110 @@ To run RStudio in NoMachine:
    (undocumented) flag ``--conda``. This sets things up properly to use the
    conda-installed version of R in RStudio.
 
+RStudio Server on Biowulf
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We can use `RStudio Server <https://posit.co/products/open-source/rstudio-server/>`_
+instead of NoMachin for R programming on Biowulf. This requires setting up an SSH tunnel 
+between your local computer and Biowulf using your SSH keys.
+Ensure that the SSH keys are set up for Biowulf (see 
+`More convenient SSH <biowulf.html#more-convenient-ssh>`_).
+
+Once you have the SSH keys ready, add the following proxy configuration to the ``~/.ssh/config``
+on your mac.
+
+.. code-block:: bash
+
+   Host cn*
+   User username
+   ProxyCommand /usr/bin/ssh -o ForwardAgent=yes username@biowulf.nih.gov nc -w 120ms %h %p
+
+Configure your proxy by following steps 6 and 7 in the `Windows: Run VS Code on a compute node
+<https://hpc.nih.gov/apps/vscode.html#win>`_ if you're using Windows.
+
+To run RStudio Server on Biowulf:
+
+* Log into Biowulf using your NIH account.
+* Allocate an `interactive node <https://hpc.nih.gov/docs/userguide.html#int>`_ with the ``-T/--tunnel``
+  (for tunneling) and ``--gres=lscratch:N`` (to allocate temporary space for RStudio Server) parameters.
+
+  .. code-block:: bash
+
+    user@biowulf:~$ sinteractive --tunnel
+    salloc.exe: Pending job allocation 26710013
+    salloc.exe: job 26710013 queued and waiting for resources
+    salloc.exe: job 26710013 has been allocated resources
+    salloc.exe: Granted job allocation 26710013
+    salloc.exe: Waiting for resource configuration
+    salloc.exe: Nodes cn3094 are ready for job
+
+    Created 1 generic SSH tunnel(s) from this compute node to 
+    biowulf for your use at port numbers defined 
+    in the $PORTn ($PORT1, ...) environment variables.
+
+
+    Please create a SSH tunnel from your workstation to these ports on biowulf.
+    On Linux/MacOS, open a terminal and run:
+
+        ssh  -L 45000:localhost:45000 biowulf.nih.gov
+
+    For Windows instructions, see https://hpc.nih.gov/docs/tunneling
+
+* Load RStudio Server as `guided by NIH HPC <https://hpc.nih.gov/apps/rstudio-server.html>`_.
+
+  .. code-block:: bash
+
+    [user@cn1640 ~]$ module load rstudio-server
+    [+] Loading gcc  9.2.0  ...
+    [-] Unloading gcc  9.2.0  ...
+    [+] Loading gcc  9.2.0  ...
+    [+] Loading openmpi 4.0.5  for GCC 9.2.0
+    [+] Loading ImageMagick  7.0.8  on cn4280
+    [+] Loading HDF5  1.10.4
+    [-] Unloading gcc  9.2.0  ...
+    [+] Loading gcc  9.2.0  ...
+    [+] Loading NetCDF 4.7.4_gcc9.2.0
+    [+] Loading pandoc  2.17.1.1  on cn4280
+    [+] Loading pcre2 10.21  ...
+    [+] Loading R 4.2.2
+    [+] Loading rstudio-server  2023.03.0-386
+
+
+* Ensure that R is available by loading `Biowulf's module <https://hpc.nih.gov/apps/R.html#int>`_ 
+  or by activating your conda environment where ``r-base`` is installed.
+* Start RStudio Server on your interactive node.
+
+  .. code-block:: bash
+
+    [user@cn1640 dir]$ rstudio-server
+
+    Please ensure you have set up the SSH port forwarding as described in the sinteractive instructions.
+
+    Please connect to http://localhost:39689/auth-sign-in?user=test2&password=nRmzfPWh_X8Z-03hbDjPz3bm
+    Use your username 'user' and the pasword 'nRmzfPWh_X8Z-03hbDjPz3bm' to login
+
+* Create an SSH tunnel connecting your local computer to Biowulf. If you're using Mac or Linux,
+  copy and paste the following code into a new terminal on your local machine.
+
+  .. code-block:: bash
+
+    (local_computer)$ alias tun='$(ssh biowulf.nih.gov /usr/local/slurm/bin/reconnect_tunnels)'
+    (local_computer)$ tun
+    ...
+    (biowulf)$
+
+  Follow the `Tunneling from Windows <https://hpc.nih.gov/docs/tunneling/#windows>`_ instruction
+  if you're using Windows. Do not close the tunneling terminal while using RStudio Server.
+
+* Copy and paste the host address 
+  (e.g. ``http://localhost:39689/auth-sign-in?user=test2&password=nRmzfPWh_X8Z-03hbDjPz3bm``)
+  provided by ``rstudio-server`` into your browser.
+
+.. note::
+
+   RStudio Server may raise an error with R in versions newer than those in Biowulf's module.
+   If you encounter this issue, downgrade your R version in conda environment or load it from 
+   Biowulf.
 
 tmux
 ~~~~
