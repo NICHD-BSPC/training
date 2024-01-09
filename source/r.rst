@@ -72,10 +72,6 @@ Beginner
   The NIH Library in Bldg 10 offers periodic R workshops, though they fill up
   quickly.
 
-
-- `Efficient R <https://csgillespie.github.io/efficientR/>`_ Once
-  you’re comfortable with R and looking to improve efficiency, have a look through this book. 
-
 - `Data Visualization: A Practical Introduction <http://socviz.co/>`_
   A data visualization-centric approach to learning R. Also has some
   great discussions on what makes a plot good or bad (channeling a fair
@@ -83,6 +79,9 @@ Beginner
 
 Intermediate
 ------------
+
+- `Efficient R <https://csgillespie.github.io/efficientR/>`_ Once
+  you’re comfortable with R and looking to improve efficiency, have a look through this book. 
 
 - `Modern Statistics for Modern Biology
   <http://web.stanford.edu/class/bios221/book>`_ assumes you
