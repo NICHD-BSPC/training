@@ -131,9 +131,13 @@ To run RStudio in NoMachine:
 RStudio Server on Biowulf
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We can use `RStudio Server <https://posit.co/products/open-source/rstudio-server/>`_
-instead of NoMachine for R programming on Biowulf. This requires setting up an SSH tunnel 
-between your local computer and Biowulf using your SSH keys.
+We can use `RStudio Server
+<https://posit.co/products/open-source/rstudio-server/>`_ instead of NoMachine
+for R programming on Biowulf. The great benefit to this is that there is little
+to no lag when typing, since the interface is entirely in your web browser. The
+downside is that this requires some additional complexity, specifically setting
+up an SSH tunnel between your local computer and Biowulf using your SSH keys.
+
 Ensure that the SSH keys are set up for Biowulf (see :ref:`convenient-biowulf-ssh`).
 
 Once you have the SSH keys ready, add the following proxy configuration to the ``~/.ssh/config``
@@ -151,8 +155,12 @@ Configure your proxy by following steps 6 and 7 in the `Windows: Run VS Code on 
 To run RStudio Server on Biowulf:
 
 * Log into Biowulf using your NIH account.
-* Allocate an `interactive node <https://hpc.nih.gov/docs/userguide.html#int>`_ with the ``-T/--tunnel``
-  (for tunneling) and ``--gres=lscratch:N`` (to allocate temporary space for RStudio Server) parameters.
+* Allocate an `interactive node <https://hpc.nih.gov/docs/userguide.html#int>`_
+  with the ``-T/--tunnel`` (for tunneling) and ``--gres=lscratch:N`` (to
+  allocate temporary space for RStudio Server) parameters. Instead of ``N`` you
+  should add the number of GB of temporary disk space you expect to need. This
+  can be small to start (say,
+  5 or 10).
 
   .. code-block:: bash
 
@@ -176,7 +184,7 @@ To run RStudio Server on Biowulf:
 
     For Windows instructions, see https://hpc.nih.gov/docs/tunneling
 
-* Load RStudio Server as `guided by NIH HPC <https://hpc.nih.gov/apps/rstudio-server.html>`_.
+* Load RStudio Server module, as `guided by NIH HPC <https://hpc.nih.gov/apps/rstudio-server.html>`_.
 
   .. code-block:: bash
 
@@ -198,6 +206,7 @@ To run RStudio Server on Biowulf:
 
 * Ensure that R is available by loading `Biowulf's module <https://hpc.nih.gov/apps/R.html#int>`_ 
   or by activating your conda environment where ``r-base`` is installed.
+
 * Start RStudio Server on your interactive node.
 
   .. code-block:: bash
@@ -220,7 +229,7 @@ To run RStudio Server on Biowulf:
     (biowulf)$
 
   Follow the `Tunneling from Windows <https://hpc.nih.gov/docs/tunneling/#windows>`_ instruction
-  if you're using Windows. Do not close the tunneling terminal while using RStudio Server.
+  if you're using Windows. **Do not close the tunneling terminal while using RStudio Server**.
 
 * Copy and paste the host address 
   (e.g. ``http://localhost:39689/auth-sign-in?user=test2&password=nRmzfPWh_X8Z-03hbDjPz3bm``)
