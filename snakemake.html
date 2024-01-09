@@ -1,17 +1,16 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Snakemake</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/better.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css?v=f848c55c" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="GitLab CI/CD" href="gitlab-cicd.html" />
@@ -51,7 +50,7 @@
           <div class="body" role="main">
             
   <section id="snakemake">
-<span id="id1"></span><h1>Snakemake<a class="headerlink" href="#snakemake" title="Permalink to this heading">¶</a></h1>
+<span id="id1"></span><h1>Snakemake<a class="headerlink" href="#snakemake" title="Link to this heading">¶</a></h1>
 <p>A workflow manager like Snakemake is the next step after simple bash scripts
 towards fully scalable and reproducible analyses. Another popular workflow
 manager for genomics is <a class="reference external" href="https://www.nextflow.io/">Nextflow</a> and <a class="reference external" href="https://www.nature.com/articles/s41592-021-01254-9">Wratten et
@@ -79,7 +78,7 @@ a new sample is added Snakemake will figure out just the rules that need to be
 run on that single sample, leaving everything else untouched. It also trivially
 parallelizes tasks that are run, dramatically speeding up workflow runs.</p>
 <section id="learning-snakemake">
-<h2>Learning Snakemake<a class="headerlink" href="#learning-snakemake" title="Permalink to this heading">¶</a></h2>
+<h2>Learning Snakemake<a class="headerlink" href="#learning-snakemake" title="Link to this heading">¶</a></h2>
 <p>The following resources are ordered from most basic to more advanced.</p>
 <ul class="simple">
 <li><p>Introductory <a class="reference external" href="https://slides.com/johanneskoester/snakemake-short">snakemake slides</a> give a very brief
@@ -93,12 +92,12 @@ will give you a more in-depth understanding.</p></li>
 </ul>
 </section>
 <section id="supporting-information-tips-and-tricks">
-<h2>Supporting information, tips and tricks<a class="headerlink" href="#supporting-information-tips-and-tricks" title="Permalink to this heading">¶</a></h2>
+<h2>Supporting information, tips and tricks<a class="headerlink" href="#supporting-information-tips-and-tricks" title="Link to this heading">¶</a></h2>
 <p>The rest of this page offers some suggestions, clarifications, and tips. The
 goal is to add some additional information on topics that we typically see new
 users struggling with.</p>
 <section id="thinking-like-snakemake">
-<h3>Thinking like Snakemake<a class="headerlink" href="#thinking-like-snakemake" title="Permalink to this heading">¶</a></h3>
+<h3>Thinking like Snakemake<a class="headerlink" href="#thinking-like-snakemake" title="Link to this heading">¶</a></h3>
 <p>When teaching Snakemake, it’s often useful to “think like Snakemake” to
 understand how all the moving parts fit together. For this exercise, let’s
 create an example Snakefile.</p>
@@ -177,7 +176,7 @@ patterns match, filling in wildcards into input and seeing if <em>that</em> exis
 the general process. Keeping this in mind can help when debugging.</p>
 </section>
 <section id="be-careful-using-for-loops-in-rules">
-<h3>Be careful using for-loops in rules<a class="headerlink" href="#be-careful-using-for-loops-in-rules" title="Permalink to this heading">¶</a></h3>
+<h3>Be careful using for-loops in rules<a class="headerlink" href="#be-careful-using-for-loops-in-rules" title="Link to this heading">¶</a></h3>
 <p>When initially learning Snakemake, you may be inclined to use <code class="docutils literal notranslate"><span class="pre">expand()</span></code> to
 get a list of files, and then iterate over them in a for-loop within the rule.</p>
 <p>For example in a <code class="docutils literal notranslate"><span class="pre">shell:</span></code> block it might look something like:</p>
@@ -283,7 +282,7 @@ it will run 6 times in parallel.</p>
 more detail on this.</p>
 </section>
 <section id="wildcards-are-not-global-variables">
-<h3>Wildcards are NOT global variables<a class="headerlink" href="#wildcards-are-not-global-variables" title="Permalink to this heading">¶</a></h3>
+<h3>Wildcards are NOT global variables<a class="headerlink" href="#wildcards-are-not-global-variables" title="Link to this heading">¶</a></h3>
 <p>Consider the following example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s1">&#39;C&quot;]</span>
 <span class="n">read_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
@@ -351,7 +350,7 @@ accordingly for the input.</p>
 consistent across rules for clarity.</p>
 </section>
 <section id="directed-acyclic-graph-dag">
-<h3>Directed Acyclic Graph (DAG)<a class="headerlink" href="#directed-acyclic-graph-dag" title="Permalink to this heading">¶</a></h3>
+<h3>Directed Acyclic Graph (DAG)<a class="headerlink" href="#directed-acyclic-graph-dag" title="Link to this heading">¶</a></h3>
 <p>This is a quick way to visualize the workflow and associated wildcards. Using
 this tool at various parts of your snakefile development process can help you
 understand where splitting/aggregation steps have occurred and the rule
@@ -371,7 +370,7 @@ snakemake<span class="w"> </span>--rulegraph<span class="w"> </span><span class=
 </div>
 </section>
 <section id="expand">
-<h3>Expand<a class="headerlink" href="#expand" title="Permalink to this heading">¶</a></h3>
+<h3>Expand<a class="headerlink" href="#expand" title="Link to this heading">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">expand()</span></code> function is not anything magical or special – it is simply
 a convenient way to generate a regular Python list.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">states</span><span class="o">=[</span><span class="s2">&quot;Colorado&quot;</span>,<span class="w"> </span><span class="s2">&quot;Texas&quot;</span>,<span class="w"> </span>Maryland<span class="s2">&quot;]</span>
@@ -409,7 +408,7 @@ become <code class="docutils literal notranslate"><span class="pre">{</span> <sp
 </div>
 </section>
 <section id="wildcard-constraints">
-<h3>Wildcard constraints<a class="headerlink" href="#wildcard-constraints" title="Permalink to this heading">¶</a></h3>
+<h3>Wildcard constraints<a class="headerlink" href="#wildcard-constraints" title="Link to this heading">¶</a></h3>
 <p>Another way to help control the wildcard is to use a <code class="docutils literal notranslate"><span class="pre">wildcard_constraint</span></code>.
 This can be added at the top of your Snakefile (acting as a global variable) or
 within your individual rules (local variable). A wildcard constraint can help
@@ -439,7 +438,7 @@ it may look like this:</p>
 </div>
 </section>
 <section id="conda-envs-and-run-blocks">
-<h3>Conda envs and <code class="docutils literal notranslate"><span class="pre">run:</span></code> blocks<a class="headerlink" href="#conda-envs-and-run-blocks" title="Permalink to this heading">¶</a></h3>
+<h3>Conda envs and <code class="docutils literal notranslate"><span class="pre">run:</span></code> blocks<a class="headerlink" href="#conda-envs-and-run-blocks" title="Link to this heading">¶</a></h3>
 <p>You may find it useful to use <code class="docutils literal notranslate"><span class="pre">conda:</span></code> directives in rules so that the rule
 runs in its own environment. Keep in mind though that you can’t use this
 mechanism if you have a <code class="docutils literal notranslate"><span class="pre">run:</span></code> block. A <code class="docutils literal notranslate"><span class="pre">run</span></code> block doesn’t work with
@@ -523,7 +522,7 @@ refactor the code into a script or wrapper.</p>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      6.1.3.
+      7.2.6.
 
   </footer>
 

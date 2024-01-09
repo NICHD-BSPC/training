@@ -18,7 +18,7 @@ Setting up
 ----------
 
 Install Python using either `Anaconda
-<https://www.anaconda.com/distribution/>`_ (if you want "the works", including
+<https://www.anaconda.com/download>`_ (if you want "the works", including
 many of the libraries described below) or `Miniconda
 <https://docs.conda.io/en/latest/miniconda.html>`_ (which is much more minimal;
 you'll need to install things separately using ``conda install

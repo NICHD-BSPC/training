@@ -1,17 +1,16 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Biowulf help topics</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/better.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css?v=f848c55c" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="UCSC Genome Browser" href="ucsc.html" />
@@ -51,7 +50,7 @@
           <div class="body" role="main">
             
   <section id="biowulf-help-topics">
-<h1>Biowulf help topics<a class="headerlink" href="#biowulf-help-topics" title="Permalink to this heading">¶</a></h1>
+<h1>Biowulf help topics<a class="headerlink" href="#biowulf-help-topics" title="Link to this heading">¶</a></h1>
 <p>In BSPC, our general workflow when connecting to Biowulf is this:</p>
 <ol class="arabic simple">
 <li><p>Open a terminal</p></li>
@@ -65,11 +64,11 @@
 <li><p>Open a terminal from within NoMachine session on Biowulf.</p></li>
 </ol>
 <section id="tips">
-<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this heading">¶</a></h2>
+<h2>Tips<a class="headerlink" href="#tips" title="Link to this heading">¶</a></h2>
 <p>Here are some tips for making it as seamless as possible to connect.</p>
 </section>
 <section id="more-convenient-ssh">
-<h2>More convenient SSH<a class="headerlink" href="#more-convenient-ssh" title="Permalink to this heading">¶</a></h2>
+<span id="convenient-biowulf-ssh"></span><h2>More convenient SSH<a class="headerlink" href="#more-convenient-ssh" title="Link to this heading">¶</a></h2>
 <p>Typically when you SSH to Biowulf you will get asked for your password. This
 can be made a bit more convenient as follows.</p>
 <p>First, create a new key pair and copy it to biowulf using <a class="reference external" href="https://www.ssh.com/ssh/copy-id">these
@@ -84,7 +83,7 @@ bash session rather than every time it’s used.</p>
 <p>Now when you connect you are just substituting your pass phrase for your
 password, but this makes other things possible (see next section).</p>
 <section id="add-ssh-key-to-mac-keychain">
-<h3>Add SSH key to Mac keychain<a class="headerlink" href="#add-ssh-key-to-mac-keychain" title="Permalink to this heading">¶</a></h3>
+<h3>Add SSH key to Mac keychain<a class="headerlink" href="#add-ssh-key-to-mac-keychain" title="Link to this heading">¶</a></h3>
 <p>If you’re on a Mac, adding the following lines to your <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file
 will allow SSH to use the Mac keychain. This means that once you log in to your
 Mac like normal, you don’t need to enter your SSH pass phrase at all. That
@@ -110,7 +109,7 @@ ecdsa algorithms.</p>
 <p>So that to connect Biowulf, you open a terminal, type <code class="docutils literal notranslate"><span class="pre">b</span></code>, then Enter, and you’re in.</p>
 </section>
 <section id="nomachine-and-rstudio">
-<h3>NoMachine and RStudio<a class="headerlink" href="#nomachine-and-rstudio" title="Permalink to this heading">¶</a></h3>
+<h3>NoMachine and RStudio<a class="headerlink" href="#nomachine-and-rstudio" title="Link to this heading">¶</a></h3>
 <p>When doing visualization-heavy work, especially in RMarkdown in RStudio, we use NoMachine.</p>
 <p>In BSPC, we prefer to manage our own conda environments so we can install
 exactly the versions we need (and use development versions of packages if
@@ -151,8 +150,107 @@ Rstudio”, but don’t do that if you’re using a conda env.</p></li>
 conda-installed version of R in RStudio.</p></li>
 </ol>
 </section>
+<section id="rstudio-server-on-biowulf">
+<h3>RStudio Server on Biowulf<a class="headerlink" href="#rstudio-server-on-biowulf" title="Link to this heading">¶</a></h3>
+<p>We can use <a class="reference external" href="https://posit.co/products/open-source/rstudio-server/">RStudio Server</a> instead of NoMachine
+for R programming on Biowulf. The great benefit to this is that there is little
+to no lag when typing, since the interface is entirely in your web browser. The
+downside is that this requires some additional complexity, specifically setting
+up an SSH tunnel between your local computer and Biowulf using your SSH keys.</p>
+<p>Ensure that the SSH keys are set up for Biowulf (see <a class="reference internal" href="#convenient-biowulf-ssh"><span class="std std-ref">More convenient SSH</span></a>).</p>
+<p>Once you have the SSH keys ready, add the following proxy configuration to the <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code>
+on your mac.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Host<span class="w"> </span>cn*
+User<span class="w"> </span>username
+ProxyCommand<span class="w"> </span>/usr/bin/ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">ForwardAgent</span><span class="o">=</span>yes<span class="w"> </span>username@biowulf.nih.gov<span class="w"> </span>nc<span class="w"> </span>-w<span class="w"> </span>120ms<span class="w"> </span>%h<span class="w"> </span>%p
+</pre></div>
+</div>
+<p>Configure your proxy by following steps 6 and 7 in the <a class="reference external" href="https://hpc.nih.gov/apps/vscode.html#win">Windows: Run VS Code on a compute node</a> if you’re using Windows.</p>
+<p>To run RStudio Server on Biowulf:</p>
+<ul>
+<li><p>Log into Biowulf using your NIH account.</p></li>
+<li><p>Allocate an <a class="reference external" href="https://hpc.nih.gov/docs/userguide.html#int">interactive node</a>
+with the <code class="docutils literal notranslate"><span class="pre">-T/--tunnel</span></code> (for tunneling) and <code class="docutils literal notranslate"><span class="pre">--gres=lscratch:N</span></code> (to
+allocate temporary space for RStudio Server) parameters. Instead of <code class="docutils literal notranslate"><span class="pre">N</span></code> you
+should add the number of GB of temporary disk space you expect to need. This
+can be small to start (say,
+5 or 10).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@biowulf:~$<span class="w"> </span>sinteractive<span class="w"> </span>--tunnel
+salloc.exe:<span class="w"> </span>Pending<span class="w"> </span>job<span class="w"> </span>allocation<span class="w"> </span><span class="m">26710013</span>
+salloc.exe:<span class="w"> </span>job<span class="w"> </span><span class="m">26710013</span><span class="w"> </span>queued<span class="w"> </span>and<span class="w"> </span>waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>resources
+salloc.exe:<span class="w"> </span>job<span class="w"> </span><span class="m">26710013</span><span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>allocated<span class="w"> </span>resources
+salloc.exe:<span class="w"> </span>Granted<span class="w"> </span>job<span class="w"> </span>allocation<span class="w"> </span><span class="m">26710013</span>
+salloc.exe:<span class="w"> </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>resource<span class="w"> </span>configuration
+salloc.exe:<span class="w"> </span>Nodes<span class="w"> </span>cn3094<span class="w"> </span>are<span class="w"> </span>ready<span class="w"> </span><span class="k">for</span><span class="w"> </span>job
+
+Created<span class="w"> </span><span class="m">1</span><span class="w"> </span>generic<span class="w"> </span>SSH<span class="w"> </span>tunnel<span class="o">(</span>s<span class="o">)</span><span class="w"> </span>from<span class="w"> </span>this<span class="w"> </span>compute<span class="w"> </span>node<span class="w"> </span>to
+biowulf<span class="w"> </span><span class="k">for</span><span class="w"> </span>your<span class="w"> </span>use<span class="w"> </span>at<span class="w"> </span>port<span class="w"> </span>numbers<span class="w"> </span>defined
+<span class="k">in</span><span class="w"> </span>the<span class="w"> </span><span class="nv">$PORTn</span><span class="w"> </span><span class="o">(</span><span class="nv">$PORT1</span>,<span class="w"> </span>...<span class="o">)</span><span class="w"> </span>environment<span class="w"> </span>variables.
+
+
+Please<span class="w"> </span>create<span class="w"> </span>a<span class="w"> </span>SSH<span class="w"> </span>tunnel<span class="w"> </span>from<span class="w"> </span>your<span class="w"> </span>workstation<span class="w"> </span>to<span class="w"> </span>these<span class="w"> </span>ports<span class="w"> </span>on<span class="w"> </span>biowulf.
+On<span class="w"> </span>Linux/MacOS,<span class="w"> </span>open<span class="w"> </span>a<span class="w"> </span>terminal<span class="w"> </span>and<span class="w"> </span>run:
+
+<span class="w">    </span>ssh<span class="w">  </span>-L<span class="w"> </span><span class="m">45000</span>:localhost:45000<span class="w"> </span>biowulf.nih.gov
+
+For<span class="w"> </span>Windows<span class="w"> </span>instructions,<span class="w"> </span>see<span class="w"> </span>https://hpc.nih.gov/docs/tunneling
+</pre></div>
+</div>
+</li>
+<li><p>Load RStudio Server module, as <a class="reference external" href="https://hpc.nih.gov/apps/rstudio-server.html">guided by NIH HPC</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>user@cn1640<span class="w"> </span>~<span class="o">]</span>$<span class="w"> </span>module<span class="w"> </span>load<span class="w"> </span>rstudio-server
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>gcc<span class="w">  </span><span class="m">9</span>.2.0<span class="w">  </span>...
+<span class="o">[</span>-<span class="o">]</span><span class="w"> </span>Unloading<span class="w"> </span>gcc<span class="w">  </span><span class="m">9</span>.2.0<span class="w">  </span>...
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>gcc<span class="w">  </span><span class="m">9</span>.2.0<span class="w">  </span>...
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>openmpi<span class="w"> </span><span class="m">4</span>.0.5<span class="w">  </span><span class="k">for</span><span class="w"> </span>GCC<span class="w"> </span><span class="m">9</span>.2.0
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>ImageMagick<span class="w">  </span><span class="m">7</span>.0.8<span class="w">  </span>on<span class="w"> </span>cn4280
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>HDF5<span class="w">  </span><span class="m">1</span>.10.4
+<span class="o">[</span>-<span class="o">]</span><span class="w"> </span>Unloading<span class="w"> </span>gcc<span class="w">  </span><span class="m">9</span>.2.0<span class="w">  </span>...
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>gcc<span class="w">  </span><span class="m">9</span>.2.0<span class="w">  </span>...
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>NetCDF<span class="w"> </span><span class="m">4</span>.7.4_gcc9.2.0
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>pandoc<span class="w">  </span><span class="m">2</span>.17.1.1<span class="w">  </span>on<span class="w"> </span>cn4280
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>pcre2<span class="w"> </span><span class="m">10</span>.21<span class="w">  </span>...
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>R<span class="w"> </span><span class="m">4</span>.2.2
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>rstudio-server<span class="w">  </span><span class="m">2023</span>.03.0-386
+</pre></div>
+</div>
+</li>
+<li><p>Ensure that R is available by loading <a class="reference external" href="https://hpc.nih.gov/apps/R.html#int">Biowulf’s module</a>
+or by activating your conda environment where <code class="docutils literal notranslate"><span class="pre">r-base</span></code> is installed.</p></li>
+<li><p>Start RStudio Server on your interactive node.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>user@cn1640<span class="w"> </span>dir<span class="o">]</span>$<span class="w"> </span>rstudio-server
+
+Please<span class="w"> </span>ensure<span class="w"> </span>you<span class="w"> </span>have<span class="w"> </span><span class="nb">set</span><span class="w"> </span>up<span class="w"> </span>the<span class="w"> </span>SSH<span class="w"> </span>port<span class="w"> </span>forwarding<span class="w"> </span>as<span class="w"> </span>described<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>sinteractive<span class="w"> </span>instructions.
+
+Please<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>http://localhost:39689/auth-sign-in?user<span class="o">=</span>test2<span class="p">&amp;</span><span class="nv">password</span><span class="o">=</span>nRmzfPWh_X8Z-03hbDjPz3bm
+Use<span class="w"> </span>your<span class="w"> </span>username<span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>pasword<span class="w"> </span><span class="s1">&#39;nRmzfPWh_X8Z-03hbDjPz3bm&#39;</span><span class="w"> </span>to<span class="w"> </span>login
+</pre></div>
+</div>
+</li>
+<li><p>Create an SSH tunnel connecting your local computer to Biowulf. If you’re using Mac or Linux,
+copy and paste the following code into a new terminal on your local machine.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>local_computer<span class="o">)</span>$<span class="w"> </span><span class="nb">alias</span><span class="w"> </span><span class="nv">tun</span><span class="o">=</span><span class="s1">&#39;$(ssh biowulf.nih.gov /usr/local/slurm/bin/reconnect_tunnels)&#39;</span>
+<span class="o">(</span>local_computer<span class="o">)</span>$<span class="w"> </span>tun
+...
+<span class="o">(</span>biowulf<span class="o">)</span>$
+</pre></div>
+</div>
+<p>Follow the <a class="reference external" href="https://hpc.nih.gov/docs/tunneling/#windows">Tunneling from Windows</a> instruction
+if you’re using Windows. <strong>Do not close the tunneling terminal while using RStudio Server</strong>.</p>
+</li>
+<li><p>Copy and paste the host address
+(e.g. <code class="docutils literal notranslate"><span class="pre">http://localhost:39689/auth-sign-in?user=test2&amp;password=nRmzfPWh_X8Z-03hbDjPz3bm</span></code>)
+provided by <code class="docutils literal notranslate"><span class="pre">rstudio-server</span></code> into your browser.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RStudio Server may raise an error with R in versions newer than those in Biowulf’s module.
+If you encounter this issue, downgrade your R version in conda environment or load it from
+Biowulf.</p>
+</div>
+</section>
 <section id="tmux">
-<h3>tmux<a class="headerlink" href="#tmux" title="Permalink to this heading">¶</a></h3>
+<h3>tmux<a class="headerlink" href="#tmux" title="Link to this heading">¶</a></h3>
 <p>We typically SSH into Helix and attach to a persistent tmux session (or create
 a new tmux session, roughly once a month). From there we ssh over to Biowulf.
 Helix has lots more resources available and tends to have less lag or slowdown
@@ -163,7 +261,7 @@ your tmux session by then!</p>
 </section>
 </section>
 <section id="limitations-of-mounted-drives">
-<h2>Limitations of mounted drives<a class="headerlink" href="#limitations-of-mounted-drives" title="Permalink to this heading">¶</a></h2>
+<h2>Limitations of mounted drives<a class="headerlink" href="#limitations-of-mounted-drives" title="Link to this heading">¶</a></h2>
 <p>While it’s convenient to map biowulf drives locally, there are
 limitations. It would be best to treat the mapped drive as
 <strong>read-only</strong>.</p>
@@ -188,7 +286,7 @@ destroyed and replaced with a regular file</strong>.</p></li>
 </ul>
 </section>
 <section id="squeue">
-<h2>squeue<a class="headerlink" href="#squeue" title="Permalink to this heading">¶</a></h2>
+<h2>squeue<a class="headerlink" href="#squeue" title="Link to this heading">¶</a></h2>
 <p>The default output of <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-u</span></code> doesn’t have a lot of info. Also,
 it’s a pain (for me) to type. Digging through the man page for squeue, I
 found you can control which columns are shown. Here’s what I’ve aliased
@@ -201,7 +299,7 @@ much time is left, and a longer “name” field and “command” field to bett
 track which job is which when you have a ton of jobs going.</p>
 </section>
 <section id="fastq-dump">
-<h2>fastq-dump<a class="headerlink" href="#fastq-dump" title="Permalink to this heading">¶</a></h2>
+<h2>fastq-dump<a class="headerlink" href="#fastq-dump" title="Link to this heading">¶</a></h2>
 <p>By default, fastq-dump uses local caching in your home directory
 (<code class="docutils literal notranslate"><span class="pre">~/ncbi</span></code> I believe) which, if you’re not careful can fill up all your
 quota. If you use <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">sratoolkit</span></code> on biowulf, it sets a
@@ -247,11 +345,11 @@ directory.</p>
 </div>
 </section>
 <section id="avoid-swarm-clutter">
-<h2>Avoid <code class="docutils literal notranslate"><span class="pre">swarm</span></code> clutter<a class="headerlink" href="#avoid-swarm-clutter" title="Permalink to this heading">¶</a></h2>
+<h2>Avoid <code class="docutils literal notranslate"><span class="pre">swarm</span></code> clutter<a class="headerlink" href="#avoid-swarm-clutter" title="Link to this heading">¶</a></h2>
 <p>When running <code class="docutils literal notranslate"><span class="pre">swarm</span></code>, use <code class="docutils literal notranslate"><span class="pre">--noout</span> <span class="pre">--noerror</span></code> to avoid getting all the <code class="docutils literal notranslate"><span class="pre">swarm_*</span></code> output files.</p>
 </section>
 <section id="consider-dev-shm-for-high-i-o">
-<h2>Consider <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> for high I/O<a class="headerlink" href="#consider-dev-shm-for-high-i-o" title="Permalink to this heading">¶</a></h2>
+<h2>Consider <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> for high I/O<a class="headerlink" href="#consider-dev-shm-for-high-i-o" title="Link to this heading">¶</a></h2>
 <p>Copying data to <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> to put it in the memory temp file system. This
 should be super fast I/O access. The size is limited to the <code class="docutils literal notranslate"><span class="pre">--mem</span></code> for the
 job and to 50% of node memory.</p>
@@ -280,6 +378,7 @@ clean up when you’re done!</p>
 <li><a class="reference internal" href="#more-convenient-ssh">More convenient SSH</a><ul>
 <li><a class="reference internal" href="#add-ssh-key-to-mac-keychain">Add SSH key to Mac keychain</a></li>
 <li><a class="reference internal" href="#nomachine-and-rstudio">NoMachine and RStudio</a></li>
+<li><a class="reference internal" href="#rstudio-server-on-biowulf">RStudio Server on Biowulf</a></li>
 <li><a class="reference internal" href="#tmux">tmux</a></li>
 </ul>
 </li>
@@ -332,7 +431,7 @@ clean up when you’re done!</p>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      6.1.3.
+      7.2.6.
 
   </footer>
 

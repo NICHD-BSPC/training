@@ -1,17 +1,16 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Variant calling</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/better.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css?v=f848c55c" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Bulk RNA-seq analysis" href="rnaseq.html" />
@@ -51,7 +50,7 @@
           <div class="body" role="main">
             
   <section id="variant-calling">
-<span id="id1"></span><h1>Variant calling<a class="headerlink" href="#variant-calling" title="Permalink to this heading">¶</a></h1>
+<span id="id1"></span><h1>Variant calling<a class="headerlink" href="#variant-calling" title="Link to this heading">¶</a></h1>
 <p>Variant calling is the process of looking for differences in the genome. This
 could be looking for differences between individuals (germline calling) or
 between a tumor and matched normal tissue (somatic calling).</p>
@@ -63,7 +62,7 @@ workflow. <a class="reference external" href="https://genomemedicine.biomedcentr
 2</a>
 is especially good to study as it has examples of incorrectly called variants
 and shows how to critically evaluate calls.</p></li>
-<li><p>Data Carpentry’s “Wrangling Genomics” workshop has a <a class="reference external" href="https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html">section on variant
+<li><p>Data Carpentry’s “Wrangling Genomics” workshop has a <a class="reference external" href="https://datacarpentry.org/wrangling-genomics/04-variant_calling.html">section on variant
 calling</a>
 that walks through some of the basics. Depending on which machine you’re
 running it on, you may want to start at the <a class="reference external" href="https://datacarpentry.org/genomics-workshop/">beginning of the workshop</a> which walks you through
@@ -76,7 +75,7 @@ and <a class="reference external" href="https://gatk.broadinstitute.org/hc/en-us
 give a lot of detail and context.</p></li>
 </ul>
 <section id="terminology">
-<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">¶</a></h2>
+<h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">¶</a></h2>
 <dl class="field-list simple">
 <dt class="field-odd">SNV<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Single-nucleotide variant, typically use GATK to call these.</p>
@@ -110,7 +109,7 @@ it’s quite a bit more complicated than that.</p>
 </dl>
 </section>
 <section id="interpreting-and-prioritizing-variants">
-<h2>Interpreting and prioritizing variants<a class="headerlink" href="#interpreting-and-prioritizing-variants" title="Permalink to this heading">¶</a></h2>
+<h2>Interpreting and prioritizing variants<a class="headerlink" href="#interpreting-and-prioritizing-variants" title="Link to this heading">¶</a></h2>
 <p>Calling variants is just the first step. You’ll probably find thousands. Which
 ones are meaningful?</p>
 <p>Variant annotation is the process of adding extra information to each variant.
@@ -186,7 +185,7 @@ included in dbNSFP.</p></li>
 </ul>
 </section>
 <section id="visualization">
-<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading">¶</a></h2>
+<h2>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">¶</a></h2>
 <p>The <a class="reference external" href="https://gnomad.broadinstitute.org/">gnomAD browser</a> is a great way to
 visualize your variants.</p>
 <p>The <a class="reference external" href="http://genome.ucsc.edu">UCSC Genome Browser</a> has tracks for many of the databases noted above.</p>
@@ -194,7 +193,7 @@ visualize your variants.</p>
 2 show the ways in which small indels can be called in different ways.</p>
 </section>
 <section id="additional-notes">
-<h2>Additional notes<a class="headerlink" href="#additional-notes" title="Permalink to this heading">¶</a></h2>
+<h2>Additional notes<a class="headerlink" href="#additional-notes" title="Link to this heading">¶</a></h2>
 <div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>This section could use some better organization</p>
@@ -244,7 +243,7 @@ describe variants in genes causing Mendelian disorders.</p></li>
 </ul>
 </section>
 <section id="other-resources">
-<h2>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a></h2>
+<h2>Other resources<a class="headerlink" href="#other-resources" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>The “Extant-knowledge-based candidate prioritization” section of <a class="reference external" href="https://www.future-science.com/doi/10.2144/000114492">Dashti 2018</a> gives an example of
 what the final output of many database searches for a candidate gene.</p></li>
@@ -317,7 +316,7 @@ databases and is very useful for exploring existing knowledge.</p></li>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      6.1.3.
+      7.2.6.
 
   </footer>
 

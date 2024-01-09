@@ -1,17 +1,16 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Conda</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/better.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css?v=f848c55c" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Rsync" href="rsync.html" />
@@ -51,7 +50,7 @@
           <div class="body" role="main">
             
   <section id="conda">
-<span id="id1"></span><h1>Conda<a class="headerlink" href="#conda" title="Permalink to this heading">¶</a></h1>
+<span id="id1"></span><h1>Conda<a class="headerlink" href="#conda" title="Link to this heading">¶</a></h1>
 <p>Conda helps install and manage software packages in a separate environment that
 is isolated from the rest of the system. You install conda once, and from there
 you use use conda to install lots of other software, without needing root
@@ -101,7 +100,7 @@ is a rather large task. There are plans to do this but the packages are not
 available yet.</p>
 </div>
 <section id="what-is-an-environment">
-<h2>What is an environment?<a class="headerlink" href="#what-is-an-environment" title="Permalink to this heading">¶</a></h2>
+<h2>What is an environment?<a class="headerlink" href="#what-is-an-environment" title="Link to this heading">¶</a></h2>
 <p>The purpose of conda is to create environments. We create environments and then
 <em>activate</em> them to use them.</p>
 <p>What is an environment?</p>
@@ -173,7 +172,7 @@ environment is a directory containing executables that has been prepended to the
 <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
 </section>
 <section id="activating-and-deactivating-environments">
-<h2>Activating and deactivating environments<a class="headerlink" href="#activating-and-deactivating-environments" title="Permalink to this heading">¶</a></h2>
+<h2>Activating and deactivating environments<a class="headerlink" href="#activating-and-deactivating-environments" title="Link to this heading">¶</a></h2>
 <p><strong>Activating an environment</strong> with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code> will add the
 environment’s directory containing executables to the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>. This is the
 <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory of the evironment. For example, if we create a simple
@@ -210,7 +209,7 @@ again to deactivate the base environment, a location like <code class="docutils 
 (in the case of MacOS).</p>
 </section>
 <section id="difference-between-named-environment-and-a-path-environment">
-<h2>Difference between named environment and a path environment<a class="headerlink" href="#difference-between-named-environment-and-a-path-environment" title="Permalink to this heading">¶</a></h2>
+<h2>Difference between named environment and a path environment<a class="headerlink" href="#difference-between-named-environment-and-a-path-environment" title="Link to this heading">¶</a></h2>
 <p>If we create a new environment like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">proj</span> <span class="n">python</span>
 </pre></div>
@@ -248,7 +247,7 @@ maintain a consistent naming convention, then it’s very clear which environmen
 should be used for the project.</p>
 </section>
 <section id="conventions-for-project-specific-environments">
-<h2>Conventions for project-specific environments<a class="headerlink" href="#conventions-for-project-specific-environments" title="Permalink to this heading">¶</a></h2>
+<h2>Conventions for project-specific environments<a class="headerlink" href="#conventions-for-project-specific-environments" title="Link to this heading">¶</a></h2>
 <p>In BSPC, we have the convention that each project directory should have at least
 an <code class="docutils literal notranslate"><span class="pre">env</span></code> directory, at the top level of the project, containing the conda
 environment to be used by that project.</p>
@@ -260,7 +259,7 @@ an obvious environment directory name
 makes it easy for others to find.</p>
 </section>
 <section id="creating-an-environment">
-<h2>Creating an environment<a class="headerlink" href="#creating-an-environment" title="Permalink to this heading">¶</a></h2>
+<h2>Creating an environment<a class="headerlink" href="#creating-an-environment" title="Link to this heading">¶</a></h2>
 <p>There are three ways to specify what should go into an environment:</p>
 <ol class="arabic simple">
 <li><p>Directly on the command line. Not advisable because it’s harder to track
@@ -298,7 +297,7 @@ contents:</p>
 <p>That is, use <code class="docutils literal notranslate"><span class="pre">create</span></code> for a text file, and <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">create</span></code> for a YAML file.</p>
 </section>
 <section id="updating-and-managing-environments">
-<h2>Updating and managing environments<a class="headerlink" href="#updating-and-managing-environments" title="Permalink to this heading">¶</a></h2>
+<h2>Updating and managing environments<a class="headerlink" href="#updating-and-managing-environments" title="Link to this heading">¶</a></h2>
 <p>In BSPC, we have the policy that <em>anything added to the environment should be
 recorded in a file</em> which is then used to update the environment. That way, the
 environment file is the authoritative source of what was put into the
@@ -315,7 +314,7 @@ installed, and in this case <code class="docutils literal notranslate"><span cla
 installed.</p>
 </section>
 <section id="conda-envs-cannot-be-moved">
-<h2>Conda envs cannot be moved<a class="headerlink" href="#conda-envs-cannot-be-moved" title="Permalink to this heading">¶</a></h2>
+<h2>Conda envs cannot be moved<a class="headerlink" href="#conda-envs-cannot-be-moved" title="Link to this heading">¶</a></h2>
 <p>Due to the way that libraries (typically C and C++) are handled in conda, the
 absolute path to an environment is written into many of the executable files at
 install time. This means that if the environment is moved to another location,
@@ -323,7 +322,7 @@ those absolute paths will no longer be pointing to the paths where the libraries
 are, which breaks the environment.</p>
 </section>
 <section id="recording-installed-packages">
-<h2>Recording installed packages<a class="headerlink" href="#recording-installed-packages" title="Permalink to this heading">¶</a></h2>
+<h2>Recording installed packages<a class="headerlink" href="#recording-installed-packages" title="Link to this heading">¶</a></h2>
 <p>If you have been rigorous about maintaining the contents of the requirements,
 that should be sufficient for someone else to build the new environment.
 Otherwise, or if you want to be sure, you can <em>export</em> the environment.</p>
@@ -354,7 +353,7 @@ were added in version 1.5.1:</p>
 (dependencies of dependencies of depencencies of….) in the environment.</p>
 </section>
 <section id="installing-a-previously-exported-env-yaml-and-dealing-with-version-conflicts">
-<h2>Installing a previously-exported env.yaml and dealing with version conflicts<a class="headerlink" href="#installing-a-previously-exported-env-yaml-and-dealing-with-version-conflicts" title="Permalink to this heading">¶</a></h2>
+<h2>Installing a previously-exported env.yaml and dealing with version conflicts<a class="headerlink" href="#installing-a-previously-exported-env-yaml-and-dealing-with-version-conflicts" title="Link to this heading">¶</a></h2>
 <p>If you re-create an environment from an env.yaml within a short amount of time
 (say a few months) then it is likely that it will work with no problems.
 However, over time, packages may get fixed which could cause issues.</p>
@@ -394,7 +393,7 @@ happened to contain that broken build, recreating that environment would fail
 because it wouldn’t be found.</p>
 </section>
 <section id="completely-remove-defaults-channels">
-<h2>Completely remove defaults channels<a class="headerlink" href="#completely-remove-defaults-channels" title="Permalink to this heading">¶</a></h2>
+<h2>Completely remove defaults channels<a class="headerlink" href="#completely-remove-defaults-channels" title="Link to this heading">¶</a></h2>
 <p>If you get an error like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">Multi</span><span class="o">-</span><span class="n">download</span> <span class="n">failed</span><span class="o">.</span> <span class="n">Reason</span><span class="p">:</span> <span class="n">Transfer</span> <span class="n">finalized</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="mi">403</span> <span class="p">[</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">repo</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pkgs</span><span class="o">/</span><span class="n">r</span><span class="o">/</span><span class="n">noarch</span><span class="o">/</span><span class="n">repodata</span><span class="o">.</span><span class="n">json</span><span class="p">]</span> <span class="mi">4020</span> <span class="nb">bytes</span>
 </pre></div>
@@ -420,7 +419,7 @@ recommended by the <a class="reference external" href="https://bioconda.github.i
 </div>
 </section>
 <section id="installation-on-helix-biowulf">
-<h2>Installation on Helix/Biowulf<a class="headerlink" href="#installation-on-helix-biowulf" title="Permalink to this heading">¶</a></h2>
+<h2>Installation on Helix/Biowulf<a class="headerlink" href="#installation-on-helix-biowulf" title="Link to this heading">¶</a></h2>
 <p>On NIH’s Helix/Biowulf cluster, trying to install miniconda can result in the
 installation directory having only a <code class="docutils literal notranslate"><span class="pre">conda.exe</span></code> file in it, and you also get
 warnings about libraries. This appears to be an issue with how temp files are
@@ -492,7 +491,7 @@ environment with <code class="docutils literal notranslate"><span class="pre">c<
 start of every session, thus reducing the I/O burden on the cluster.</p>
 </section>
 <section id="source-activate-vs-conda-activate">
-<h2>source activate vs conda activate<a class="headerlink" href="#source-activate-vs-conda-activate" title="Permalink to this heading">¶</a></h2>
+<h2>source activate vs conda activate<a class="headerlink" href="#source-activate-vs-conda-activate" title="Link to this heading">¶</a></h2>
 <p>The “old” way of activating an environment was <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">env</span></code>.
 This should still work.</p>
 <p>The “new” way of activating an environment is <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">env</span></code>.</p>
@@ -512,7 +511,7 @@ conda<span class="w"> </span>activate<span class="w"> </span>./env
 it’s basically doing the same thing.</p>
 </section>
 <section id="detailed-troubleshooting-example">
-<h2>Detailed troubleshooting example<a class="headerlink" href="#detailed-troubleshooting-example" title="Permalink to this heading">¶</a></h2>
+<h2>Detailed troubleshooting example<a class="headerlink" href="#detailed-troubleshooting-example" title="Link to this heading">¶</a></h2>
 <p>Here are some notes on a recent conda troubleshooting session that may provide
 some useful tools for future cases.</p>
 <p>This issue started when cutadapt in the original env was giving CRC errors
@@ -626,7 +625,7 @@ original environment…and that worked!</p>
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      6.1.3.
+      7.2.6.
 
   </footer>
 
