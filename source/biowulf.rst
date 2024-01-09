@@ -19,6 +19,8 @@ Tips
 
 Here are some tips for making it as seamless as possible to connect.
 
+.. _convenient-biowulf-ssh:
+
 More convenient SSH
 -------------------
 Typically when you SSH to Biowulf you will get asked for your password. This
@@ -130,10 +132,9 @@ RStudio Server on Biowulf
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can use `RStudio Server <https://posit.co/products/open-source/rstudio-server/>`_
-instead of NoMachin for R programming on Biowulf. This requires setting up an SSH tunnel 
+instead of NoMachine for R programming on Biowulf. This requires setting up an SSH tunnel 
 between your local computer and Biowulf using your SSH keys.
-Ensure that the SSH keys are set up for Biowulf (see 
-`More convenient SSH <biowulf.html#more-convenient-ssh>`_).
+Ensure that the SSH keys are set up for Biowulf (see :ref:`convenient-biowulf-ssh`).
 
 Once you have the SSH keys ready, add the following proxy configuration to the ``~/.ssh/config``
 on your mac.

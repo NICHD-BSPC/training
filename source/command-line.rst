@@ -186,7 +186,7 @@ Other intermediate resources:
   of an extension beyond the above style guide.
 
 - `Intermediate guide to bash scripting
-  <https://www.linode.com/docs/development/bash/an-intermediate-guide-to-bash-scripting/>`_,
+  <https://www.linode.com/docs/guides/an-intermediate-guide-to-bash-scripting/>`_,
   which talks about making menus, printf, and various test options for files and
   directories.
 
@@ -201,7 +201,7 @@ Other intermediate resources:
   things directly from the command line.
 
 - `Defensive bash programming
-  <https://kfirlavi.herokuapp.com/blog/2012/11/14/defensive-bash-programming/>`_
+  <https://frippertronics.com/posts/defensive_bash_programming.html/>`_
   also reiterates some of the suggestions from above and adds some additional ones.
 
 Advanced command line
