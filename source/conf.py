@@ -137,4 +137,5 @@ linkcheck_ignore = [
 
     # Scrape-resistant
     r'https://doi.org/10.1146/annurev-biodatasci-072018-021255',
+    r'https://www.annualreviews.org/doi/10.1146/annurev-biodatasci-072018-021255',
 ]
