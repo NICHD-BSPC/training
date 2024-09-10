@@ -203,45 +203,6 @@ though, so rather than try to learn it all in practice you'll typically find
 a package that does what you want and then read the vignette (a tutorial that
 comes with the package) to learn how to use it.
 
-scRNA-seq
-~~~~~~~~~
-
-Recently, many people have been asking about R specifically so that they can
-learn how to work with scRNA-seq on their own.
-
-.. note::
-
-    If you jump right in to the Seurat tutorials without knowing R, you won't know
-    which commands are standard R and which are Seurat-specific. And if your data
-    do not exactly match their example data, it will be unclear how to modify the
-    code to suit your data if you don't know R.
-
-    You should be fine with the "Level 1" set of R skills above to start using
-    Seurat effectively. See the "Beginner" section above for learning these
-    skills.
-
-
-There are several major packages
-for scRNA-seq: `Seurat <https://satijalab.org/seurat/>`_, a `suite of
-Bioconductor packages <https://bioconductor.org/books/release/OSCA/>`_, and
-`scanpy <https://scanpy.readthedocs.io/en/stable/>`_. Seurat and Bioconductor are
-in R, scanpy is Python. They are broadly the same, but are in somewhat of an
-arms race so some new features or analyses may not be immediately available in
-all of them.
-
-The book `Orchestrating Single-Cell Analysis with Bioconductor
-<https://bioconductor.org/books/release/OSCA/>`_ is a fantastic, comprehensive
-resource that even goes through worked examples of published data. This uses
-the suite of tools in Bioconductor. Highly recommended.
-
-`Seurat <https://satijalab.org/seurat/>`_ is another popular package for
-scRNA-seq, and has a series of vignettes on the home page. There have been
-recent improvments to the normalization (scTransform v1 and v2), and these use
-somewhat different steps. The different vignettes therefore differ in the
-steps, and it can be a bit confusing. The `PBMC3k tutorial
-<https://satijalab.org/seurat/articles/pbmc3k_tutorial.html>`_ is the classic
-starting point, so working through this one will at least give you the context
-to work through other vignettes.
 
 Additional resources
 --------------------
