@@ -196,8 +196,8 @@ Other intermediate resources:
   things directly from the command line.
 
 - `Defensive bash programming
-  <https://frippertronics.com/posts/defensive_bash_programming.html>`_
-  also reiterates some of the suggestions from above and adds some additional ones.
+  <https://frippertronics.com/posts/defensive_bash_programming.html>`__ also
+  reiterates some of the suggestions from above and adds some additional ones.
 
 Advanced command line
 ---------------------

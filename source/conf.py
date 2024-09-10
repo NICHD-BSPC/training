@@ -135,7 +135,11 @@ linkcheck_ignore = [
     # since the site seems slow.
     r'http://blogs.nature.com/methagora',
 
-    # Scrape-resistant
+    # more sites that seem to be scrape-resistant
     r'https://doi.org/10.1146/annurev-biodatasci-072018-021255',
     r'https://www.annualreviews.org/doi/10.1146/annurev-biodatasci-072018-021255',
+    r'https://www.cell.com',
+    r'https://www.sciencedirect.com',
+    r'https://www.future-science.com',
+    r'https://www.linode.com',
 ]
