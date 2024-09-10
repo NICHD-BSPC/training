@@ -3,6 +3,13 @@
 Changelog
 =========
 
+2024-09-10
+----------
+- Added more info on R resource descriptions
+- Split scRNA-seq off into its own section (it was previously under R)
+- Fixed broken links
+
+
 2024-01-08
 ----------
 
