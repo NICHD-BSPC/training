@@ -10,9 +10,6 @@ This page is a collection of links about programming in general.
 - https://news.ycombinator.com/item?id=20487652, some commentary on what is
   a program vs what is the source code
 
-- `CS Unplugged: computer science without a computer
-  <https://www.csunplugged.org/en/>`_
-
 - `Ten simple rules for documenting scientific software
   <https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006561>`_
 

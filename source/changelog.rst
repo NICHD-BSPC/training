@@ -2,6 +2,12 @@
 
 Changelog
 =========
+
+2024-01-08
+----------
+
+New section on using RStudio Server on Biowulf (NIH only)
+
 2022-12-23
 ----------
 

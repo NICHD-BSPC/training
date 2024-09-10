@@ -113,7 +113,7 @@ html_sidebars = {
 linkcheck_request_headers = {
     # Add a user agent to everything
     "*": {
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     }
 }
 
@@ -136,6 +136,8 @@ linkcheck_ignore = [
     r'http://blogs.nature.com/methagora',
 
     # more sites that seem to be scrape-resistant
+    r'https://doi.org/10.1146/annurev-biodatasci-072018-021255',
+    r'https://www.annualreviews.org/doi/10.1146/annurev-biodatasci-072018-021255',
     r'https://www.cell.com',
     r'https://www.sciencedirect.com',
     r'https://www.future-science.com',

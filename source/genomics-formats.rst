@@ -14,8 +14,7 @@ and prime yourself for further reading. You’ll probably get a lot more
 out these by re-reading them after you gain some experience. The rest of
 this page will be about the specifics, and getting more experience.
 
-This review article from Molecular Cell
-(https://www.cell.com/molecular-cell/fulltext/S1097-2765(15)00340-8)
+This `review article from Molecular Cell <https://doi.org/10.1016/j.molcel.2015.05.004>`__
 gives a good overview of high-throughput sequencing. It’s fairly
 up-to-date, comparing Illumina with Pac Bio, Nanopore, and Ion Torrent
 as well as giving a brief overview of the kinds of assays that are

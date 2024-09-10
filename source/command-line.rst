@@ -185,11 +185,6 @@ Other intermediate resources:
   a concise overview of good ways to use bash. This could be thought of as sort
   of an extension beyond the above style guide.
 
-- `Intermediate guide to bash scripting
-  <https://www.linode.com/docs/development/bash/an-intermediate-guide-to-bash-scripting/>`_,
-  which talks about making menus, printf, and various test options for files and
-  directories.
-
 - Julia Evans' `bash quirks <https://jvns.ca/blog/2017/03/26/bash-quirks/>`_
   has some overlap with the previous links and some new ones as well.
 
