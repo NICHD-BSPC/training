@@ -138,6 +138,6 @@ linkcheck_ignore = [
     # more sites that seem to be scrape-resistant
     r'https://www.cell.com',
     r'https://www.sciencedirect.com',
-    r'https://future-science.com',
+    r'https://www.future-science.com',
     r'https://www.linode.com',
 ]
