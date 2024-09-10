@@ -80,6 +80,7 @@ These sections point to resources to learn about some specific genomics topics:
    genomics-formats
    variant-calling
    rnaseq
+   scrnaseq
    chipseq
    lcdb-wf
 

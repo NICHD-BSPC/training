@@ -17,13 +17,14 @@ GitLab instance, contact ryan.dale@nih.gov for more info.
 It's expected that you already know :ref:`git`.
 
 For the basics of GitLab, the `GitLab tutorials
-<https://docs.gitlab.com/ee/tutorials/>`__ have useful links to start with.
+<https://docs.gitlab.com/?tab=Tutorials>`__ page has useful links to start
+with.
 
 You can read more about the bigger picture of how we use git and GitLab in the
-documention for `GitLab flow
-<https://docs.gitlab.com/ee/topics/gitlab_flow.html>`_. While most of that page
-is very useful information, we tend to use the simpler GitHub flow rather than
-GitLab flow.
+documention for `GitLab Flow
+<https://about.gitlab.com/topics/version-control/what-are-gitlab-flow-best-practices/>`__.
+While most of that page is very useful information, we tend to use the simpler
+GitHub flow rather than GitLab flow.
 
 Issues and merge requests
 -------------------------

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="_static/better.css?v=f848c55c" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -62,10 +62,12 @@ strategies. You’ll be spending a lot of time with them, so it might be a good
 idea to briefly look at them all first to see what would be a good fit for you.</p>
 <section id="setting-up">
 <h2>Setting up<a class="headerlink" href="#setting-up" title="Link to this heading">¶</a></h2>
-<p>Install Python using either <a class="reference external" href="https://www.anaconda.com/download">Anaconda</a> (if you want “the works”, including
-many of the libraries described below) or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> (which is much more minimal;
-you’ll need to install things separately using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span>
-<span class="pre">&lt;packagename&gt;</span></code>).</p>
+<p>Install Python using <a class="reference external" href="https://github.com/conda-forge/miniforge">miniforge</a>.
+This is better than using Anaconda or Miniconda because those others will set
+the defaults channel to be the paid one at anaconda.org. Miniforge sets the
+default channel to the free, community-maintained <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel. This
+will ensure reproducibility of your work by not requiring a license to
+anaconda.org channel.</p>
 <p>You may have heard about Jupyter notebooks. While they have their place in data
 science-type work, I do not think this is a good way to learn Python. <a class="reference external" href="https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/">Here are
 some reasons why</a>;
@@ -430,7 +432,7 @@ which have their own lists of skills. This section is just about base Python.</p
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -501,7 +503,7 @@ which have their own lists of skills. This section is just about base Python.</p
   </div>
   <footer id="pagefooter">&copy; 2020, Ryan Dale.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a>
-      7.2.6.
+      8.0.2.
 
   </footer>
 

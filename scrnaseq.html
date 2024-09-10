@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>scRNA-seq</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css?v=f848c55c" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ChIP-seq analysis" href="chipseq.html" />
+    <link rel="prev" title="Bulk RNA-seq analysis" href="rnaseq.html" />
+
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lato:bold,italic,bolditalic|Lora|Oswald|Inconsolata&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  </head><body>
+    <header id="pageheader"><h1><a href="index.html ">
+        
+    </a></h1></header>
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="rnaseq.html" title="Previous document">Bulk RNA-seq analysis</a>
+        </li>
+        <li>
+          <a href="chipseq.html" title="Next document">ChIP-seq analysis</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="scrna-seq">
+<h1>scRNA-seq<a class="headerlink" href="#scrna-seq" title="Link to this heading">¶</a></h1>
+<p>Single-cell RNA-seq (scRNA-seq) gives inforamtion on the transcripts in individual cells.</p>
+<p>Recently, many people have been asking about R specifically so that they can
+learn how to work with scRNA-seq on their own.</p>
+<p>There are several major packages
+for scRNA-seq: <a class="reference external" href="https://satijalab.org/seurat/">Seurat</a>, a <a class="reference external" href="https://bioconductor.org/books/release/OSCA/">suite of
+Bioconductor packages</a>, and
+<a class="reference external" href="https://scanpy.readthedocs.io/en/stable/">scanpy</a>. Seurat and Bioconductor are
+in R, scanpy is Python. They are broadly the same, but are in somewhat of an
+arms race so some new features or analyses may not be immediately available in
+all of them.</p>
+<p>The book <a class="reference external" href="https://bioconductor.org/books/release/OSCA/">Orchestrating Single-Cell Analysis with Bioconductor</a> is a fantastic, comprehensive
+resource that even goes through worked examples of published data. This uses
+the suite of tools in Bioconductor. Highly recommended.</p>
+<p><a class="reference external" href="https://satijalab.org/seurat/">Seurat</a> is another popular package for
+scRNA-seq, and has a series of vignettes on the home page. There have been
+recent improvments to the normalization (scTransform v1 and v2), and these use
+somewhat different steps. The different vignettes therefore differ in the
+steps, and it can be a bit confusing. The <a class="reference external" href="https://satijalab.org/seurat/articles/pbmc3k_tutorial.html">PBMC3k tutorial</a> is the classic
+starting point, so working through this one will at least give you the context
+to work through other vignettes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you jump right in to the Seurat tutorials without knowing R, you won’t know
+which commands are standard R and which are Seurat-specific. And if your data
+do not exactly match their example data, it will be unclear how to modify the
+code to suit your data if you don’t know R.</p>
+<p>You should be fine with the “Level 1” set of R skills above to start using
+Seurat effectively. See the “Beginner” section above for learning these
+skills.</p>
+</div>
+<ul class="simple">
+<li><p>Introduction to 10X scRNA-seq: <a class="reference external" href="https://www.bioinformatics.babraham.ac.uk/training/10XRNASeq/10X_Introduction.pdf">https://www.bioinformatics.babraham.ac.uk/training/10XRNASeq/10X_Introduction.pdf</a></p></li>
+<li><p>PCA vs t-SNE vs UMAP: <a class="reference external" href="https://www.bioinformatics.babraham.ac.uk/training/10XRNASeq/Dimension%20Reduction.pdf">https://www.bioinformatics.babraham.ac.uk/training/10XRNASeq/Dimension%20Reduction.pdf</a></p></li>
+<li><p>Harvard Bioinformatics Core training on scRNA-seq: <a class="reference external" href="https://hbctraining.github.io/scRNA-seq_online/schedule/links-to-lessons.html">https://hbctraining.github.io/scRNA-seq_online/schedule/links-to-lessons.html</a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/scrnaseq.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="rnaseq.html" title="Previous document">Bulk RNA-seq analysis</a>
+        </li>
+        <li>
+          <a href="chipseq.html" title="Next document">ChIP-seq analysis</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2020, Ryan Dale.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      8.0.2.
+
+  </footer>
+
+  
+  </body>
+</html>

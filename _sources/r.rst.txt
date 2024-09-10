@@ -38,18 +38,23 @@ Beginner
 
 - `FasteR <https://github.com/matloff/fasteR>`_, which has the tagline
   "Becoming productive in R, as fast as possible". This teaches you base R in
-  a way that focuses on getting you working with real data quickly.
+  a way that focuses on getting you working with real data quickly. While many
+  tutorials start you off in RStudio, this one starts you off directly in the
+  R interpreter.
 
 - `Hadley Wickham's R for Data Science <http://r4ds.had.co.nz/>`_ A
   book on the basics of R focusing on the new-style method
   (“tidyverse”) of interacting with dataframes. It starts you off quickly with
-  plotting, which can be rewarding.
+  plotting, which can be rewarding. As the title suggests, it is heavily
+  oriented towards data science -- reading in large tables of data and
+  manipulating and visualizing that data.
 
 - `Hadley Wickham's Advanced R <https://adv-r.hadley.nz/>`_ If there’s
   one single R resource to read, it’s this one. Lots of details, well-written,
   comprehensive . . . yet still accessible to relative beginners. The later
   chapters do get fairly advanced, but the first section ("Foundations") is
-  good for beginners.
+  good for beginners. Later sections are for more advanced users, and includes
+  object-oriented programming, metaprogramming, and techniques for debugging.
 
 - `Ten simple rules for teaching yourself
   R <https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010372>`_
@@ -58,11 +63,14 @@ Beginner
 
 - These `cheatsheets from RStudio
   <https://rstudio.com/resources/cheatsheets/>`_ summarize lots of information
-  into compact form.
+  into compact form. These are great for after you've learned the basics.
 
 - `R in 8 pages <https://github.com/saghirb/Getting-Started-in-R>`_
-  Practical approach of showing how to do things immediately using
-  realistic examples and a real life dataset.
+  Practical approach of showing how to do things immediately using realistic
+  examples and a real life dataset. This could be useful if you already know
+  another programming language, or if the other tutorials are too slow for you.
+  Here's the `direct link to the PDF
+  <https://github.com/saghirb/Getting-Started-in-R/blob/master/Getting-Started-in-R.pdf>`_.
 
 - `Software Carpentry's "R for Reproducible Scientific Analysis"
   <https://swcarpentry.github.io/r-novice-gapminder/>`_ These are workshop
@@ -86,7 +94,9 @@ Intermediate
 - `Modern Statistics for Modern Biology
   <http://web.stanford.edu/class/bios221/book>`_ assumes you
   know R, and goes deeper into many important and useful statistical methods.
-  There are exercises and solutions as well. Very well written.
+  There are exercises and solutions as well. Very well written. One of the
+  authors (Wolfgang Huber) is well-known in bioinformatics for co-authoring
+  DESeq2 (widely used in RNA-seq analysis).
 
 - `R packages <https://r-pkgs.org/>`_ describes how to packages your R code so
   it can be redistributable.
@@ -192,45 +202,6 @@ though, so rather than try to learn it all in practice you'll typically find
 a package that does what you want and then read the vignette (a tutorial that
 comes with the package) to learn how to use it.
 
-scRNA-seq
-~~~~~~~~~
-
-Recently, many people have been asking about R specifically so that they can
-learn how to work with scRNA-seq on their own.
-
-.. note::
-
-    If you jump right in to the Seurat tutorials without knowing R, you won't know
-    which commands are standard R and which are Seurat-specific. And if your data
-    do not exactly match their example data, it will be unclear how to modify the
-    code to suit your data if you don't know R.
-
-    You should be fine with the "Level 1" set of R skills above to start using
-    Seurat effectively. See the "Beginner" section above for learning these
-    skills.
-
-
-There are several major packages
-for scRNA-seq: `Seurat <https://satijalab.org/seurat/>`_, a `suite of
-Bioconductor packages <https://bioconductor.org/books/release/OSCA/>`_, and
-`scanpy <https://scanpy.readthedocs.io/en/stable/>`_. Seurat and Bioconductor are
-in R, scanpy is Python. They are broadly the same, but are in somewhat of an
-arms race so some new features or analyses may not be immediately available in
-all of them.
-
-The book `Orchestrating Single-Cell Analysis with Bioconductor
-<https://bioconductor.org/books/release/OSCA/>`_ is a fantastic, comprehensive
-resource that even goes through worked examples of published data. This uses
-the suite of tools in Bioconductor. Highly recommended.
-
-`Seurat <https://satijalab.org/seurat/>`_ is another popular package for
-scRNA-seq, and has a series of vignettes on the home page. There have been
-recent improvments to the normalization (scTransform v1 and v2), and these use
-somewhat different steps. The different vignettes therefore differ in the
-steps, and it can be a bit confusing. The `PBMC3k tutorial
-<https://satijalab.org/seurat/articles/pbmc3k_tutorial.html>`_ is the classic
-starting point, so working through this one will at least give you the context
-to work through other vignettes.
 
 Additional resources
 --------------------
