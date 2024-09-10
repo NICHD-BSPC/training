@@ -304,7 +304,7 @@ are many subprograms of BEDTools, and you’ll eventually want to
 familiarize yourself with them all.
 
 Aaron Quinlan, the author of BEDTools, has a tutorial available at
-http://quinlanlab.org/tutorials/bedtools/bedtools.html. It’s well worth
+http://quinlanlab.org/tutorials/bedtools.html. It’s well worth
 your time to go through this and understand how the tools work.
 Especially useful are the “puzzles” at the end which will test your
 knowledge.

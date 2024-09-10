@@ -16,13 +16,12 @@ idea to briefly look at them all first to see what would be a good fit for you.
 
 Setting up
 ----------
-
-Install Python using either `Anaconda
-<https://www.anaconda.com/distribution/>`_ (if you want "the works", including
-many of the libraries described below) or `Miniconda
-<https://docs.conda.io/en/latest/miniconda.html>`_ (which is much more minimal;
-you'll need to install things separately using ``conda install
-<packagename>``).
+Install Python using `miniforge <https://github.com/conda-forge/miniforge>`__.
+This is better than using Anaconda or Miniconda because those others will set
+the defaults channel to be the paid one at anaconda.org. Miniforge sets the
+default channel to the free, community-maintained ``conda-forge`` channel. This
+will ensure reproducibility of your work by not requiring a license to
+anaconda.org channel.
 
 You may have heard about Jupyter notebooks. While they have their place in data
 science-type work, I do not think this is a good way to learn Python. `Here are

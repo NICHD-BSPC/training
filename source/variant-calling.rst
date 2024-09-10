@@ -19,7 +19,7 @@ between a tumor and matched normal tissue (somatic calling).
 
 - Data Carpentry's "Wrangling Genomics" workshop has a `section on variant
   calling
-  <https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html>`_
+  <https://datacarpentry.org/wrangling-genomics/04-variant_calling.html>`__
   that walks through some of the basics. Depending on which machine you're
   running it on, you may want to start at the `beginning of the workshop
   <https://datacarpentry.org/genomics-workshop/>`_ which walks you through
