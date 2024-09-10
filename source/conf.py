@@ -134,4 +134,10 @@ linkcheck_ignore = [
     # Scraping returns 500, but website seems fine. Possibly a timeout issue
     # since the site seems slow.
     r'http://blogs.nature.com/methagora',
+
+    # more sites that seem to be scrape-resistant
+    r'https://www.cell.com',
+    r'https://www.sciencedirect.com',
+    r'https://future-science.com',
+    r'https://www.linode.com',
 ]
