@@ -38,16 +38,7 @@ vimtutor
 ~~~~~~~~
 
 Once vim is installed, type ``vimtutor`` at the terminal and go through
-it.
-
-Tips and Tricks
-~~~~~~~~~~~~~~~
--  The search and replace functionality is very useful in vim. To do this you
-   use the command ``:s`` (substitute). Check out `Search and Replace
-   <https://vim.fandom.com/wiki/Search_and_replace>`_ for the many ways you can
-   use this command.
-
-
+it. This walks you through the concepts of vim within vim itself.
 
 Other resources
 ~~~~~~~~~~~~~~~
@@ -56,6 +47,10 @@ Other resources
    image search
    <https://www.google.com/search?source=univ&tbm=isch&q=vim+cheat+sheet>`_ for
    them.
+
+- `This infographic <https://cdn.shopify.com/s/files/1/0165/4168/files/preview.png>`__ has a lot
+  of material packed into it (so maybe a bit more than just a cheatsheet...)
+  and may have some useful tidbits for even the seasoned vim user.
 
 -  `Learn Vim Progressively
    <http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/>`_ is one
