@@ -41,7 +41,6 @@ The following resources are ordered from most basic to more advanced.
   <https://slides.com/johanneskoester/snakemake-short>`_ give a very brief
   overview of what Snakemake is about.
 - Live `demo video <https://youtu.be/hPrXcUUp70Y>`_ given by the author.
-- The official `short tutorial <https://snakemake.readthedocs.io/en/stable/tutorial/short.html>`_ gives a quick overview.
 - The `official Snakemake tutorial
   <https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html#tutorial>`_
   will give you a more in-depth understanding.

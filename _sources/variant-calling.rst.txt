@@ -237,4 +237,4 @@ Other resources
 
 - RegulomeDB: https://www.regulomedb.org
 - GTEx: https://www.gtexportal.org
-- GWAVA: https://www.sanger.ac.uk/sanger/StatGen_Gwava
+- GWAVA: https://www.sanger.ac.uk/tool/gwava/
