@@ -109,7 +109,7 @@ RNA-seq analysis, to be used as supplemental material.
 
 - We base part of our RNA-seq template off of the `Bioconductor RNA-seq
   workflow
-  <https://www.bioconductor.org/packages/devel/workflows/vignettes/rnaseqGene/inst/doc/rnaseqGene.html>`_, which shows all the steps of RNA-seq from within R.
+  <https://www.bioconductor.org/packages/release/workflows/vignettes/rnaseqGene/inst/doc/rnaseqGene.html>`_, which shows all the steps of RNA-seq from within R.
 
 - In BSPC, we develop and maintain `lcdb-wf
   <https://github.com/lcdb/lcdb-wf>`_, which automates much of RNA-seq, and
