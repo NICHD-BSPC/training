@@ -113,6 +113,11 @@ decide what fits your brain the best.
   <https://tighten.com/blog/adding-commits-to-a-pull-request/>`_ walks you
   through making your own commits that get added to that PR.
 
+- Eventually, you'll be contributing to open source software. That may involve
+  rebasing a fork of an upstream repo. `How to fork
+  <https://joaquimrocha.com/2024/09/22/how-to-fork/>`__ is about this, but also
+  is a great explanation of rebasing.
+
 Do you know git?
 ----------------
 
