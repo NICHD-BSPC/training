@@ -30,6 +30,10 @@ organization, alignment, QC, peak-calling, and comparing peaks between condition
 a high-level overview of ChIP-seq, and may be more succinct than the HBC
 workshop linked above.
 
+`Eder 2022
+<https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02686-y>`__
+compares methods for differential ChIP-seq, and has helpful decision trees for
+figuring out what algorithm to use under what circumstances.
 
 Technical details
 -----------------
