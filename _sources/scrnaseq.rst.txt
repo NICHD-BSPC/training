@@ -43,5 +43,3 @@ to work through other vignettes.
 
 - Introduction to 10X scRNA-seq: https://www.bioinformatics.babraham.ac.uk/training/10XRNASeq/10X_Introduction.pdf
 - PCA vs t-SNE vs UMAP: https://www.bioinformatics.babraham.ac.uk/training/10XRNASeq/Dimension%20Reduction.pdf
-
-- Harvard Bioinformatics Core training on scRNA-seq: https://hbctraining.github.io/scRNA-seq_online/schedule/links-to-lessons.html
