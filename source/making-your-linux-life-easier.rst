@@ -128,11 +128,6 @@ another pane.
 -  Lots more details: https://leanpub.com/the-tao-of-tmux/read
 -  Recent HN post: https://news.ycombinator.com/item?id=17998649
 
-Copy/paste between tmux, vim/neovim, and the system clipboard can get a
-bit crazy. See
-http://www.rushiagr.com/blog/2016/06/16/everything-you-need-to-know-about-tmux-copy-pasting-ubuntu
-for the details.
-
 fzf
 ~~~
 `fzf <https://github.com/junegunn/fzf>`_ is a fuzzy-finder. The installation

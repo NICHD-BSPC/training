@@ -142,4 +142,8 @@ linkcheck_ignore = [
     r'https://www.sciencedirect.com',
     r'https://www.future-science.com',
     r'https://www.linode.com',
+    r'https://security.stackexchange.com',
+    r'http://mendel.stanford.edu/SidowLab/downloads/gerp/',
+    r'https://apple.stackexchange.com',
+    r'https://wiki.python.org',
 ]

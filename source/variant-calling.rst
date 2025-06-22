@@ -150,7 +150,7 @@ incomplete list:
   info on somatic mutations in human cancer. You will need to create an account
   to download data.
 
-- `GERP <http://mendel.stanford.edu/SidowLab/downloads/gerp/>`_ (Genomic
+- GERP (link has been down: http://mendel.stanford.edu/SidowLab/downloads/gerp/. (Genomic
   Evolutionary Rate Profiling) assesses if a mutation was likely to be neutral
   or not (precomputed scores included in dbNSFP)
 
