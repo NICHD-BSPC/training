@@ -6,36 +6,21 @@ bulk RNA-seq (measuring transcripts from many cells mixed together) and
 single-cell RNA-seq (keeping track of which transcript measurements came from
 which cell). This page is about bulk RNA-seq.
 
-Harvard Bioinformatics Core training materials
-----------------------------------------------
-These tutorials are the best way to learn RNA-seq:
+BSPC's adaptation of Harvard Bioinformatics Core training materials
+-------------------------------------------------------------------
 
-- **TUTORIAL 1**: `Introduction to (bulk) RNA-seq using High-Performance Computing <https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon-flipped/schedule/links-to-lessons.html>`_. This walks you through the primary processing, mostly using command-line tools.
-- **TUTORIAL 2**: `Introduction to Differential Gene Expression Analysis <https://hbctraining.github.io/DGE_workshop_salmon_online/schedule/links-to-lessons.html>`_. This walks you through differential expression analysis in R.
+`NICHD BSPC's RNA-seq training
+<https://github.com/NICHD-BSPC/intro-rnaseq-hpc/tree/main>`__ is an
+NIH-specific adaptation of the original RNA-seq workshops from the `Harvard
+Bioinformatics Core training materials
+<https://hbctraining.github.io/main/>`__. 
 
-Note that these have prerequisites of `Introduction to shell
-<https://hbctraining.github.io/Intro-to-shell-flipped/schedule/links-to-lessons.html>`_
-and `Introduction to
-R <https://hbctraining.github.io/Intro-to-R-flipped/schedules/links-to-lessons.html>`_
-respectively.
+These lessons walk you through using bash on NIH's `Biowulf cluster
+<https://hpc.nih.gov>`__ to do your own basic RNA-seq analysis.
 
-Upon completing those two tutorials, you will be able to run arbitrary RNA-seq
+Upon completing those materials, you will be able to run arbitrary RNA-seq
 analyses, and you may be ready to learn Snakemake and either write your own
 workflows or use something like `lcdb-wf <https://github.com/lcdb/lcdb-wf>`_.
-
-.. note::
-
-    The Harvard Bioinformatics Core tutorials sometimes change locations or get
-    updated or split. The above links are checked periodically for correctness,
-    but if you can't find the linked tutorials, look around on their
-    `main training page <https://github.com/hbctraining/main>`_.
-
-    These tutorials make some assumptions about using Harvard's
-    high-performance compute cluster, O2. There are commands related to
-    installing or activating software that you will need to adapt to your local
-    HPC or other computing environment.
-
-    We have not rewritten these tutorials for NIH's Biowulf, for example.
 
 Skills for RNA-seq
 ------------------
@@ -84,13 +69,6 @@ RNA-seq analysis, to be used as supplemental material.
   while going over the details of the popular differential expression
   algorithm, is very approachable even for someone with not a lot of
   math/stats/algorithm background.
-
-- If you've done the tutorials above, you will have seen the `experimental
-  planning considerations
-  <https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon-flipped/lessons/02_experimental_planning_considerations.html>`_
-  section from HBC training, which is a very good discussion on how much to
-  sequence (more samples or more depth?), how to avoid a confounded experiment,
-  and preventing batch effects in general.
 
 - Especially when doing `in vitro` research with cell lines, it's important to
   think about what a replicate really is. `This blog post
