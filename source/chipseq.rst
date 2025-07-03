@@ -56,3 +56,14 @@ a depletion of signal around the TSS due to expected nucleosome depletion.
 While there may be corner cases where the particular biological questions may
 cause one to be more biologically meaningful, in general using input for
 histone modifications seems well-justified.
+
+Combining the output of many ChIP-seq experiments at the level of peak calls
+can be challenging (and messy). Often the goal of such an analysis is to
+identify diferrent classes of chromatin, as opposed to presence/absence of
+peaks. This is particularly the case when working with histone modification
+data. In this case, it can be better to use genome segmentation algorithms like
+`Segway <https://segway.hoffmanlab.org/>`__ or `ChromHMM
+<https://compbio.mit.edu/ChromHMM/>`__  that learn a statistical model over
+(possibly many) inputs. See `Libbrecht 2021
+<https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009423>`__
+for a good overview of these methods.
