@@ -119,5 +119,10 @@ Other useful options
 - Use ``--exclude`` to avoid transferring matching patterns. Useful to avoid
   copying conda environments, for example.
 
+You can read a bit more about the rationale and algorithm behind rsync in
+`Tridgell & Mackerras (1996)
+<https://www.andrew.cmu.edu/course/15-749/READINGS/required/cas/tridgell96.pdf>`__. 
+
 There are many more options for rsync, so as usual, read the manual (e.g.,
 ``man rsync``)!
+
