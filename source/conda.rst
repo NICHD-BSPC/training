@@ -35,34 +35,26 @@ Then set up the channels like this, which follows the
 
 .. code-block:: bash
 
-   conda config --add channels defaults
    conda config --add channels bioconda
    conda config --add channels conda-forge
    conda config --set channel_priority strict
 
-**Optional:** Much of the bioinformatics community is moving to `mamba
-<https://mamba.readthedocs.io/en/latest/index.html>`_, which is a faster
-drop-in replacement for ``conda`` which is `quite a bit faster
-<https://pythonspeed.com/articles/faster-conda-install/>`_. So typically the
-next step is to install ``mamba`` into your base environment. You only have to
-do this once:
+Your :file:`~/.condarc` file should look something like:
 
-.. code-block:: bash
+.. code-block:: yaml
 
-    conda install -n base mamba
+    channels:
+      - conda-forge
+      - bioconda
+    channel_priority: strict
 
-From now on, instead of ``conda install`` you can use ``mamba install`` to make
-it go faster. Instead of ``conda create`` use ``mamba create``. And so on. There
-are also some nice troubleshooting tools that come with ``mamba`` that can come
-in handy.
 
-.. warning::
+.. note::
 
-    If you have a new Mac that uses the M1 chip, **this is not yet supported by
-    Bioconda**. All packages need to be re-built for ARM64 architecture, which
-    is a rather large task. There are plans to do this but the packages are not
-    available yet.
-
+   Previously, we suggested using ``mamba`` as a drop-in replacement for
+   ``conda`` because it was much faster. Luckily, those performance
+   improvements have since been merged into conda, so there's no reason to use
+   mamba any more.
 
 What is an environment?
 -----------------------
@@ -160,7 +152,7 @@ environment with just Python:
 
 .. code-block:: bash
 
-    mamba create -p ./env python
+    conda create -p ./env python
 
 and look inside it with ``ls env/``, we see this:
 
@@ -262,7 +254,7 @@ There are three ways to specify what should go into an environment:
 
 Directly on the command line::
 
-    mamba create ./env python
+    conda create ./env python
 
 Using a plain text file called ``requirements.txt`` with the following contents
 (one line per requirement)::
@@ -271,7 +263,7 @@ Using a plain text file called ``requirements.txt`` with the following contents
 
 would be::
 
-    mamba create -p ./env --file requirements.txt
+    conda create -p ./env --file requirements.txt
 
 
 Using an environment file in YAML format called ``env.yml`` with the following
@@ -287,7 +279,7 @@ contents:
 
 would be::
 
-    mamba env create -p ./env --file env.yml
+    conda env create -p ./env --file env.yml
 
 That is, use ``create`` for a text file, and ``env create`` for a YAML file.
 
@@ -305,7 +297,7 @@ activated, install the entire requirements file. For example:
 .. code-block:: bash
 
     conda activate ./env
-    mamba install --file requirements.txt
+    conda install --file requirements.txt
 
 This will only install packages (and dependencies) that have not already been
 installed, and in this case ``requirements.txt`` contains the packages that were
@@ -461,8 +453,8 @@ Biowulf staff also recommend NOT activating your base environment by default. Wh
   potentially causing I/O lag on the cluster.
 
 There are a few ways around this. The one I have found most convenient is to
-first run ``conda init bash``, which adds lines to your ``~/.bashrc`` file that
-look like this:
+NOT allow conda to touch your ``~/.bashrc``. If you do, it will look something
+like this:
 
 .. code-block:: bash
 
@@ -481,50 +473,30 @@ look like this:
     unset __conda_setup
     # <<< conda initialize <<<
 
-Edit your ``.bashrc``, and wrap that newly-added-by-conda-init code in
-a function. Here, the function is called ``c`` just because it's easy to type
-but it can be whatever you want. Here, I also added ``conda activate $1`` to
-the end of it. So I converted those lines to something that looks like this in
-my ``.bashrc`` (added lines emphasized):
+So you should delete those lines.
+
+Then add a function, here ``ca`` for "conda activate", to your ``~/.bashrc``:
 
 .. code-block:: bash
-    :emphasize-lines: 1,17,18
 
-    function c() {
-        # >>> conda initialize >>>
-        # !! Contents within this block are managed by 'conda init' !!
-        __conda_setup="$('/data/$USER/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-        if [ $? -eq 0 ]; then
-            eval "$__conda_setup"
-        else
-            if [ -f "/data/$USER/miniconda3/etc/profile.d/conda.sh" ]; then
-                . "/data/$USER/miniconda3/etc/profile.d/conda.sh"
-            else
-                export PATH="/data/$USER/miniconda3/bin:$PATH"
-            fi
-        fi
-        unset __conda_setup
-        # <<< conda initialize <<<
-
-        conda activate $1
+    function ca() {
+        # This function allows you to activate the base env only when you're ready
+        # to (and don't activate it on EVERY new shell).
+        #
+        # You can also provide an env name or path to activate it.
+        eval "$(conda shell.bash hook 2> /dev/null)"
+        conda activate "$@"
     }
 
-Now, I can either activate my base environment with ``c``, or activate an
-environment with ``c ./env``...but my base environment is not activated at the
-start of every session, thus reducing the I/O burden on the cluster.
 
-source activate vs conda activate
----------------------------------
+Now, you can either activate your base environment with ``ca``, or activate an
+environment with ``ca ./env``...but your base environment is *not activated at the
+start of every session*, thus reducing the I/O burden on the cluster.
 
-The "old" way of activating an environment was ``source activate env``.
-This should still work.
+conda activate in a script
+--------------------------
 
-The "new" way of activating an environment is ``conda activate env``.
-
-The new way requires to do a one-time setup, ``conda init bash``, which adds
-a bunch of stuff into your ``.bashrc``.
-
-However if you try ``conda activate`` within a script, you'll get an error
+If you try ``conda activate`` within a script, you'll get an error
 because the script does not source ``.bashrc``. The solution is to change
 
 .. code-block:: bash
@@ -539,7 +511,8 @@ to
     conda activate ./env
 
 Note that if you inspect what ``conda init bash`` adds to your ``.bashrc``,
-it's basically doing the same thing.
+it's basically doing the same thing, and it's also what we did for the ``ca``
+function above.
 
 
 Detailed troubleshooting example
